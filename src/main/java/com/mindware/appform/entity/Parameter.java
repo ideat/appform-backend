@@ -1,0 +1,13 @@
+package com.mindware.appform.entity;
+
+import lombok.Data;
+
+@Data
+public class Parameter {
+
+    private Integer id;
+
+    private String name;
+
+    private String category;
+}
