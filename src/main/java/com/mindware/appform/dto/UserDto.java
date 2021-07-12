@@ -11,5 +11,9 @@ public class UserDto {
 
     private String login;
 
+    private String menu;
+
+    private String rolName;
+
     private String token;
 }

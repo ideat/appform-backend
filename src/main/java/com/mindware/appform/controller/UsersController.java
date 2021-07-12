@@ -7,8 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.List;
 
 @RestController
 @RequestMapping(value ="/rest",  produces = {"application/json"})
@@ -35,5 +34,19 @@ public class UsersController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(value = "/v1/user/findAll", name = "Obtiene todos los usuarios")
+    public ResponseEntity<List<Users>> findAll(){
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/v1/user/findByRol", name = "Obtiene todos los usuarios por Rol")
+    public ResponseEntity<List<Users>> findByRol(@PathVariable("rolName") String rolName){
+        return new ResponseEntity<>(service.findByRol(rolName), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/v1/user/findByLogin/{login}", name = "Obtiene usuario por su login")
+    public ResponseEntity<Users> findbyLogin(@PathVariable("login") String login){
+        return new ResponseEntity<>(service.findByLogin(login).get(), HttpStatus.OK);
+    }
 
 }

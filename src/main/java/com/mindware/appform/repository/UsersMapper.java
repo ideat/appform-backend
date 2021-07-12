@@ -15,7 +15,7 @@ public interface UsersMapper {
             " login, " +
             " full_name, " +
             " password, " +
-            " id_rol, " +
+            " rol_name, " +
             " image, " +
             " date_update_password, " +
             " email, " +
@@ -25,7 +25,7 @@ public interface UsersMapper {
             " #{users.login}, " +
             " #{users.fullName}, " +
             " #{users.password}, " +
-            " #{users.idRol}, " +
+            " #{users.rolName}, " +
             " #{users.image}, " +
             " #{users.dateUpdatePassword}, " +
             " #{users.email}, " +
@@ -35,7 +35,7 @@ public interface UsersMapper {
 
     @Update("update users set " +
             " full_name = #{users.fullName}, " +
-            " id_rol = #{users.idRol}, " +
+            " rol = #{users.rolName}, " +
             " image = #{users.image}, " +
             " email = #{users.email}, " +
             " num_days_validity = #{users.numDaysValidity}, " +
@@ -53,4 +53,7 @@ public interface UsersMapper {
 
     @Select("select * from users where login = #{login}")
     Optional<Users> findByLogin(@Param("login") String login);
+
+    @Select(" select * from users where users.rol_name = #{rolName}")
+    List<Users> findByRol(@Param("rolName") String rolName);
 }

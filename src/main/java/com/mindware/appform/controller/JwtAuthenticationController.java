@@ -5,6 +5,11 @@ package com.mindware.appform.controller;
 import com.mindware.appform.config.JwtRequest;
 import com.mindware.appform.config.JwtResponse;
 import com.mindware.appform.config.JwtTokenUtil;
+import com.mindware.appform.dto.UserDto;
+import com.mindware.appform.entity.Rol;
+import com.mindware.appform.entity.Users;
+import com.mindware.appform.service.RolService;
+import com.mindware.appform.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +37,12 @@ public class JwtAuthenticationController {
 	@Autowired
 	private UserDetailsService jwtInMemoryUserDetailsService;
 
+	@Autowired
+	private UsersService usersService;
+
+	@Autowired
+	private RolService rolService;
+
 	@RequestMapping(value = "/rest/v1/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
 			throws Exception {
@@ -43,6 +54,7 @@ public class JwtAuthenticationController {
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
+//		return ResponseEntity.ok(getLoggedUser(authenticationRequest.getUsername(),token));
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 
@@ -58,4 +70,18 @@ public class JwtAuthenticationController {
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
+
+//	private UserDto getLoggedUser(String login, String token){
+//		Users users = usersService.findByLogin(login).get();
+//		Rol rol = rolService.findByName(users.getRolName()).get();
+//		UserDto userDto = new UserDto();
+//
+//		userDto.setId(users.getId());
+//		userDto.setFullName(users.getFullName());
+//		userDto.setLogin(users.getLogin());
+//		userDto.setMenu(rol.getOptions());
+//		userDto.setRolName(users.getRolName());
+//		userDto.setToken(token);
+//		return userDto;
+//	}
 }

@@ -4,16 +4,22 @@ import com.mindware.appform.entity.Forms;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface FormsMapper {
 
     @Insert(" insert into forms " +
-            "( id, id_client, " +
-            " id_type_form, " +
+            "( id, " +
+            " id_client, " +
+            " id_account, " +
+            " name_type_form, " +
+            " category_type_form, " +
+            " product, " +
             " reference, " +
             " description, " +
             " state, " +
+            " linking_account, " +
             " is_final_beneficiary, " +
             " beneficiary, " +
             " services, " +
@@ -32,10 +38,14 @@ public interface FormsMapper {
             " Values ( " +
             " #{forms.id}, " +
             " #{forms.idClient}, " +
-            " #{forms.idTypeForm}, " +
+            " #{forms.idAccount}, " +
+            " #{forms.nameTypeForm}," +
+            " #{forms.categoryTypeForm}, " +
+            " #{forms.product}, " +
             " #{forms.reference}," +
             " #{forms.description}, " +
-            " #{forms.state}," +
+            " #{forms.state}, " +
+            " #{forms.linkingAccount}, " +
             " #{forms.isFinalBeneficiary}," +
             " #{forms.beneficiary}," +
             " #{forms.services}," +
@@ -58,13 +68,17 @@ public interface FormsMapper {
 
     @Update(" update forms set " +
             " description = #{forms.description}," +
-            " state = #{forms.state}," +
-            " is_final_beneficiary = #{forms.isFinalBeneficiary}," +
+            " state = #{forms.state}, " +
+            " product = #{forms.product}, " +
+            " category_type_form = #{forms.categoryTypeForm}, " +
+            " name_type_form = #{forms.nameTypeForm}, " +
+            " linking_account = #{forms.linkingAccount}, " +
+            " is_final_beneficiary = #{forms.isFinalBeneficiary}, " +
             " beneficiary = #{forms.beneficiary}," +
             " services = #{forms.services}," +
             " operations = #{forms.operations}," +
             " accounts = #{forms.accounts}," +
-            " debit_account = #{forms.debiAccount}," +
+            " debit_account = #{forms.debitAccount}," +
             " reasons_detail = #{forms.reasonsDetail}," +
             " card_number = #{forms.cardNumber}," +
             " max_amount = #{forms.maxAmount}, " +
@@ -72,7 +86,7 @@ public interface FormsMapper {
             " currency = #{forms.currency}," +
             " id_card_for_verification = #{forms.idCardForVerification}" +
             " where id = #{forms.id}" )
-    Forms update(@Param("forms") Forms forms);
+    void update(@Param("forms") Forms forms);
 
     @Select("select * " +
             "from forms " +
@@ -87,4 +101,12 @@ public interface FormsMapper {
 
     @Select("select * from forms order by forms.creation_date" )
     List<Forms> findAll();
+
+    @Select("select * from forms " +
+            " where id_account = #{idAccount} " +
+            " and name_type_form = #{typeForm} " +
+            " and category_type_form = #{categoryTypeForm}")
+    Optional<Forms> findByIdAccountAndTypeFormAndCategoryTypeForm(@Param("idAccount") String idAccount,
+                                                                  @Param("typeForm") String typeForm,
+                                                                  @Param("categoryTypeForm") String categoryTypeForm);
 }

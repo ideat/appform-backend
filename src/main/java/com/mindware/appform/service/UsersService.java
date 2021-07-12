@@ -60,4 +60,8 @@ public class UsersService {
 
         return result;
     }
+
+    public List<Users> findByRol(String rolName){
+         return mapper.findByRol(rolName);
+    }
 }

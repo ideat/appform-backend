@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ public class JwtUserDetailsService  implements UserDetailsService {
         Optional<Users> users = usersService.findByLogin(login);
         List<GrantedAuthority> roles = new ArrayList<>();
         if(users.isPresent()) {
-            return this.usersBuilder(login, users.get().getPassword(), users.get().getIdRol());
+            return this.usersBuilder(login, users.get().getPassword(), users.get().getRolName());
         }else{
             throw new UsernameNotFoundException("Usuario no encontrado");
         }

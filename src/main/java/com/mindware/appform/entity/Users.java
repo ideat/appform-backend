@@ -16,7 +16,7 @@ public class Users {
 
     private String password;
 
-    private String idRol;
+    private String rolName;
 
     private String image;
 

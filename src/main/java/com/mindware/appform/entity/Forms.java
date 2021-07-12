@@ -13,7 +13,11 @@ public class Forms {
 
     private Integer idClient;
 
-    private Integer idTypeForm;
+    private String nameTypeForm;
+
+    private String categoryTypeForm;
+
+    private String product;
 
     private String idAccount;
 
@@ -22,6 +26,8 @@ public class Forms {
     private String description;
 
     private Integer state;
+
+    private String linkingAccount;
 
     private String isFinalBeneficiary;
 
