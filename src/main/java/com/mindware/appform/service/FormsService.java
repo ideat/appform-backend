@@ -34,4 +34,8 @@ public class FormsService {
     public Optional<Forms> findByIdAccountAndTypeFormAndCategoryTypeForm(String idAccount, String typeForm, String categoryTypeForm){
         return mapper.findByIdAccountAndTypeFormAndCategoryTypeForm(idAccount,typeForm, categoryTypeForm);
     }
+
+    public Optional<Forms> findByIdClientAndTypeFormAndCategoryTypeForm(Integer idClient, String typeForm, String categoryTypeForm){
+        return mapper.findByIdClientAndTypeFormAndCategoryTypeForm(idClient,typeForm, categoryTypeForm);
+    }
 }

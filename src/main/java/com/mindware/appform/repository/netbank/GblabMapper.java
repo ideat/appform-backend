@@ -11,10 +11,10 @@ import java.util.List;
 public interface GblabMapper {
 
     @Select("select gblabcage, gblabdact,gblabitel, " +
-            " gblabitem, gblabmont, gblabcmon" +
+            " gblabitem, gblabmont, gblabcmon, gblabmpri" +
             " from gblab " +
             " where gblabmrcb = 0 " +
             " and gblabcage = #{cage} " +
-            " order by gblabitel")
+            " order by gblabmpri desc")
     List<Gblab> findGblabByCage(@Param("cage") Integer cage);
 }

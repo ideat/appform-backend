@@ -34,7 +34,11 @@ public interface FormsMapper {
             " id_card_for_verification, " +
             " creation_date," +
             " created_by, " +
-            " id_user)" +
+            " id_user, " +
+            " name_client_vinculation, " +
+            " document_client_vinculation," +
+            " user_digital_bank, " +
+            " account_service_operation )" +
             " Values ( " +
             " #{forms.id}, " +
             " #{forms.idClient}, " +
@@ -60,7 +64,11 @@ public interface FormsMapper {
             " #{forms.idCardForVerification}," +
             " #{forms.creationDate}," +
             " #{forms.createdBy}," +
-            " #{forms.idUser} )")
+            " #{forms.idUser}, " +
+            " #{forms.nameClientVinculation}, " +
+            " #{forms.documentClientVinculation}," +
+            " #{forms.userDigitalBank}, " +
+            " #{forms.accountServiceOperation} )")
 //    @SelectKey(statement=" SELECT LAST_INSERT_ID() ", keyProperty="id", before=false, resultType=int.class)
 //    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void add(@Param("forms") Forms forms);
@@ -84,7 +92,11 @@ public interface FormsMapper {
             " max_amount = #{forms.maxAmount}, " +
             " max_extension_amount = #{forms.maxExtensionAmount}," +
             " currency = #{forms.currency}," +
-            " id_card_for_verification = #{forms.idCardForVerification}" +
+            " id_card_for_verification = #{forms.idCardForVerification}, " +
+            " name_client_vinculation = #{forms.nameClientVinculation}, " +
+            " document_client_vinculation = #{forms.documentClientVinculation}," +
+            " user_digital_bank = #{forms.userDigitalBank}," +
+            " account_service_operation = #{forms.accountServiceOperation} " +
             " where id = #{forms.id}" )
     void update(@Param("forms") Forms forms);
 
@@ -107,6 +119,14 @@ public interface FormsMapper {
             " and name_type_form = #{typeForm} " +
             " and category_type_form = #{categoryTypeForm}")
     Optional<Forms> findByIdAccountAndTypeFormAndCategoryTypeForm(@Param("idAccount") String idAccount,
+                                                                  @Param("typeForm") String typeForm,
+                                                                  @Param("categoryTypeForm") String categoryTypeForm);
+
+    @Select("select * from forms " +
+            " where id_client = #{idClient} " +
+            " and name_type_form = #{typeForm} " +
+            " and category_type_form = #{categoryTypeForm}")
+    Optional<Forms> findByIdClientAndTypeFormAndCategoryTypeForm(@Param("idClient") Integer idClient,
                                                                   @Param("typeForm") String typeForm,
                                                                   @Param("categoryTypeForm") String categoryTypeForm);
 }

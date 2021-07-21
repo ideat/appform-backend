@@ -15,6 +15,8 @@ import java.util.Map;
 public class GblabController {
     private Integer cage;
 
+    private String idcard;
+
     @Autowired
     private GblabService gblabService;
 
@@ -26,4 +28,6 @@ public class GblabController {
         List<Gblab> gblabList = gblabService.findGblabByCage(cage);
         return new ResponseEntity<>(gblabList, HttpStatus.OK);
     }
+
+
 }

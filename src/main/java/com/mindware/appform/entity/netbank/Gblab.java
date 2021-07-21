@@ -16,4 +16,6 @@ public class Gblab {
     private Double gblabmont;
 
     private Integer gblabcmon;
+
+    private Integer gblabmpri;
 }

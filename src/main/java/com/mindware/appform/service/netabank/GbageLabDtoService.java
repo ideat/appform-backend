@@ -13,8 +13,14 @@ public class GbageLabDtoService {
     @Autowired
     GbageLabDtoMapper mapper;
 
-    public List<GbageLabDto> findGbageLabByCage(Integer cage){
-        List<GbageLabDto> gbageDtoList = mapper.findGbageLabByCage(cage);
+    public List<GbageLabDto> findGbageLabDtoByCage(Integer cage){
+        List<GbageLabDto> gbageDtoList = mapper.findGbageLabDtoByCage(cage);
+
+        return gbageDtoList;
+    }
+
+    public List<GbageLabDto> findGbageLabDtoByIdCard(String idcard){
+        List<GbageLabDto> gbageDtoList = mapper.findGbageLabDtoByIdCard(idcard);
 
         return gbageDtoList;
     }
