@@ -8,17 +8,15 @@ import java.util.Date;
 public class AccountServiceOperation {
     private String id;
 
-    private Date createDate;
+    private String createDate;
 
     private String account;
 
     private String services; //json parameter
 
-    private String user;
-
     private String reasonOpening;
 
-    private Double maxDailyLimit;
+    private Double extensionAmount;
 
-    private Double maxLimitExtension;
+    private Double decreaseAmount;
 }
