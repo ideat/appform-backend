@@ -2,13 +2,14 @@ package com.mindware.appform.entity;
 
 import lombok.Data;
 
-import java.util.Date;
 
 @Data
 public class AccountServiceOperation {
     private String id;
 
     private String createDate;
+
+    private String hourCreate;
 
     private String account;
 
@@ -19,4 +20,6 @@ public class AccountServiceOperation {
     private Double extensionAmount;
 
     private Double decreaseAmount;
+
+    private String accountSavingBank;
 }

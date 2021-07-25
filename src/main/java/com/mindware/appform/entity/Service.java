@@ -10,4 +10,8 @@ public class Service {
     private String checked;
 
     private String category;
+
+    private Double amount;
+
+    private Double amountSus;
 }

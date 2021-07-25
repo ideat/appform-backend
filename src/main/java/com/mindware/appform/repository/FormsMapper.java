@@ -95,7 +95,8 @@ public interface FormsMapper {
             " id_card_for_verification = #{forms.idCardForVerification}, " +
             " name_client_vinculation = #{forms.nameClientVinculation}, " +
             " document_client_vinculation = #{forms.documentClientVinculation}," +
-            " user_digital_bank = #{forms.userDigitalBank}," +
+            " user_digital_bank = #{forms.userDigitalBank}, " +
+            " id_user = #{forms.idUser}, " +
             " account_service_operation = #{forms.accountServiceOperation} " +
             " where id = #{forms.id}" )
     void update(@Param("forms") Forms forms);

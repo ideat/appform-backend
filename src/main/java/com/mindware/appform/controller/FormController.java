@@ -1,9 +1,13 @@
 package com.mindware.appform.controller;
 
+import com.mindware.appform.dto.FormDebitCardDtoReport;
+import com.mindware.appform.dto.FormDigitalBankDtoReport;
 import com.mindware.appform.dto.FormsDtoReport;
 import com.mindware.appform.entity.Forms;
 import com.mindware.appform.entity.netbank.dto.DataFormDto;
 import com.mindware.appform.repository.FormsMapper;
+import com.mindware.appform.service.FormsDebitCardDtoReportService;
+import com.mindware.appform.service.FormsDigitalBankDtoReportService;
 import com.mindware.appform.service.FormsDtoReportService;
 import com.mindware.appform.service.FormsService;
 import com.mindware.appform.service.netabank.DataFormDtoService;
@@ -40,6 +44,12 @@ public class FormController {
 
     @Autowired
     FormsDtoReportService formsDtoReportService;
+
+    @Autowired
+    FormsDebitCardDtoReportService formsDebitCardDtoReportService;
+
+    @Autowired
+    FormsDigitalBankDtoReportService formsDigitalBankDtoReportService;
 
     @PostMapping(value = "/v1/form/create", name = "Crear formulario")
     ResponseEntity<Forms> create (@RequestBody Forms forms){
@@ -137,6 +147,60 @@ public class FormController {
         InputStream stream = getClass().getResourceAsStream("/template-report/saving-bank-dpf/openingSavingBankDpf.jrxml");
         String pathLogo =  getClass().getResource("/template-report/img/logo.png").getPath();
         String pathSubreport ="template-report/saving-bank-dpf/";
+        Map<String,Object> params = new WeakHashMap<>();
+        params.put("logo",pathLogo);
+        params.put("path_subreport", pathSubreport);
+
+        byte[] b = PrinterReportJasper.imprimirComoPdf(stream,collection,params);
+        InputStream is = new ByteArrayInputStream(b);
+
+        return IOUtils.toByteArray(is);
+
+    }
+
+    @GetMapping(value ="/v1/form/getFormDigitalBankDtoReport", name ="Reporte formulario banca digital")
+    public @ResponseBody byte[] getFormDigitalBankDtoReport(@RequestHeader Map<String,String> headers) throws IOException, JRException {
+        headers.forEach((key,value) -> {
+            if(key.equals("code_client")) idClient = Integer.parseInt(value);
+            if(key.equals("id_account_service_operation")) value2 = value;
+            if(key.equals("type_form")) value3 = value;
+            if(key.equals("category_type_form")) value4 = value;
+        });
+
+        FormDigitalBankDtoReport result = formsDigitalBankDtoReportService.generate(idClient, value3, value4, value2);
+        List<FormDigitalBankDtoReport> collection = new ArrayList<>();
+
+        collection.add(result);
+        InputStream stream = getClass().getResourceAsStream("/template-report/digital-bank/digitalBank.jrxml");
+        String pathLogo =  getClass().getResource("/template-report/img/logo.png").getPath();
+        String pathSubreport ="template-report/digital-bank/";
+        Map<String,Object> params = new WeakHashMap<>();
+        params.put("logo",pathLogo);
+        params.put("path_subreport", pathSubreport);
+
+        byte[] b = PrinterReportJasper.imprimirComoPdf(stream,collection,params);
+        InputStream is = new ByteArrayInputStream(b);
+
+        return IOUtils.toByteArray(is);
+
+    }
+
+    @GetMapping(value ="/v1/form/getFormDebitCardDtoReport", name ="Reporte formulario Servicios TD")
+    public @ResponseBody byte[] getFormDebitCardDtoReport(@RequestHeader Map<String,String> headers) throws IOException, JRException {
+        headers.forEach((key,value) -> {
+            if(key.equals("code_client")) idClient = Integer.parseInt(value);
+            if(key.equals("id_account_service_operation")) value2 = value;
+            if(key.equals("type_form")) value3 = value;
+            if(key.equals("category_type_form")) value4 = value;
+        });
+
+        FormDebitCardDtoReport result = formsDebitCardDtoReportService.generate(idClient, value3, value4, value2);
+        List<FormDebitCardDtoReport> collection = new ArrayList<>();
+
+        collection.add(result);
+        InputStream stream = getClass().getResourceAsStream("/template-report/debit-card/debitCardService.jrxml");
+        String pathLogo =  getClass().getResource("/template-report/img/logo.png").getPath();
+        String pathSubreport ="template-report/debit-card/";
         Map<String,Object> params = new WeakHashMap<>();
         params.put("logo",pathLogo);
         params.put("path_subreport", pathSubreport);

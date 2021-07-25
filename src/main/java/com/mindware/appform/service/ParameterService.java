@@ -42,6 +42,10 @@ public class ParameterService {
         return mapper.findAll();
     }
 
+    public List<Parameter> findByCategory(String category){
+        return mapper.findByCategory(category);
+    }
+
 
 }
 

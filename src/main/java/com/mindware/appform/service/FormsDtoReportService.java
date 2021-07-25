@@ -76,31 +76,34 @@ public class FormsDtoReportService {
         result.setCountry(dataFormDto.getCountry());
         result.setNameClientVinculation(formsResult.get().getNameClientVinculation());
         result.setDocumentClientVinculation(formsResult.get().getDocumentClientVinculation());
-        if(formsResult.get().getLinkingAccount().equals("PADRES O TUTORES LEGALES")){
-            result.setLabel1("Nombre del Menor");
-            result.setLabel2("Número de Documento");
-        }else if(formsResult.get().getLinkingAccount().equals("APODERADOS")){
-            result.setLabel1("Nombre o Razon Social");
-            result.setLabel2("Número de Documento/Nit");
-        }else if(formsResult.get().getLinkingAccount().equals("REPRESENTANTE LEGAL")){
-            result.setLabel1("Empresa o Razon Social");
-            result.setLabel2("Número de Documento/Nit");
-        }else{
-            result.setLabel1("");
-            result.setNameClientVinculation("");
-            result.setDocumentClientVinculation("");
+        if(formsResult.get().getLinkingAccount()!=null) {
+            if (formsResult.get().getLinkingAccount().equals("PADRES O TUTORES LEGALES")) {
+                result.setLabel1("Nombre del Menor");
+                result.setLabel2("Número de Documento");
+            } else if (formsResult.get().getLinkingAccount().equals("APODERADOS")) {
+                result.setLabel1("Nombre o Razon Social");
+                result.setLabel2("Número de Documento/Nit");
+            } else if (formsResult.get().getLinkingAccount().equals("REPRESENTANTE LEGAL")) {
+                result.setLabel1("Empresa o Razon Social");
+                result.setLabel2("Número de Documento/Nit");
+            } else {
+                result.setLabel1("");
+                result.setNameClientVinculation("");
+                result.setDocumentClientVinculation("");
+            }
         }
-
-        if(formsResult.get().getIsFinalBeneficiary().equals("NO")){
-            ObjectMapper mapper = new ObjectMapper();
-            try {
-                if(formsResult.get().getBeneficiary()!=null && !formsResult.get().getBeneficiary().equals("[]")) {
-                    List<Beneficiary> beneficiaryList = mapper.readValue(formsResult.get().getBeneficiary(), new TypeReference<List<Beneficiary>>() {
-                    });
-                    result.setBeneficiaryList(beneficiaryList);
+        if(formsResult.get().getIsFinalBeneficiary()!=null) {
+            if (formsResult.get().getIsFinalBeneficiary().equals("NO")) {
+                ObjectMapper mapper = new ObjectMapper();
+                try {
+                    if (formsResult.get().getBeneficiary() != null && !formsResult.get().getBeneficiary().equals("[]")) {
+                        List<Beneficiary> beneficiaryList = mapper.readValue(formsResult.get().getBeneficiary(), new TypeReference<List<Beneficiary>>() {
+                        });
+                        result.setBeneficiaryList(beneficiaryList);
+                    }
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
                 }
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
             }
         }
 

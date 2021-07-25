@@ -36,5 +36,7 @@ public interface ParameterMapper {
             " and name = #{name}")
     Optional<Parameter> findByCategoryAndName(@Param("category") String category, @Param("name") String name);
 
-
+    @Select(" select * from parameter " +
+            " where category = #{category} ")
+    List<Parameter> findByCategory(@Param("category") String category);
 }
