@@ -10,6 +10,8 @@ public class FormDebitCardDtoReport {
 
     private String createDate;
 
+    private String deliverDate;
+
     private String hourCreate;
 
     private String officeName;
@@ -33,4 +35,5 @@ public class FormDebitCardDtoReport {
     private String accounts;
 
     private String accountSavingBank;
+
 }

@@ -4,11 +4,13 @@ import com.mindware.appform.entity.netbank.GbageLabDto;
 import com.mindware.appform.entity.netbank.Gbcae;
 import com.mindware.appform.entity.netbank.Gblab;
 import com.mindware.appform.entity.netbank.dto.DataFormDto;
+import com.mindware.appform.exceptions.AppException;
 import com.mindware.appform.repository.netbank.DataFormDtoMapper;
 import com.mindware.appform.repository.netbank.GbageLabDtoMapper;
 import com.mindware.appform.repository.netbank.GbcaeMapper;
 import com.mindware.appform.repository.netbank.GblabMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,6 +35,10 @@ public class DataFormDtoService {
     public List<DataFormDto> findDataFormForDigitalBank(Integer cage){
         List<DataFormDto> dataFormDtoList = new ArrayList<>();
         dataFormDtoList = dataFormDtoMapper.findDataFormForDigitalBank(cage);
+
+        if(dataFormDtoList.size()==0){
+            throw new AppException("Cliente no tiene cuentas activas", HttpStatus.BAD_REQUEST);
+        }
 
         Double income = 0.0;
         List<Gblab> gblabList = gblabMapper.findGblabByCage(cage);
@@ -121,38 +127,29 @@ public class DataFormDtoService {
             dataFormDto.setActivity1(gbcae.get(0).getGbcaedesc());
         }
 
-        if(dataFormDto.getActivity1()==null || dataFormDto.getActivity1().trim().equals("")){
-//            if(gblabList.size()==1){
-//                dataFormDto.setActivity1(gblabList.get(0).getGblabdact()!=null?gblabList.get(0).getGblabdact():"");
-//            }else {
-//                if (gblabList.size() > 1) {
-//                    List<Gblab> aux = gblabList.stream()
-//                            .filter(g -> g.getGblabmpri() != null && g.getGblabmpri() == 1)
-//                            .collect(Collectors.toList());
-//                    if (aux.size() > 0) {
-//                        dataFormDto.setActivity1(aux.get(0).getGblabdact());
-//                    }
-//                    List<Gblab> aux2 = gblabList.stream()
-//                            .filter(g -> g.getGblabmpri() == null || (g.getGblabmpri() != 1 && !g.getGblabdact().isEmpty()))
-//                            .collect(Collectors.toList());
-//                    if (aux2.size() > 0) {
-//                        dataFormDto.setActivity2(aux2.get(0).getGblabdact());
-//                    }
-//                }
-//            }
+//        if(dataFormDto.getActivity1()==null || dataFormDto.getActivity1().trim().equals("")){
             List<Gblab> aux2 = gblabList.stream()
                     .filter(g -> g.getGblabmpri() == null || (g.getGblabmpri() != 1 && !g.getGblabdact().isEmpty()))
                     .collect(Collectors.toList());
             if (aux2.size() > 0) {
                 dataFormDto.setActivity2(aux2.get(0).getGblabdact());
             }
-        }
+//        }
         if(dataFormDto.getCodeSpouse()!=null) {
             List<GbageLabDto> gbageLabDtoList = gbageLabDtoMapper.findGbageLabDtoByCage(dataFormDto.getCodeSpouse());
             String name = gbageLabDtoList.get(0).getGbagenomb()!=null?gbageLabDtoList.get(0).getGbagenomb():"";
             name = name.replace("¥","Ñ");
             dataFormDto.setFullNameSpouse(name);
-            dataFormDto.setActivitySpouse(gbageLabDtoList.get(0).getGblabdact()!=null?gbageLabDtoList.get(0).getGblabdact():"");
+            String gcae2 = gbageLabDtoList.get(0).getGbageciiu();
+            if(!gcae.isEmpty()){
+                gbcae = gbcaeList.stream()
+                        .filter(g -> g.getGbcaeciiu()!=null &&  g.getGbcaeciiu() ==Integer.parseInt(gcae2))
+                        .collect(Collectors.toList());
+            }
+            if(gbcae.size() > 0){
+                dataFormDto.setActivitySpouse(gbcae.get(0).getGbcaedesc()); //(gbageLabDtoList.get(0).getGblabdact()!=null?gbageLabDtoList.get(0).getGblabdact():"");
+            }
+
         }
         dataFormDto.setIncomeMountly(income);
 

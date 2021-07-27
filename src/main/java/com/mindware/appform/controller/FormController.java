@@ -2,14 +2,12 @@ package com.mindware.appform.controller;
 
 import com.mindware.appform.dto.FormDebitCardDtoReport;
 import com.mindware.appform.dto.FormDigitalBankDtoReport;
+import com.mindware.appform.dto.FormVerifyIdCardDtoReport;
 import com.mindware.appform.dto.FormsDtoReport;
 import com.mindware.appform.entity.Forms;
 import com.mindware.appform.entity.netbank.dto.DataFormDto;
 import com.mindware.appform.repository.FormsMapper;
-import com.mindware.appform.service.FormsDebitCardDtoReportService;
-import com.mindware.appform.service.FormsDigitalBankDtoReportService;
-import com.mindware.appform.service.FormsDtoReportService;
-import com.mindware.appform.service.FormsService;
+import com.mindware.appform.service.*;
 import com.mindware.appform.service.netabank.DataFormDtoService;
 import com.mindware.appform.util.PrinterReportJasper;
 import net.sf.jasperreports.engine.JRException;
@@ -50,6 +48,9 @@ public class FormController {
 
     @Autowired
     FormsDigitalBankDtoReportService formsDigitalBankDtoReportService;
+
+    @Autowired
+    FormsVerifyIdCardDtoReportService formsVerifyIdCardDtoReportService;
 
     @PostMapping(value = "/v1/form/create", name = "Crear formulario")
     ResponseEntity<Forms> create (@RequestBody Forms forms){
@@ -103,6 +104,29 @@ public class FormController {
         Optional<Forms> forms = mapper.findByIdClientAndTypeFormAndCategoryTypeForm(idClient,value2,value3);
         Forms result = forms.isPresent()?forms.get():new Forms();
 
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping(value ="/v1/form/findByTypeFormAndCategoryTypeForm", name ="Formulario por tipo y categoria")
+    ResponseEntity<List<Forms>> findByTypeFormAndCategoryTypeForm(@RequestHeader Map<String, String> headers){
+        headers.forEach((key,value) -> {
+            if(key.equals("name_type_form")) value2 = value;
+            if(key.equals("category_type_form")) value3 = value;
+        });
+
+        List<Forms> result = service.findByTypeFormAndCategoryTypeForm(value2,value3);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping(value ="/v1/form/findByUserTypeFormAndCategoryTypeForm", name ="Formulario por tipo y categoria")
+    ResponseEntity<List<Forms>> findByUserTypeFormAndCategoryTypeForm(@RequestHeader Map<String, String> headers){
+        headers.forEach((key,value) -> {
+            if(key.equals("user")) value1 = value;
+            if(key.equals("name_type_form")) value2 = value;
+            if(key.equals("category_type_form")) value3 = value;
+        });
+
+        List<Forms> result = service.findByUserTypeFormAndCategoryTypeForm(value2,value3,value1);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -204,6 +228,56 @@ public class FormController {
         Map<String,Object> params = new WeakHashMap<>();
         params.put("logo",pathLogo);
         params.put("path_subreport", pathSubreport);
+
+        byte[] b = PrinterReportJasper.imprimirComoPdf(stream,collection,params);
+        InputStream is = new ByteArrayInputStream(b);
+
+        return IOUtils.toByteArray(is);
+
+    }
+
+    @GetMapping(value ="/v1/form/getFormDeliverDebitCardReport", name ="Reporte formulario Servicios TD")
+    public @ResponseBody byte[] getFormDeliverDebitCardReport(@RequestHeader Map<String,String> headers) throws IOException, JRException {
+        headers.forEach((key,value) -> {
+            if(key.equals("code_client")) idClient = Integer.parseInt(value);
+            if(key.equals("id_account_service_operation")) value2 = value;
+            if(key.equals("type_form")) value3 = value;
+            if(key.equals("category_type_form")) value4 = value;
+        });
+
+        FormDebitCardDtoReport result = formsDebitCardDtoReportService.generate(idClient, value3, value4, value2);
+        List<FormDebitCardDtoReport> collection = new ArrayList<>();
+
+        collection.add(result);
+        InputStream stream = getClass().getResourceAsStream("/template-report/debit-card/deliverDebitCard.jrxml");
+        String pathLogo =  getClass().getResource("/template-report/img/logo.png").getPath();
+        Map<String,Object> params = new WeakHashMap<>();
+        params.put("logo",pathLogo);
+
+        byte[] b = PrinterReportJasper.imprimirComoPdf(stream,collection,params);
+        InputStream is = new ByteArrayInputStream(b);
+
+        return IOUtils.toByteArray(is);
+
+    }
+
+
+    @GetMapping(value ="/v1/form/getFormVerifyIdCardDtoReport", name ="Reporte Verificacion SEGIP")
+    public @ResponseBody byte[] getFormVerifyIdCardDtoReport(@RequestHeader Map<String,String> headers) throws IOException, JRException {
+        headers.forEach((key,value) -> {
+            if(key.equals("id")) value2 = value;
+            if(key.equals("login")) value3 = value;
+
+        });
+
+        List<FormVerifyIdCardDtoReport> collection = formsVerifyIdCardDtoReportService.generate(value2, value3);
+//        List<FormDebitCardDtoReport> collection = new ArrayList<>();
+
+//        collection.add(result);
+        InputStream stream = getClass().getResourceAsStream("/template-report/verification-idcard/verificationIdCard.jrxml");
+        String pathLogo =  getClass().getResource("/template-report/img/logo.png").getPath();
+        Map<String,Object> params = new WeakHashMap<>();
+        params.put("logo",pathLogo);
 
         byte[] b = PrinterReportJasper.imprimirComoPdf(stream,collection,params);
         InputStream is = new ByteArrayInputStream(b);

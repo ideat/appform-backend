@@ -76,6 +76,7 @@ public class FormsDtoReportService {
         result.setCountry(dataFormDto.getCountry());
         result.setNameClientVinculation(formsResult.get().getNameClientVinculation());
         result.setDocumentClientVinculation(formsResult.get().getDocumentClientVinculation());
+        result.setSourceFounds(formsResult.get().getSourceFounds());
         if(formsResult.get().getLinkingAccount()!=null) {
             if (formsResult.get().getLinkingAccount().equals("PADRES O TUTORES LEGALES")) {
                 result.setLabel1("Nombre del Menor");

@@ -46,6 +46,6 @@ public class FormsDtoReport {
     private String documentClientVinculation;
     private String label1;
     private String label2;
-
+    private String sourceFounds;
 
 }

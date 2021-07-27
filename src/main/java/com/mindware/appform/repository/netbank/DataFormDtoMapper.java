@@ -12,7 +12,7 @@ public interface DataFormDtoMapper {
 
     @Select(" select gbdaccage as code_client, gbdacnomb as names, gbdacape1 as last_name, " +
             " gbdacape2 as mother_last_name, gbdacape3 as married_last_name, " +
-            " gbagendid as idcard, gbofides1 as office_name, catcadesc as product, " +
+            " trim(gbagendid) as idcard, gbofides1 as office_name, catcadesc as product, " +
             " gbcon1.gbcondesc as gender, gbcon2.gbcondesc as type_document, gbcon3.gbcondesc as civil_status, " +
             " gbdocfvid as expired_date, gbcon5.gbcondesc as currency, gbagefnac as born_date, " +
             " gbdirdire as address_home, gbprfdesc as profession, " +
@@ -48,7 +48,7 @@ public interface DataFormDtoMapper {
 
     @Select(" select gbdaccage as code_client, gbdacnomb as names, gbdacape1 as last_name, " +
             " gbdacape2 as mother_last_name, gbdacape3 as married_last_name, " +
-            " gbagendid as idcard, gbofides1 as office_name, pfhtsdesc as product, " +
+            " trim(gbagendid) as idcard, gbofides1 as office_name, pfhtsdesc as product, " +
             " gbcon1.gbcondesc as gender, gbcon2.gbcondesc as type_document, gbcon3.gbcondesc as civil_status, " +
             " gbdocfvid as expired_date, gbcon5.gbcondesc as currency, gbagefnac as born_date, " +
             " gbdirdire as address_home, gbprfdesc as profession, " +
@@ -87,7 +87,7 @@ public interface DataFormDtoMapper {
 
     @Select(" select distinct gbdaccage as code_client, gbdacnomb as names, gbdacape1 as last_name, " +
             " gbdacape2 as mother_last_name, gbdacape3 as married_last_name, " +
-            " gbagendid as idcard, gbofides1 as office_name, catcadesc as product, " +
+            " trim(gbagendid) as idcard, gbofides1 as office_name, catcadesc as product, " +
             " gbcon1.gbcondesc as gender, gbcon2.gbcondesc as type_document, gbcon3.gbcondesc as civil_status, " +
             " gbdocfvid as expired_date, gbcon5.gbcondesc as currency, gbagefnac as born_date, " +
             " gbdirdire as address_home, gbprfdesc as profession, " +

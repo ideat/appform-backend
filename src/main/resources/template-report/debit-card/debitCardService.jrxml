@@ -45,27 +45,36 @@
 				<text><![CDATA[FORMULARIO DE TARJETAS DE DEBITO]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="350" y="3" width="60" height="12" uuid="57d50247-599a-4dca-870e-f0d1c36f0aa1">
+				<reportElement x="350" y="18" width="60" height="12" uuid="57d50247-599a-4dca-870e-f0d1c36f0aa1">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center">
 					<font size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{createDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="410" y="3" width="114" height="12" uuid="e40d138c-b4d8-4b63-b7e3-8a166a5293b2">
+				<reportElement x="410" y="18" width="114" height="12" uuid="e40d138c-b4d8-4b63-b7e3-8a166a5293b2">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center">
 					<font size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{officeName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="524" y="3" width="38" height="12" uuid="e9330e1a-fa98-4878-a881-e927b5030e9c">
+				<reportElement x="524" y="18" width="38" height="12" uuid="e9330e1a-fa98-4878-a881-e927b5030e9c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
 				<textElement textAlignment="Center">
 					<font size="6"/>
 				</textElement>
@@ -76,7 +85,7 @@
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement mode="Opaque" x="350" y="15" width="60" height="12" backcolor="rgba(181, 177, 177, 0.6901961)" uuid="ac59bbe9-7691-4b01-be8c-d3dd8aeb095e">
+				<reportElement mode="Opaque" x="350" y="5" width="60" height="12" backcolor="rgba(181, 177, 177, 0.6901961)" uuid="ac59bbe9-7691-4b01-be8c-d3dd8aeb095e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -88,7 +97,7 @@
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="410" y="15" width="114" height="12" backcolor="rgba(181, 177, 177, 0.6901961)" uuid="4cda4a70-e10a-4c1b-9d32-8ee7d7a7fbe9">
+				<reportElement mode="Opaque" x="410" y="5" width="114" height="12" backcolor="rgba(181, 177, 177, 0.6901961)" uuid="4cda4a70-e10a-4c1b-9d32-8ee7d7a7fbe9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -100,7 +109,7 @@
 				<text><![CDATA[Agencia]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="524" y="15" width="38" height="12" backcolor="rgba(181, 177, 177, 0.6901961)" uuid="60d01cd5-a35a-43b4-80aa-12647f1a2f6f">
+				<reportElement mode="Opaque" x="524" y="5" width="38" height="12" backcolor="rgba(181, 177, 177, 0.6901961)" uuid="60d01cd5-a35a-43b4-80aa-12647f1a2f6f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -127,12 +136,14 @@
 			<textField>
 				<reportElement x="51" y="70" width="468" height="12" uuid="8b8822a2-13ff-42fb-977d-4a487f6ecde1">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fullNameClient}]]></textFieldExpression>
 			</textField>
@@ -158,24 +169,28 @@
 				<reportElement x="51" y="88" width="468" height="12" uuid="8e9217a6-4040-4b37-b5f0-40dcdda3052c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{homeAddress}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="51" y="106" width="89" height="12" uuid="f4eddcdb-b8f2-4cad-8966-5cd8e7808994">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{idCard}]]></textFieldExpression>
 			</textField>
@@ -191,12 +206,14 @@
 			<textField>
 				<reportElement x="190" y="106" width="89" height="12" uuid="2c68f0aa-da1f-48ac-8ff8-4b1643e9bd54">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cellphone}]]></textFieldExpression>
 			</textField>
@@ -212,12 +229,14 @@
 			<textField>
 				<reportElement x="330" y="106" width="89" height="12" uuid="5f04a19e-5890-41d0-950c-d4cbd8bb061e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{homePhone}]]></textFieldExpression>
 			</textField>
@@ -247,12 +266,15 @@
 			<frame>
 				<reportElement positionType="Float" x="10" y="160" width="509" height="60" uuid="b71e817e-3454-4099-85a2-004918f9e702"/>
 				<textField textAdjust="StretchHeight">
-					<reportElement x="3" y="20" width="499" height="30" uuid="e03d6f4f-f57a-402d-923f-430434817786"/>
+					<reportElement x="3" y="20" width="499" height="30" uuid="e03d6f4f-f57a-402d-923f-430434817786">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					</reportElement>
 					<box>
 						<pen lineWidth="0.25"/>
 					</box>
 					<textElement>
 						<font size="8" isBold="false"/>
+						<paragraph leftIndent="2"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{reason}]]></textFieldExpression>
 				</textField>
@@ -344,12 +366,14 @@
 				<textField textAdjust="StretchHeight">
 					<reportElement x="390" y="0" width="116" height="12" uuid="455b353b-122e-4b08-b415-3e35f6060c1b">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					</reportElement>
 					<box>
 						<pen lineWidth="0.25"/>
 					</box>
 					<textElement textAlignment="Left">
 						<font size="8"/>
+						<paragraph leftIndent="2"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{accountSavingBank}]]></textFieldExpression>
 				</textField>

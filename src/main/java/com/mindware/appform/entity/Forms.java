@@ -51,7 +51,7 @@ public class Forms {
 
     private String currency;
 
-    private String idCardForVerification; //json
+    private String idCardForVerification; //json VerifyIdCard
 
     private Date creationDate;
 
@@ -68,6 +68,8 @@ public class Forms {
     private String accountServiceOperation; //json
 
     private String userDigitalBank;
+
+    private String sourceFounds;
 
 }
 

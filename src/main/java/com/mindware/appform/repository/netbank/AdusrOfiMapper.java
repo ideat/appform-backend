@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface AdusrOfiMapper {
 
-    @Select(" select adusrnomb, adusrusrn, adusragen, gbofides1 " +
+    @Select(" select adusrnomb, adusrusrn, adusragen, gbofides1, gbofides4 " +
             " from adusr " +
             " inner join gbofi on adusragen = gbofinofi " +
             " where adusrusrn = upper(#{login}) ")

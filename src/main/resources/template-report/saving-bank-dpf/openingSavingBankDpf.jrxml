@@ -53,11 +53,12 @@
 	<field name="documentClientVinculation" class="java.lang.String"/>
 	<field name="label1" class="java.lang.String"/>
 	<field name="label2" class="java.lang.String"/>
+	<field name="sourceFounds" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="526" splitType="Stretch">
+		<band height="538" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<rectangle radius="6">
 				<reportElement x="7" y="379" width="555" height="64" uuid="bc9799ea-fbb5-4d4e-ac38-0c78eefb36a7"/>
@@ -92,12 +93,14 @@
 			<textField>
 				<reportElement mode="Opaque" x="151" y="75" width="136" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="fdf9ca99-0344-4753-9302-9b7628d0d7e5">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
 			</textField>
@@ -114,12 +117,14 @@
 			<textField>
 				<reportElement mode="Opaque" x="287" y="75" width="143" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="e448875b-6631-4682-a034-76c7f6c165d7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{office}]]></textFieldExpression>
 			</textField>
@@ -142,27 +147,31 @@
 				</textElement>
 				<text><![CDATA[Producto:]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="dd/MM/yyyy">
 				<reportElement mode="Opaque" x="430" y="75" width="121" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="5e06df92-d3d5-413a-9aff-bf8fce571b88">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{openingDate}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="8" y="75" width="143" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="b4ac897c-9100-4b7d-8d8d-0181053fcae9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{product}]]></textFieldExpression>
 			</textField>
@@ -184,6 +193,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{codeClient}]]></textFieldExpression>
 			</textField>
@@ -201,6 +211,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{lastName}]]></textFieldExpression>
 			</textField>
@@ -213,6 +224,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{motherLastName}]]></textFieldExpression>
 			</textField>
@@ -225,6 +237,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{marriedLastName}]]></textFieldExpression>
 			</textField>
@@ -237,6 +250,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{names}]]></textFieldExpression>
 			</textField>
@@ -287,6 +301,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{typeIdCard}]]></textFieldExpression>
 			</textField>
@@ -299,6 +314,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{idCard}]]></textFieldExpression>
 			</textField>
@@ -311,6 +327,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{expirateDate}]]></textFieldExpression>
 			</textField>
@@ -323,6 +340,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{civilStatus}]]></textFieldExpression>
 			</textField>
@@ -373,6 +391,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{birthDate}]]></textFieldExpression>
 			</textField>
@@ -403,6 +422,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{gender}]]></textFieldExpression>
 			</textField>
@@ -438,20 +458,23 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{motherLastName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{activitySpouse}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="7" y="256" width="262" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="57796238-25d0-4e66-b591-46aab5e63ed0">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{lastName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fullNameSpouse}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="269" y="242" width="280" height="12" uuid="b32f86f0-c1d5-4150-938c-219c84e23c6a">
@@ -481,6 +504,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{country}]]></textFieldExpression>
 			</textField>
@@ -493,6 +517,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{departament}]]></textFieldExpression>
 			</textField>
@@ -505,6 +530,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{city}]]></textFieldExpression>
 			</textField>
@@ -546,6 +572,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{province}]]></textFieldExpression>
 			</textField>
@@ -567,6 +594,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{country}]]></textFieldExpression>
 			</textField>
@@ -579,6 +607,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{departament}]]></textFieldExpression>
 			</textField>
@@ -611,6 +640,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{homeTelephone}]]></textFieldExpression>
 			</textField>
@@ -632,6 +662,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cellphone}]]></textFieldExpression>
 			</textField>
@@ -662,6 +693,7 @@
 				</box>
 				<textElement textAlignment="Center">
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{incomeMounthly}]]></textFieldExpression>
 			</textField>
@@ -674,6 +706,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{economicActivity1}]]></textFieldExpression>
 			</textField>
@@ -687,7 +720,7 @@
 				</textElement>
 				<text><![CDATA[Actividad Económica:]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement stretchType="ContainerHeight" mode="Opaque" x="90" y="424" width="458" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="09a1fa9e-c2ff-40d8-8f3f-5983556188ff">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -696,6 +729,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reasonOpening}]]></textFieldExpression>
 			</textField>
@@ -727,6 +761,7 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{economicActivity2}]]></textFieldExpression>
 			</textField>
@@ -749,7 +784,7 @@
 				<text><![CDATA[Datos Actividad Económica]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Opaque" x="9" y="465" width="174" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="a2217f8c-afbc-4308-a6cb-cd1c25f81743">
+				<reportElement mode="Opaque" x="9" y="460" width="174" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="a2217f8c-afbc-4308-a6cb-cd1c25f81743">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -757,11 +792,12 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{typeVinculation}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="9" y="449" width="119" height="12" uuid="6c3a3702-32fc-44bb-8f71-ffc905a3c126">
+				<reportElement x="9" y="446" width="119" height="12" uuid="6c3a3702-32fc-44bb-8f71-ffc905a3c126">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -771,7 +807,7 @@
 				<text><![CDATA[Vinculación a la Cuenta:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="183" y="451" width="123" height="12" uuid="eb9353b9-c8ba-45c4-9861-33485677fe60">
+				<reportElement x="183" y="448" width="123" height="12" uuid="eb9353b9-c8ba-45c4-9861-33485677fe60">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -781,7 +817,7 @@
 				<text><![CDATA[Beneficiario Final:]]></text>
 			</staticText>
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="337" y="465" width="33" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="a0dc328f-31e1-42d5-9f8b-9dbb9f185778">
+				<reportElement mode="Opaque" x="337" y="462" width="33" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="a0dc328f-31e1-42d5-9f8b-9dbb9f185778">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -793,7 +829,7 @@
 				<textFieldExpression><![CDATA[($F{isFinalBeneficiary}.trim().equals("SI")?"X":"")]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="183" y="465" width="123" height="14" uuid="7e3704b5-eff3-4f28-bb73-2b7ab00aac41">
+				<reportElement x="183" y="462" width="123" height="14" uuid="7e3704b5-eff3-4f28-bb73-2b7ab00aac41">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -803,7 +839,7 @@
 				<text><![CDATA[Usted es el Beneficiario Final?]]></text>
 			</staticText>
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="406" y="465" width="33" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="2a59f260-2c06-40d1-8abf-68a2f19c5dfc">
+				<reportElement mode="Opaque" x="406" y="462" width="33" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="2a59f260-2c06-40d1-8abf-68a2f19c5dfc">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -815,7 +851,7 @@
 				<textFieldExpression><![CDATA[($F{isFinalBeneficiary}.trim().equals("NO")?"X":"")]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="316" y="465" width="20" height="12" uuid="1c8d286a-ae16-41d0-b7de-73c0994fe976">
+				<reportElement x="316" y="462" width="20" height="12" uuid="1c8d286a-ae16-41d0-b7de-73c0994fe976">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -825,7 +861,7 @@
 				<text><![CDATA[SI]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="383" y="465" width="20" height="12" uuid="5ee3087b-0113-4090-a491-bc905cfc1ebd">
+				<reportElement x="383" y="462" width="20" height="12" uuid="5ee3087b-0113-4090-a491-bc905cfc1ebd">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -840,12 +876,14 @@
 			<textField>
 				<reportElement mode="Opaque" x="8" y="49" width="143" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="2f810c61-ed41-48c8-bfd2-6912d6ee1254">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
 			</textField>
@@ -859,10 +897,16 @@
 				<text><![CDATA[Tipo de Cuenta:]]></text>
 			</staticText>
 			<rectangle radius="6">
-				<reportElement x="5" y="481" width="559" height="43" isRemoveLineWhenBlank="true" uuid="9f142b04-9ecc-45c1-8225-a8368a43f1db"/>
+				<reportElement x="5" y="503" width="559" height="35" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="9f142b04-9ecc-45c1-8225-a8368a43f1db">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{documentClientVinculation}!=null || !$F{documentClientVinculation}.equals("")]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
 			</rectangle>
-			<textField>
-				<reportElement mode="Opaque" x="13" y="502" width="305" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="2aada2e6-bfd9-48cb-9a19-af3e6b2d735f">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="13" y="520" width="305" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="2aada2e6-bfd9-48cb-9a19-af3e6b2d735f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -870,11 +914,12 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nameClientVinculation}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement mode="Opaque" x="318" y="502" width="218" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="97e63ece-313e-4327-8f27-9fb4e0589c40">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="318" y="520" width="218" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="97e63ece-313e-4327-8f27-9fb4e0589c40">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -882,11 +927,12 @@
 				</box>
 				<textElement>
 					<font size="8"/>
+					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{documentClientVinculation}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="12" y="488" width="306" height="12" uuid="e5f16376-74b2-4cf4-8cfc-b53821350ce7">
+				<reportElement x="12" y="506" width="306" height="12" uuid="e5f16376-74b2-4cf4-8cfc-b53821350ce7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -894,8 +940,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{label1}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="321" y="488" width="198" height="12" uuid="792df7b1-8c46-4edd-a611-73804aefb7d9">
+			<textField isBlankWhenNull="true">
+				<reportElement x="321" y="506" width="198" height="12" uuid="792df7b1-8c46-4edd-a611-73804aefb7d9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -903,6 +949,29 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{label2}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="7" y="491" width="553" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="e8981e50-23fc-40d2-a465-1483522adbdc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sourceFounds}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="476" width="119" height="12" uuid="ca2abc35-ed34-46d3-8a98-2ecc9ccbf643">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Origen de Fondos:]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -913,8 +982,9 @@
 	<columnHeader>
 		<band height="20">
 			<staticText>
-				<reportElement x="5" y="5" width="100" height="15" uuid="c06e9f17-e7b3-42bb-bdb7-ee52e1475163">
+				<reportElement x="5" y="6" width="100" height="14" isPrintWhenDetailOverflows="true" uuid="c06e9f17-e7b3-42bb-bdb7-ee52e1475163">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{isFinalBeneficiary}.equals("NO")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font isBold="true"/>

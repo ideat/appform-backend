@@ -32,13 +32,15 @@ public interface FormsMapper {
             " max_extension_amount, " +
             " currency, " +
             " id_card_for_verification, " +
-            " creation_date," +
+            " creation_date, " +
+            " creation_time, " +
             " created_by, " +
             " id_user, " +
             " name_client_vinculation, " +
             " document_client_vinculation," +
             " user_digital_bank, " +
-            " account_service_operation )" +
+            " account_service_operation , " +
+            " source_founds )" +
             " Values ( " +
             " #{forms.id}, " +
             " #{forms.idClient}, " +
@@ -62,13 +64,15 @@ public interface FormsMapper {
             " #{forms.maxExtensionAmount}," +
             " #{forms.currency}," +
             " #{forms.idCardForVerification}," +
-            " #{forms.creationDate}," +
+            " #{forms.creationDate}, " +
+            " #{forms.creationTime}, " +
             " #{forms.createdBy}," +
             " #{forms.idUser}, " +
             " #{forms.nameClientVinculation}, " +
             " #{forms.documentClientVinculation}," +
             " #{forms.userDigitalBank}, " +
-            " #{forms.accountServiceOperation} )")
+            " #{forms.accountServiceOperation}, " +
+            " #{forms.sourceFounds} )")
 //    @SelectKey(statement=" SELECT LAST_INSERT_ID() ", keyProperty="id", before=false, resultType=int.class)
 //    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void add(@Param("forms") Forms forms);
@@ -97,7 +101,8 @@ public interface FormsMapper {
             " document_client_vinculation = #{forms.documentClientVinculation}," +
             " user_digital_bank = #{forms.userDigitalBank}, " +
             " id_user = #{forms.idUser}, " +
-            " account_service_operation = #{forms.accountServiceOperation} " +
+            " account_service_operation = #{forms.accountServiceOperation}, " +
+            " source_founds = #{forms.sourceFounds}" +
             " where id = #{forms.id}" )
     void update(@Param("forms") Forms forms);
 
@@ -130,4 +135,22 @@ public interface FormsMapper {
     Optional<Forms> findByIdClientAndTypeFormAndCategoryTypeForm(@Param("idClient") Integer idClient,
                                                                   @Param("typeForm") String typeForm,
                                                                   @Param("categoryTypeForm") String categoryTypeForm);
+
+    @Select("select * from forms " +
+            " where name_type_form = #{typeForm} " +
+            " and category_type_form = #{categoryTypeForm}")
+    List<Forms> findByTypeFormAndCategoryTypeForm(@Param("typeForm") String typeForm,
+                                                  @Param("categoryTypeForm") String categoryTypeForm);
+
+    @Select("select * from forms " +
+            " where name_type_form = #{typeForm} " +
+            " and category_type_form = #{categoryTypeForm} " +
+            " and id_user = #{user}")
+    List<Forms> findByUserTypeFormAndCategoryTypeForm(@Param("typeForm") String typeForm,
+                                                      @Param("categoryTypeForm") String categoryTypeForm,
+                                                      @Param("user") String user);
+
+    @Select("select * from forms " +
+            " where id = #{id} " )
+    Forms findById(@Param("id") String id);
 }

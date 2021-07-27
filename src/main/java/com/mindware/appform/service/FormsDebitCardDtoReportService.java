@@ -57,6 +57,7 @@ public class FormsDebitCardDtoReportService {
 
 
         result.setCreateDate(accountServiceOperation.getCreateDate());
+        result.setDeliverDate(accountServiceOperation.getDeliverDate()!=null?accountServiceOperation.getDeliverDate():"");
         result.setHourCreate(accountServiceOperation.getHourCreate());
         result.setOfficeName(dataFormDtoList.get(0).getOfficeName());
         result.setUserCreate(formsDebitCard.getIdUser());
