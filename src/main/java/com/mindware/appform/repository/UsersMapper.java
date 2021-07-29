@@ -20,7 +20,8 @@ public interface UsersMapper {
             " date_update_password, " +
             " email, " +
             " num_days_validity, " +
-            " state ) values (" +
+            " state, " +
+            " create_date ) values (" +
             " #{users.id}, " +
             " #{users.login}, " +
             " #{users.fullName}, " +
@@ -30,12 +31,13 @@ public interface UsersMapper {
             " #{users.dateUpdatePassword}, " +
             " #{users.email}, " +
             " #{users.numDaysValidity}, " +
-            " #{users.state})")
+            " #{users.state}, " +
+            " #{users.createDate})")
     void add(@Param("users") Users users);
 
     @Update("update users set " +
             " full_name = #{users.fullName}, " +
-            " rol = #{users.rolName}, " +
+            " rol_name = #{users.rolName}, " +
             " image = #{users.image}, " +
             " email = #{users.email}, " +
             " num_days_validity = #{users.numDaysValidity}, " +
@@ -44,9 +46,17 @@ public interface UsersMapper {
     void update(@Param("users") Users users);
 
     @Update("update users set " +
-            " password= #{users.password} " +
+            " password= #{users.password} ," +
+            " state = #{users.state}, " +
+            " date_update_password = #{users.dateUpdatePassword}" +
             " where id = #{users.id}")
     void updatePassword(@Param("users") Users users);
+
+    @Update("update users set " +
+            " password= #{users.password} ," +
+            " state = 'RESET' " +
+            " where id = #{users.id}")
+    void resetPassword(@Param("users") Users users);
 
     @Select(" select * from users order by full_name")
     List<Users> findAll();
