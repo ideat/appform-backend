@@ -14,4 +14,6 @@ public class AdusrOfi {
     private String gbofides1;
 
     private String gbofides4;
+
+    private String gbdacmail;
 }

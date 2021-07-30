@@ -13,6 +13,7 @@ import com.mindware.appform.util.PrinterReportJasper;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +52,9 @@ public class FormController {
 
     @Autowired
     FormsVerifyIdCardDtoReportService formsVerifyIdCardDtoReportService;
+
+    @Value("${path_image}")
+    private String path;
 
     @PostMapping(value = "/v1/form/create", name = "Crear formulario")
     ResponseEntity<Forms> create (@RequestBody Forms forms){
@@ -170,10 +174,14 @@ public class FormController {
         collection.add(result);
         InputStream stream = getClass().getResourceAsStream("/template-report/saving-bank-dpf/openingSavingBankDpf.jrxml");
         String pathLogo =  getClass().getResource("/template-report/img/logo.png").getPath();
+        String check = path +"/check.png";
+        String unchecked = path + "/unchecked.png";
         String pathSubreport ="template-report/saving-bank-dpf/";
         Map<String,Object> params = new WeakHashMap<>();
         params.put("logo",pathLogo);
         params.put("path_subreport", pathSubreport);
+        params.put("check",check);
+        params.put("unchecked",unchecked);
 
         byte[] b = PrinterReportJasper.imprimirComoPdf(stream,collection,params);
         InputStream is = new ByteArrayInputStream(b);
@@ -197,10 +205,14 @@ public class FormController {
         collection.add(result);
         InputStream stream = getClass().getResourceAsStream("/template-report/digital-bank/digitalBank.jrxml");
         String pathLogo =  getClass().getResource("/template-report/img/logo.png").getPath();
+        String check = path +"/check.png";
+        String unchecked = path + "/unchecked.png";
         String pathSubreport ="template-report/digital-bank/";
         Map<String,Object> params = new WeakHashMap<>();
         params.put("logo",pathLogo);
         params.put("path_subreport", pathSubreport);
+        params.put("check",check);
+        params.put("unchecked",unchecked);
 
         byte[] b = PrinterReportJasper.imprimirComoPdf(stream,collection,params);
         InputStream is = new ByteArrayInputStream(b);
@@ -224,10 +236,16 @@ public class FormController {
         collection.add(result);
         InputStream stream = getClass().getResourceAsStream("/template-report/debit-card/debitCardService.jrxml");
         String pathLogo =  getClass().getResource("/template-report/img/logo.png").getPath();
+        String check = path +"/check.png"; //getClass().getResource("/template-report/img/check.png").getPath();
+        String unchecked = path + "/unchecked.png";  //getClass().getResource("/template-report/img/unchecked.png").getPath();
+//        String check =  "C:/auto-form/check.png";
+//        String unchecked = "C:/auto-form/unchecked.png";
         String pathSubreport ="template-report/debit-card/";
         Map<String,Object> params = new WeakHashMap<>();
         params.put("logo",pathLogo);
         params.put("path_subreport", pathSubreport);
+        params.put("check",check);
+        params.put("unchecked",unchecked);
 
         byte[] b = PrinterReportJasper.imprimirComoPdf(stream,collection,params);
         InputStream is = new ByteArrayInputStream(b);
@@ -251,8 +269,12 @@ public class FormController {
         collection.add(result);
         InputStream stream = getClass().getResourceAsStream("/template-report/debit-card/deliverDebitCard.jrxml");
         String pathLogo =  getClass().getResource("/template-report/img/logo.png").getPath();
+        String check = path +"/check.png"; //getClass().getResource("/template-report/img/check.png").getPath();
+        String unchecked = path + "/unchecked.png"; //getClass().getResource("/template-report/img/unchecked.png").getPath();
         Map<String,Object> params = new WeakHashMap<>();
         params.put("logo",pathLogo);
+        params.put("check",check);
+        params.put("unchecked",unchecked);
 
         byte[] b = PrinterReportJasper.imprimirComoPdf(stream,collection,params);
         InputStream is = new ByteArrayInputStream(b);

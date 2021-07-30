@@ -13,23 +13,29 @@ public interface ParameterMapper {
             " id, " +
             " name, " +
             " category, " +
-            " value ) " +
+            " value, " +
+            " state ) " +
             " values ( " +
             " #{parameter.id}, " +
             " #{parameter.name}, " +
             " #{parameter.category}, " +
-            " #{parameter.value} )")
+            " #{parameter.value}," +
+            " #{parameter.state} )")
     void create(@Param("parameter") Parameter parameter);
 
     @Update("update parameter set" +
             " name = #{parameter.name}, " +
             " category = #{parameter.category}, " +
-            " value = #{parameter.value} " +
+            " value = #{parameter.value}," +
+            " state = #{parameter.state} " +
             " where id = #{parameter.id}")
     void update(@Param("parameter") Parameter parameter);
 
     @Select(" select * from parameter")
     List<Parameter> findAll();
+
+    @Select(" select * from parameter where state = 'ACTIVO'")
+    List<Parameter> findAllActive();
 
     @Select(" select * from parameter " +
             " where category = #{category} " +

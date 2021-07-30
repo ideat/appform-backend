@@ -100,22 +100,22 @@ public class FormsDigitalBankDtoReportService {
                 s.setAmount(accountServiceOperation.getDecreaseAmount());
                 s.setAmountSus(accountServiceOperation.getDecreaseAmount()/gbpmt.getGbpmttcof());
             }
-            if(s.getChecked().equals("SI")){
-                s.setChecked(imgCheck);
-            }else{
-                s.setChecked(imgUnchecked);
-            }
+//            if(s.getChecked().equals("SI")){
+//                s.setChecked(imgCheck);
+//            }else{
+//                s.setChecked(imgUnchecked);
+//            }
             serviceList2.add(s);
         }
         List<com.mindware.appform.entity.Service> operationList = serviceOperationList.stream()
                 .filter(f -> f.getCategory().equals("BANCA DIGITAL, OPERACIONES"))
                 .collect(Collectors.toList());
         for(com.mindware.appform.entity.Service s : operationList){
-            if(s.getChecked().equals("SI")){
-                s.setChecked(imgCheck);
-            }else{
-                s.setChecked(imgUnchecked);
-            }
+//            if(s.getChecked().equals("SI")){
+//                s.setChecked(imgCheck);
+//            }else{
+//                s.setChecked(imgUnchecked);
+//            }
             operationList2.add(s);
         }
 

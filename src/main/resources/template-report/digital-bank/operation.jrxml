@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="services" pageWidth="412" pageHeight="492" columnWidth="412" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="1e6e8c46-11fa-4a94-8097-72bfbe753af1">
-	<parameter name="check" class="java.lang.String"/>
+	<parameter name="checkOpe" class="java.lang.String"/>
+	<parameter name="uncheckedOpe" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -50,7 +51,7 @@
 				<reportElement stretchType="ContainerHeight" x="192" y="-1" width="20" height="15" uuid="b0f2b475-e59f-49d4-a4ab-8316809f7985">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<imageExpression><![CDATA[$F{checked}]]></imageExpression>
+				<imageExpression><![CDATA[$F{checked}.equals("SI")?$P{checkOpe}:$P{uncheckedOpe}]]></imageExpression>
 			</image>
 		</band>
 	</detail>

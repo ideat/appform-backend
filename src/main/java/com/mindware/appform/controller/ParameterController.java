@@ -30,4 +30,10 @@ public class ParameterController {
         return new ResponseEntity<>(parameterList,HttpStatus.OK);
     }
 
+    @GetMapping(value = "/v1/parameter/findAllActive", name = "Obtiene todos los parametros Activos")
+    ResponseEntity<List<Parameter>> findAllActive(){
+        List<Parameter> parameterList = service.findAllActive();
+        return new ResponseEntity<>(parameterList,HttpStatus.OK);
+    }
+
 }

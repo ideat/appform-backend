@@ -10,6 +10,8 @@
 	<parameter name="title_service" class="java.lang.String"/>
 	<parameter name="title_operation" class="java.lang.String"/>
 	<parameter name="path_subreport" class="java.lang.String"/>
+	<parameter name="check" class="java.lang.String"/>
+	<parameter name="unchecked" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -288,6 +290,12 @@
 					<subreportParameter name="title">
 						<subreportParameterExpression><![CDATA[$P{title_operation}]]></subreportParameterExpression>
 					</subreportParameter>
+					<subreportParameter name="checkOpe">
+						<subreportParameterExpression><![CDATA[$P{check}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="uncheckedOpe">
+						<subreportParameterExpression><![CDATA[$P{unchecked}]]></subreportParameterExpression>
+					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{listOperation})]]></dataSourceExpression>
 					<subreportExpression><![CDATA[$P{path_subreport}  + "operation.jasper"]]></subreportExpression>
 				</subreport>
@@ -295,6 +303,12 @@
 					<reportElement x="7" y="10" width="190" height="30" uuid="aa8e93b0-019e-46fa-a9c6-b39e3f70ff43"/>
 					<subreportParameter name="title">
 						<subreportParameterExpression><![CDATA[$P{title_service}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="check">
+						<subreportParameterExpression><![CDATA[$P{check}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="unchecked">
+						<subreportParameterExpression><![CDATA[$P{unchecked}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{listService})]]></dataSourceExpression>
 					<subreportExpression><![CDATA[$P{path_subreport}  + "services.jasper"]]></subreportExpression>

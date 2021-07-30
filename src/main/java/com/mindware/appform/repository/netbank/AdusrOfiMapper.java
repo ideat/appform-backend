@@ -8,9 +8,10 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface AdusrOfiMapper {
 
-    @Select(" select adusrnomb, adusrusrn, adusragen, gbofides1, gbofides4 " +
+    @Select(" select adusrnomb, adusrusrn, adusragen, gbofides1, gbofides4, gbdacmail " +
             " from adusr " +
             " inner join gbofi on adusragen = gbofinofi " +
+            " left join gbdac on gbdaccage = adusrcage " +
             " where adusrusrn = upper(#{login}) ")
     AdusrOfi findByLogin(@Param("login") String login);
 }

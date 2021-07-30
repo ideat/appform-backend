@@ -81,8 +81,8 @@ public class FormsDebitCardDtoReportService {
 
         List<com.mindware.appform.entity.Service> serviceList2 = new ArrayList<>();
 
-        String imgCheck = getClass().getResource("/template-report/img/check.png").getPath();
-        String imgUnchecked = getClass().getResource("/template-report/img/unchecked.png").getPath();
+//        String imgCheck = getClass().getResource("/img/check.png").getPath();
+//        String imgUnchecked = getClass().getResource("/img/unchecked.png").getPath();
         for(com.mindware.appform.entity.Service s : serviceOperationList){
             if(s.getName().equals("AMPLIACION DE LIMITE HASTA") && s.getChecked().equals("SI")){
                 s.setAmount(accountServiceOperation.getExtensionAmount());
@@ -92,11 +92,11 @@ public class FormsDebitCardDtoReportService {
                 s.setAmount(accountServiceOperation.getDecreaseAmount());
                 s.setAmountSus(accountServiceOperation.getDecreaseAmount()/gbpmt.getGbpmttcof());
             }
-            if(s.getChecked().equals("SI")){
-                s.setChecked(imgCheck);
-            }else{
-                s.setChecked(imgUnchecked);
-            }
+//            if(s.getChecked().equals("SI")){
+//                s.setChecked(imgCheck);
+//            }else{
+//                s.setChecked(imgUnchecked);
+//            }
             serviceList2.add(s);
         }
         serviceList2.sort(Comparator.comparing(com.mindware.appform.entity.Service::getName));
