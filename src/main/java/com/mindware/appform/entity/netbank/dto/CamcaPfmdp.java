@@ -18,4 +18,5 @@ public class CamcaPfmdp {
     private String typeAccount;
 
     private String state;
+
 }

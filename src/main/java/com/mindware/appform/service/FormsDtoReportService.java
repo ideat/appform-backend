@@ -7,8 +7,10 @@ import com.mindware.appform.dto.FormsDtoReport;
 import com.mindware.appform.entity.Beneficiary;
 import com.mindware.appform.entity.Forms;
 import com.mindware.appform.entity.netbank.dto.DataFormDto;
+import com.mindware.appform.exceptions.AppException;
 import com.mindware.appform.service.netabank.DataFormDtoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +37,9 @@ public class FormsDtoReportService {
         }else{
             formsResult = formsService.findByIdClientAndTypeFormAndCategoryTypeForm(codeClient,typeForm,categoryTypeForm);
         }
-
+        if(formsResult.isEmpty()){
+            throw new AppException("No existe el formulario, Primero creelo", HttpStatus.BAD_REQUEST);
+        }
         if(formsResult.get().getCategoryTypeForm().equals("CAJA-AHORRO")){
             result.setCategory("CAJA DE AHORRO");
         }else if (formsResult.get().getCategoryTypeForm().equals("DPF")){
