@@ -36,4 +36,9 @@ public class ParameterController {
         return new ResponseEntity<>(parameterList,HttpStatus.OK);
     }
 
+    @GetMapping(value = "/v1/kiosco/parameter/findFromKioscoAll", name = "Obtiene todos los parametros")
+    ResponseEntity<List<Parameter>> findFromKioscoAll(){
+        List<Parameter> parameterList = service.findAll();
+        return new ResponseEntity<>(parameterList,HttpStatus.OK);
+    }
 }

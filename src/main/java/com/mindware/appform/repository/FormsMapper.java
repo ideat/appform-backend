@@ -40,7 +40,8 @@ public interface FormsMapper {
             " document_client_vinculation," +
             " user_digital_bank, " +
             " account_service_operation , " +
-            " source_founds )" +
+            " source_founds, " +
+            " origin_module )" +
             " Values ( " +
             " #{forms.id}, " +
             " #{forms.idClient}, " +
@@ -72,7 +73,8 @@ public interface FormsMapper {
             " #{forms.documentClientVinculation}," +
             " #{forms.userDigitalBank}, " +
             " #{forms.accountServiceOperation}, " +
-            " #{forms.sourceFounds} )")
+            " #{forms.sourceFounds}," +
+            " #{forms.originModule} )")
 //    @SelectKey(statement=" SELECT LAST_INSERT_ID() ", keyProperty="id", before=false, resultType=int.class)
 //    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     void add(@Param("forms") Forms forms);
@@ -145,7 +147,8 @@ public interface FormsMapper {
     @Select("select * from forms " +
             " where name_type_form = #{typeForm} " +
             " and category_type_form = #{categoryTypeForm} " +
-            " and id_user = #{user}")
+            " and id_user = #{user} " +
+            " or origin_module = 'KIOSCO' ")
     List<Forms> findByUserTypeFormAndCategoryTypeForm(@Param("typeForm") String typeForm,
                                                       @Param("categoryTypeForm") String categoryTypeForm,
                                                       @Param("user") String user);

@@ -71,6 +71,8 @@ public class Forms {
 
     private String sourceFounds;
 
+    private String originModule;
+
 }
 
 

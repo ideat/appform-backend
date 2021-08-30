@@ -74,6 +74,7 @@ public class FormsDebitCardDtoReportService {
         for(char c:array){
             numberDebitCard = numberDebitCard + c +" | ";
         }
+        numberDebitCard = "| " + numberDebitCard;
         result.setAccounts(numberDebitCard);
 
         List<com.mindware.appform.entity.Service> serviceOperationList = new ArrayList<>();

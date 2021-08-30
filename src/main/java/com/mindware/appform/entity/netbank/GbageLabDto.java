@@ -30,4 +30,6 @@ public class GbageLabDto {
     private String gbdaccelu;
 
     private String gbageciiu;
+
+    private String gbcaedesc;
 }

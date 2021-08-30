@@ -11,20 +11,20 @@ import java.util.List;
 public interface GbageLabDtoMapper {
 
     @Select(" select gbagecage, gbagendid, gbagenruc, gbagenomb, gblabdact, gblabitem, gblabitel, gbagenaci," +
-            " gbagedir1, gbagetlfd, gbdaccelu, gbdacmail, gbageciiu " +
+            " gbagedir1, gbagetlfd, gbdaccelu, gbdacmail, gbageciiu, trim(gbcaedesc) gbcaedesc " +
             " from gbage " +
-            " inner join gblab on gbagecage = gblabcage " +
             " inner join gbdac on gbdaccage = gbagecage " +
-            " where gblabmrcb = 0 " +
-            " and gbagecage = #{cage}")
+            " left join gblab on gbagecage = gblabcage and  gblabmrcb = 0 " +
+            " left join gbcae on gbcaeciiu = gbageciiu " +
+            " where gbagecage = #{cage}")
     List<GbageLabDto> findGbageLabDtoByCage(@Param("cage") Integer cage);
 
     @Select(" select gbagecage, gbagendid, gbagenruc, gbagenomb, gblabdact, gblabitem, gblabitel, gbagenaci," +
-            " gbagedir1, gbagetlfd,  gbdaccelu, gbdacmail, gbageciiu " +
+            " gbagedir1, gbagetlfd,  gbdaccelu, gbdacmail, gbageciiu, trim(gbcaedesc) gbcaedesc " +
             " from gbage " +
-            " inner join gblab on gbagecage = gblabcage " +
             " inner join gbdac on gbdaccage = gbagecage " +
-            " where gblabmrcb = 0 " +
-            " and trim(gbagendid) like #{idcard}")
+            " left join gblab on gbagecage = gblabcage and  gblabmrcb = 0 " +
+            " left join gbcae on gbcaeciiu = gbageciiu" +
+            " where trim(gbagendid) like #{idcard}")
     List<GbageLabDto> findGbageLabDtoByIdCard(@Param("idcard") String idcard);
 }

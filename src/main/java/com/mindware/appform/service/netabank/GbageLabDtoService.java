@@ -2,6 +2,7 @@ package com.mindware.appform.service.netabank;
 
 import com.mindware.appform.entity.netbank.GbageLabDto;
 import com.mindware.appform.repository.netbank.GbageLabDtoMapper;
+import com.mindware.appform.repository.netbank.GbcaeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

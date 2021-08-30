@@ -24,4 +24,6 @@ public class AccountServiceOperation {
     private Double decreaseAmount;
 
     private String accountSavingBank;
+
+    private String originModule;
 }

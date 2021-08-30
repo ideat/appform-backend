@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="verificatioIdCard" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dfdf3959-c552-44e3-82a8-5ab011bf9751">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="verificatioIdCard" pageWidth="612" pageHeight="792" columnWidth="552" leftMargin="40" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dfdf3959-c552-44e3-82a8-5ab011bf9751">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="logo" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
@@ -82,7 +91,7 @@
 				<text><![CDATA[Presente:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="254" width="100" height="12" uuid="0db2e853-626c-49f8-9ed7-9ea0f80b0d66">
+				<reportElement x="10" y="254" width="89" height="12" uuid="0db2e853-626c-49f8-9ed7-9ea0f80b0d66">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fd9a51ea-9ced-4b81-949b-e3763320da64"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -128,7 +137,7 @@
 		<band height="30" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
-				<reportElement x="0" y="0" width="100" height="30" uuid="985517b7-256c-4a3e-a19a-9c7bd107676f">
+				<reportElement x="10" y="0" width="89" height="30" uuid="985517b7-256c-4a3e-a19a-9c7bd107676f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fd9a51ea-9ced-4b81-949b-e3763320da64"/>
 				</reportElement>
 				<box>

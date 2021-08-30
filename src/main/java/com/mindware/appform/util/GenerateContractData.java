@@ -19,9 +19,9 @@ public class GenerateContractData {
 
         ContractData contractData = new ContractData();
         String fullName = formsDtoReport.getNames().trim().concat(" ")
-                .concat( formsDtoReport.getLastName()!=null?formsDtoReport.getLastName().trim():"").concat(" ")
-                .concat(formsDtoReport.getMotherLastName()!=null?formsDtoReport.getMotherLastName().trim():"").concat(" ")
-                .concat( formsDtoReport.getMarriedLastName()!=null?"De " +formsDtoReport.getMarriedLastName().trim():"");
+                .concat( formsDtoReport.getLastName()!=null && !formsDtoReport.getLastName().trim().equals("") ?formsDtoReport.getLastName().trim():"").concat(" ")
+                .concat(formsDtoReport.getMotherLastName()!=null && !formsDtoReport.getMotherLastName().trim().equals("") ?formsDtoReport.getMotherLastName().trim():"").concat(" ")
+                .concat(formsDtoReport.getMarriedLastName()!=null && !formsDtoReport.getMarriedLastName().trim().equals("") ?"de " +formsDtoReport.getMarriedLastName().trim():"");
 
         contractData.setFullNameClient(fullName);
         contractData.setFullNamePartner("");
@@ -32,7 +32,7 @@ public class GenerateContractData {
         contractData.setCurrency(formsDtoReport.getCurrency().trim());
         contractData.setCurrencyName("");
         contractData.setRate("");
-        contractData.setAddressClientHome(formsDtoReport.getHomeAddress());
+        contractData.setAddressClientHome(formsDtoReport.getHomeAddress().trim());
 
         return contractData;
     }

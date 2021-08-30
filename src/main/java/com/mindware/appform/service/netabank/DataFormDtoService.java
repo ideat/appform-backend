@@ -132,14 +132,15 @@ public class DataFormDtoService {
                     .filter(g -> g.getGblabmpri() == null || (g.getGblabmpri() != 1 && !g.getGblabdact().isEmpty()))
                     .collect(Collectors.toList());
             if (aux2.size() > 0) {
-                dataFormDto.setActivity2(aux2.get(0).getGblabdact());
+                dataFormDto.setActivity2(aux2.get(0).getGblabdact()!=null?aux2.get(0).getGblabdact():"NO APLICA");
             }
 //        }
         if(dataFormDto.getCodeSpouse()!=null) {
             List<GbageLabDto> gbageLabDtoList = gbageLabDtoMapper.findGbageLabDtoByCage(dataFormDto.getCodeSpouse());
-            String name = gbageLabDtoList.get(0).getGbagenomb()!=null?gbageLabDtoList.get(0).getGbagenomb():"";
+
+            String name = gbageLabDtoList.get(0).getGbagenomb()!=null?gbageLabDtoList.get(0).getGbagenomb():"NO APLICA";
             name = name.replace("¥","Ñ");
-            dataFormDto.setFullNameSpouse(name);
+            dataFormDto.setFullNameSpouse(!name.equals("")?name:"NO APLICA");
             String gcae2 = gbageLabDtoList.get(0).getGbageciiu();
             if(!gcae.isEmpty()){
                 gbcae = gbcaeList.stream()
@@ -148,8 +149,13 @@ public class DataFormDtoService {
             }
             if(gbcae.size() > 0){
                 dataFormDto.setActivitySpouse(gbcae.get(0).getGbcaedesc()); //(gbageLabDtoList.get(0).getGblabdact()!=null?gbageLabDtoList.get(0).getGblabdact():"");
+            }else{
+                dataFormDto.setActivitySpouse("NO APLICA");
             }
 
+        }else{
+            dataFormDto.setFullNameSpouse("NO APLICA");
+            dataFormDto.setActivitySpouse("NO APLICA");
         }
         dataFormDto.setIncomeMountly(income);
 

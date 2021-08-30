@@ -41,11 +41,12 @@ public class ContractController {
 
         wordReplaceTextContract.generateContract(codeClient, account, typeForm, categoryTypeForm);
 
-
         Path path = Paths.get("c://auto-form//contract//3051756195-CA-MEGAFUSION.pdf");
 
         byte[] bFile = Files.readAllBytes(path);
         InputStream is = new ByteArrayInputStream(bFile);
         return IOUtils.toByteArray(is);
     }
+
+
 }

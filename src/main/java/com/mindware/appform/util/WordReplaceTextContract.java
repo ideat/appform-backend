@@ -36,6 +36,9 @@ public class WordReplaceTextContract {
     @Autowired
     private GenerateContractData generateContractData;
 
+    @Autowired
+    private ConvertWordToPdf convertWordToPdf;
+
     @SneakyThrows
     public void generateContract(Integer codeClient, String account, String typeForm, String categoryTypeForm) throws IOException {
 
@@ -64,7 +67,10 @@ public class WordReplaceTextContract {
         });
 //        wordReplacer.saveAndGetModdedFile(contract.getPathContract());
         //todo: reemplazar por el nombre que se va a generar el contrato
-        wordReplacer.saveAndGetModdedFile("c://auto-form//contract//3051756195-CA-MEGAFUSION.docx");
+        String pathWord = "c://auto-form//contract//3051756195-CA-MEGAFUSION.docx";
+        String pathPdf = "c://auto-form//contract//3051756195-CA-MEGAFUSION.pdf";
+        wordReplacer.saveAndGetModdedFile(pathWord);
+        convertWordToPdf.convert(pathWord,pathPdf);
     }
 
     private Map<String,String> getDataForMapContractData(ContractData contractData) throws NoSuchFieldException, IllegalAccessException {

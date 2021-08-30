@@ -308,4 +308,29 @@ public class FormController {
 
     }
 
+    //SERVICIOS SISTEMA DE KIOSCO
+    @PostMapping(value = "/v1/kiosco/form/create", name = "Crear formulario")
+    ResponseEntity<Forms> createFromKiosco (@RequestBody Forms forms){
+        if (forms.getId()==null){
+            return new ResponseEntity<>(service.create(forms), HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(service.update(forms),HttpStatus.OK);
+        }
+
+    }
+
+    @GetMapping(value ="/v1/kiosco/form/findFromKioscoByIdClientAndTypeFormAndCategoryTypeForm", name ="Formulario por ID Cliente")
+    ResponseEntity<Forms> findFromKioscoByIdClientAndTypeFormAndCategoryTypeForm(@RequestHeader Map<String, String> headers){
+        headers.forEach((key,value) -> {
+            if(key.equals("id_client")) idClient = Integer.parseInt(value);
+            if(key.equals("name_type_form")) value2 = value;
+            if(key.equals("category_type_form")) value3 = value;
+        });
+
+        Optional<Forms> forms = mapper.findByIdClientAndTypeFormAndCategoryTypeForm(idClient,value2,value3);
+        Forms result = forms.isPresent()?forms.get():new Forms();
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 }
