@@ -25,14 +25,14 @@ public class FormsDtoReportService {
     @Autowired
     DataFormDtoService dataFormDtoService;
 
-    public FormsDtoReport generate(Integer codeClient, String idAccount, String typeForm, String categoryTypeForm){
+    public FormsDtoReport generate(Integer codeClient, String idAccount, String typeForm, String categoryTypeForm, String isTutor){
         FormsDtoReport result = new FormsDtoReport();
         Optional<Forms> formsResult =Optional.empty();
         DataFormDto dataFormDto = new DataFormDto();
 
         if(categoryTypeForm.equals("CAJA-AHORRO")|| categoryTypeForm.equals("DPF")){
             formsResult = formsService.findByIdAccountAndTypeFormAndCategoryTypeForm(idAccount,typeForm,categoryTypeForm);
-            dataFormDto = dataFormDtoService.findDataFormDtoFormSavingBoxOrDpfByCageAndAccount(codeClient, idAccount,categoryTypeForm);
+            dataFormDto = dataFormDtoService.findDataFormDtoFormSavingBoxOrDpfByCageAndAccount(codeClient, idAccount,categoryTypeForm, isTutor);
 
         }else{
             formsResult = formsService.findByIdClientAndTypeFormAndCategoryTypeForm(codeClient,typeForm,categoryTypeForm);

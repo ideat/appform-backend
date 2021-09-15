@@ -1,18 +1,26 @@
 package com.mindware.appform.util;
 
-import com.mindware.appform.entity.Contract;
+import com.mindware.appform.dto.DataContractSavingBankDto;
 import com.mindware.appform.entity.ContractData;
 import com.mindware.appform.entity.VariableContract;
+import com.mindware.appform.entity.netbank.dto.CamcaCatcaDto;
+import com.mindware.appform.entity.netbank.dto.PfmdpGbageDto;
+import com.mindware.appform.exceptions.AppException;
+import com.mindware.appform.service.DataContractDtoService;
 import com.mindware.appform.service.VariableContractService;
+import com.mindware.appform.service.netabank.CamcaCatcaDtoService;
 import com.xandryex.WordReplacer;
 import com.xandryex.utils.TextReplacer;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +38,15 @@ public class WordReplaceTextContract {
     private Map<String,String> mapContractData;
     private Map<String,String> mapWithDataContractVariable;
 
+    @Value("${path_template}")
+    private String pathContract;
+
+    @Value("${path_word}")
+    private String pathWord;
+
+    @Value("${path_pdf}")
+    private String pathPdf;
+
     @Autowired
     private VariableContractService variableContractService;
 
@@ -39,13 +56,98 @@ public class WordReplaceTextContract {
     @Autowired
     private ConvertWordToPdf convertWordToPdf;
 
+    @Autowired
+    private DataContractDtoService dataContractDtoService;
+
+    @Autowired
+    private CamcaCatcaDtoService camcaCatcaDtoService;
+
+    public String generateContractSavingBank(String login, String account, String typeAccount, Integer plaza,
+                                             String typeForm, String categoryTypeForm, String isTutor) throws Exception {
+
+        String nameContract="";
+        DataContractSavingBankDto dataContractSavingBankDto = new DataContractSavingBankDto();
+        if(categoryTypeForm.equals("CAJA-AHORRO")) {
+            dataContractSavingBankDto = dataContractDtoService.getDataContractSavingBank(account, login);
+            CamcaCatcaDto camcaCatcaDto = camcaCatcaDtoService.findByAccount(account);
+
+            nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),
+                    camcaCatcaDto.getProductName().trim());
+        }else{
+            dataContractSavingBankDto = dataContractDtoService.getDataContractDpf(account,login);
+            nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),"");
+        }
+
+        try {
+            templateFile = new File(pathContract + nameContract);
+        }catch (Exception e){
+            throw new AppException("Plantilla de nombre: " + nameContract +
+                    ", no encontrada, verifique que la plantilla este cargada", HttpStatus.BAD_REQUEST);
+        }
+        replacer = new TextReplacer();
+        wordReplacer = new WordReplacer(templateFile);
+
+        mapContractData = getMapDataContract(dataContractSavingBankDto);
+        Map<String,String> mapDataContractVariableSimple = getDataForMapContractVariable("SIMPLE");
+        mapWithDataContractVariable = replaceDataForMapContractVariable(mapDataContractVariableSimple);
+
+        mapWithDataContractVariable.forEach((k,v)->{
+            if(v.equals("$us.") || v.equals("$US")) v="USD";
+//            if(v.contains("$")) v.replaceAll("$","S");
+            wordReplacer.replaceWordsInText(k,v);
+            wordReplacer.replaceWordsInTables(k,v);
+        });
+       String currentDate =  Util.formatDate(new Date(),"ddMMyyyyHHmm");
+
+        String nameWord = account + "-"+currentDate+".docx";
+        String namePdf = account + "-"+currentDate+".pdf";
+        wordReplacer.saveAndGetModdedFile(pathWord + nameWord);
+        convertWordToPdf.convert(pathWord + nameWord,pathPdf + namePdf);
+        return  pathPdf + namePdf;
+    }
+
+    private String createNameContract(String categoryTypeForm, String typeAccount, Integer totalParticipants, String product){
+        String nameContract = "";
+        if(categoryTypeForm.equals("CAJA-AHORRO")){
+            nameContract="CAH";
+            if(typeAccount.equals("INDIVITUAL")) nameContract = nameContract + "-IND";
+            if(typeAccount.equals("CONJUNTA")) nameContract = nameContract + "-CON";
+            if(typeAccount.equals("ALTERNA")) nameContract = nameContract + "-ALT";
+
+            if(!product.equals("EFICAZ") && !product.equals("FUTURO") && !product.equals("DINAMICA")){
+                product = "TRAD";
+            }
+
+            nameContract = nameContract+"-"+totalParticipants.toString();
+            nameContract = nameContract +"-"+product  +".docx";
+        }else{
+            nameContract = "DPF" + "-"+totalParticipants.toString() +".docx";
+        }
+
+
+        return nameContract;
+    }
+
+    private Map<String,String> getMapDataContract(DataContractSavingBankDto dataContractSavingBankDto) throws NoSuchFieldException, IllegalAccessException {
+        Class aClass = DataContractSavingBankDto.class;
+        Field[] fields = aClass.getDeclaredFields();
+        Map<String,String> map = new HashMap<>();
+        for(Field f: fields ){
+            Field field = dataContractSavingBankDto.getClass().getDeclaredField(f.getName());
+            map.put(f.getName(),field.get(dataContractSavingBankDto)!=null?field.get(dataContractSavingBankDto).toString():"");
+        }
+        return map;
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @SneakyThrows
-    public void generateContract(Integer codeClient, String account, String typeForm, String categoryTypeForm) throws IOException {
+    public void generateContract(Integer codeClient, String account, String typeForm, String categoryTypeForm, String isTutor) throws IOException {
 
 //        generateContractData = new GenerateContractData();
 
 
-        ContractData contractData = generateContractData.getContractData(codeClient, account, typeForm, categoryTypeForm);
+        ContractData contractData = generateContractData.getContractData(codeClient, account, typeForm, categoryTypeForm, isTutor);
 
         replacer = new TextReplacer();
 //        templateFile = new File(contract.getPathTemplate());
@@ -89,6 +191,7 @@ public class WordReplaceTextContract {
         List<VariableContract> contractVariableList = variableContractService.findAll();
 
         for(VariableContract cv:contractVariableList){
+
             mapContractVariable.put(cv.getName(),cv.getVariable());
         }
         return mapContractVariable;
@@ -100,7 +203,7 @@ public class WordReplaceTextContract {
         mapContractVariable.forEach((k,v)->{ //(k,v) -> @nombreCompleto,fullName
             String value= mapContractData.get(v);// get value from mapContractData (Jose Luis)
             if(value!=null && !value.equals(""))
-                resultMap.replace(k,v,value); // @nomberCompleto,fullName,Jose Luis
+                resultMap.replace(k,v,value.trim().replace("¥","Ñ")); // @nomberCompleto,fullName,Jose Luis
 
         });
         return resultMap;

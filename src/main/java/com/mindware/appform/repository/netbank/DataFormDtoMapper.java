@@ -27,11 +27,11 @@ public interface DataFormDtoMapper {
             " inner join camca on gbdaccage = camcacage  " +
             " inner join catca on catcatpca = camcatpca  " +
             " inner join gbofi on gbofinofi = gbageagen  " +
-            " inner join gbcon  gbcon1 on (gbcon1.gbconpfij = 2 and gbcon1.gbconcorr = gbagesexo)  " +
-            " inner join gbcon gbcon2 on (gbcon2.gbconpfij = 4 and gbcon2.gbconcorr = gbagetdid)  " +
-            " inner join gbcon gbcon3 on (gbcon3.gbconpfij = 3 and gbcon3.gbconcorr = gbageeciv)  " +
-            " inner join gbcon gbcon5 on (gbcon5.gbconpfij = 10 and gbcon5.gbconcorr = camcacmon)  " +
-            " inner join gbprf on gbprfprof = gbageprof  " +
+            " left join gbcon  gbcon1 on (gbcon1.gbconpfij = 2 and gbcon1.gbconcorr = gbagesexo)  " +
+            " left join gbcon gbcon2 on (gbcon2.gbconpfij = 4 and gbcon2.gbconcorr = gbagetdid)  " +
+            " left join gbcon gbcon3 on (gbcon3.gbconpfij = 3 and gbcon3.gbconcorr = gbageeciv)  " +
+            " left join gbcon gbcon5 on (gbcon5.gbconpfij = 10 and gbcon5.gbconcorr = camcacmon)  " +
+            " left join gbprf on gbprfprof = gbageprof  " +
             " inner join gbdoc on gbdoccage = gbagecage  " +
             " inner join gbdir on gbdircage = gbagecage and gbdirtdir = 1 and gbdirmrcb = 0 " +
             " inner join gbprv on gbdircprv = gbprvcprv " +
@@ -64,11 +64,11 @@ public interface DataFormDtoMapper {
             " inner join pfhts on pfmdptdep = pfhtstdep  " +
             " inner join pftdp on pfmdptdep = pftdptdep  " +
             " inner join gbofi on gbofinofi = gbageagen  " +
-            " inner join gbcon  gbcon1 on (gbcon1.gbconpfij = 2 and gbcon1.gbconcorr = gbagesexo)  " +
-            " inner join gbcon gbcon2 on (gbcon2.gbconpfij = 4 and gbcon2.gbconcorr = gbagetdid)  " +
-            " inner join gbcon gbcon3 on (gbcon3.gbconpfij = 3 and gbcon3.gbconcorr = gbageeciv)  " +
-            " inner join gbcon gbcon5 on (gbcon5.gbconpfij = 10 and gbcon5.gbconcorr = pfmdpcmon)  " +
-            " inner join gbprf on gbprfprof = gbageprof  " +
+            " left join gbcon  gbcon1 on (gbcon1.gbconpfij = 2 and gbcon1.gbconcorr = gbagesexo)  " +
+            " left join gbcon gbcon2 on (gbcon2.gbconpfij = 4 and gbcon2.gbconcorr = gbagetdid)  " +
+            " left join gbcon gbcon3 on (gbcon3.gbconpfij = 3 and gbcon3.gbconcorr = gbageeciv)  " +
+            " left join gbcon gbcon5 on (gbcon5.gbconpfij = 10 and gbcon5.gbconcorr = pfmdpcmon)  " +
+            " left join gbprf on gbprfprof = gbageprof  " +
             " inner join gbdoc on gbdoccage = gbagecage  " +
             " inner join gbdir on gbdircage = gbagecage and gbdirtdir = 1 and gbdirmrcb = 0 " +
             " inner join gbprv on gbdircprv = gbprvcprv " +
@@ -102,11 +102,11 @@ public interface DataFormDtoMapper {
             " inner join camca on gbdaccage = camcacage  " +
             " inner join catca on catcatpca = camcatpca  " +
             " inner join gbofi on gbofinofi = gbageagen  " +
-            " inner join gbcon  gbcon1 on (gbcon1.gbconpfij = 2 and gbcon1.gbconcorr = gbagesexo)  " +
-            " inner join gbcon gbcon2 on (gbcon2.gbconpfij = 4 and gbcon2.gbconcorr = gbagetdid)  " +
-            " inner join gbcon gbcon3 on (gbcon3.gbconpfij = 3 and gbcon3.gbconcorr = gbageeciv)  " +
-            " inner join gbcon gbcon5 on (gbcon5.gbconpfij = 10 and gbcon5.gbconcorr = camcacmon)  " +
-            " inner join gbprf on gbprfprof = gbageprof  " +
+            " left join gbcon  gbcon1 on (gbcon1.gbconpfij = 2 and gbcon1.gbconcorr = gbagesexo)  " +
+            " left join gbcon gbcon2 on (gbcon2.gbconpfij = 4 and gbcon2.gbconcorr = gbagetdid)  " +
+            " left join gbcon gbcon3 on (gbcon3.gbconpfij = 3 and gbcon3.gbconcorr = gbageeciv)  " +
+            " left join gbcon gbcon5 on (gbcon5.gbconpfij = 10 and gbcon5.gbconcorr = camcacmon)  " +
+            " left join gbprf on gbprfprof = gbageprof  " +
             " inner join gbdoc on gbdoccage = gbagecage  " +
             " inner join gbdir on gbdircage = gbagecage and gbdirtdir = 1 and gbdirmrcb = 0 " +
             " inner join gbprv on gbdircprv = gbprvcprv " +
@@ -119,5 +119,43 @@ public interface DataFormDtoMapper {
             " where gbagecage = #{cage}  " +
             " and camcastat = 1 ")
     List<DataFormDto> findDataFormForDigitalBank(@Param("cage") Integer cage);
+
+
+    @Select(" select gbdaccage as code_client, gbdacnomb as names, gbdacape1 as last_name, " +
+            " gbdacape2 as mother_last_name, gbdacape3 as married_last_name, " +
+            " trim(gbagendid) as idcard, gbofides1 as office_name, catcadesc as product, " +
+            " gbcon1.gbcondesc as gender, gbcon2.gbcondesc as type_document, gbcon3.gbcondesc as civil_status, " +
+            " gbdocfvid as expired_date, gbcon5.gbcondesc as currency, gbagefnac as born_date, " +
+            " gbdirdire as address_home, gbprfdesc as profession, " +
+            " 0.0 as income_mountly, " +
+            " gbprvdesc as province, gbdptdesc as departament, gbpaidesc as country, gbzondesc as zone, " +
+            " gbdaccelu as cellphone, gbagetlfd as home_phone, " +
+            " gbageciiu as activity1, '' as activity2, cacondesc as reason_opening_account, gbdaccony as code_spouse," +
+            " camcafapt as opening_date, gbciudesc as city, gbdacmail as email, gbagenomb as full_name_client, " +
+            " cafirncta as account " +
+            " from gbdac " +
+            " inner join gbage on gbagecage = gbdaccage " +
+            " inner join cafir on cafircage = gbagecage " +
+            " inner join camca on camcancta = cafirncta  " +
+            " inner join catca on catcatpca = camcatpca  " +
+            " inner join gbofi on gbofinofi = gbageagen  " +
+            " left join gbcon  gbcon1 on (gbcon1.gbconpfij = 2 and gbcon1.gbconcorr = gbagesexo)  " +
+            " left join gbcon gbcon2 on (gbcon2.gbconpfij = 4 and gbcon2.gbconcorr = gbagetdid)  " +
+            " left join gbcon gbcon3 on (gbcon3.gbconpfij = 3 and gbcon3.gbconcorr = gbageeciv)  " +
+            " left join gbcon gbcon5 on (gbcon5.gbconpfij = 10 and gbcon5.gbconcorr = camcacmon)  " +
+            " left join gbprf on gbprfprof = gbageprof  " +
+            " inner join gbdoc on gbdoccage = gbagecage  " +
+            " inner join gbdir on gbdircage = gbagecage and gbdirtdir = 1 and gbdirmrcb = 0 " +
+            " inner join gbprv on gbdircprv = gbprvcprv " +
+            " inner join gbciu on gbciuciud = gbdirciud  " +
+            " inner join gbpai on gbpaipais = gbdirpais " +
+            " inner join gbdpt on gbdptdpto = gbdirdpto  " +
+            " inner join gbzon on gbzonzona = gbdirzona " +
+            " inner join cadac on cadacncta = camcancta  " +
+            " inner join cacon on cadacmoti = caconcorr and caconpref = 30  " +
+            " where gbagecage = #{cage}  " +
+            " and cafirncta = #{account}  " +
+            " and camcastat = 1 ")
+    DataFormDto findDataFormForSavingBankTutor(@Param("cage") Integer cage, @Param("account") String account);
 
 }

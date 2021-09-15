@@ -13,9 +13,9 @@ public class GenerateContractData {
     @Autowired
     FormsDtoReportService formsDtoReportService;
 
-    public ContractData getContractData(Integer codeClient, String account, String typeForm, String categoryTypeForm){
+    public ContractData getContractData(Integer codeClient, String account, String typeForm, String categoryTypeForm, String isTutor){
 
-        FormsDtoReport formsDtoReport = formsDtoReportService.generate(codeClient,account, typeForm, categoryTypeForm);
+        FormsDtoReport formsDtoReport = formsDtoReportService.generate(codeClient,account, typeForm, categoryTypeForm, isTutor);
 
         ContractData contractData = new ContractData();
         String fullName = formsDtoReport.getNames().trim().concat(" ")

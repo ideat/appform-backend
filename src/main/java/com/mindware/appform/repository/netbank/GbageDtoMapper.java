@@ -10,17 +10,23 @@ import java.util.List;
 @Mapper
 public interface GbageDtoMapper {
 
-    @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, camcafapt as openingDate, " +
-            " 'CAJA-AHORRO' as accountName,camcancta as accountCode,camcacmon as currency " +
-            " from gbage " +
-            " inner join camca on gbagecage = camcacage " +
-            " where gbagemrcb = 0 " +
-            " and camcastat = 1 " +
-            " and gbagecage = #{cage}")
+    @Select(" select camcacage as gbagecage, c.gbagenomb, c.gbagendid, g.gbagefnac, c.gbagefreg, camcafapt as openingDate, " +
+            " 'CAJA-AHORRO' as accountName,cafirncta as accountCode,camcacmon as currency, cafircage as secundaryCage, " +
+            " cacondesc as typeAccount" +
+            " from gbage c " +
+            " inner join cafir on c.gbagecage = cafircage " +
+            " inner join camca on camcancta = cafirncta " +
+            " inner join gbage g on g.gbagecage = camcacage " +
+            " inner join cacon on caconpref = 3 and caconcorr = camcamane" +
+            " where c.gbagemrcb = 0 " +
+            " and camcastat in (1,2,3) " +
+            " and cafirstat = 0 " +
+            " and c.gbagecage = #{cage}")
     List<GbageDto> findGbageCamcaByCage(@Param("cage") Integer cage);
 
     @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
-            " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency " +
+            " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency, 0 as secundaryCage, " +
+            " '' as typeAccount " +
             " from gbage " +
             " inner join pfmdp on gbagecage = pfmdpcage " +
             " where gbagemrcb = 0 " +
@@ -28,23 +34,31 @@ public interface GbageDtoMapper {
             " and gbagecage = #{cage}" )
     List<GbageDto> findGbagePfmdpByCage(@Param("cage") Integer cage);
 
-    @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, 'VARIOS' as accountName " +
+    @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, 'VARIOS' as accountName, " +
+            " gbcondesc as civilStatus, gbagedir1 as addressHome1, gbagedir2 as addressHome2 " +
             " from gbage " +
+            " inner join gbcon on gbconpfij =3 and gbconcorr = gbageeciv " +
             " where gbagemrcb = 0 " +
             " and gbagecage = #{cage}" )
     List<GbageDto> findGbageByCage(@Param("cage") Integer cage);
 
-    @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, camcafapt as openingDate, " +
-            " 'CAJA-AHORRO' as accountName,camcancta as accountCode,camcacmon as currency " +
-            " from gbage " +
-            " inner join camca on gbagecage = camcacage " +
-            " where gbagemrcb = 0 " +
-            " and camcastat = 1 " +
+    @Select(" select camcacage as gbagecage, c.gbagenomb, c.gbagendid, g.gbagefnac, c.gbagefreg, camcafapt as openingDate, " +
+            " 'CAJA-AHORRO' as accountName,cafirncta as accountCode,camcacmon as currency, cafircage as secundaryCage ," +
+            " cacondesc as typeAccount" +
+            " from gbage c " +
+            " inner join cafir on c.gbagecage = cafircage " +
+            " inner join camca on camcancta = cafirncta " +
+            " inner join gbage g on g.gbagecage = camcacage " +
+            " inner join cacon on caconpref = 3 and caconcorr = camcamane" +
+            " where c.gbagemrcb = 0 " +
+            " and camcastat in (1,2,3) " +
+            " and cafirstat = 0 " +
             " and trim(gbagendid) like #{cardNumber}")
     List<GbageDto> findGbageCamcaByCardNumber(@Param("cardNumber") String cardNumber);
 
     @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
-            " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency " +
+            " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency, 0 as secundaryCage," +
+            " '' as typeAccount " +
             " from gbage " +
             " inner join pfmdp on gbagecage = pfmdpcage " +
             " where gbagemrcb = 0 " +

@@ -148,7 +148,7 @@ public interface FormsMapper {
             " where name_type_form = #{typeForm} " +
             " and category_type_form = #{categoryTypeForm} " +
             " and id_user = #{user} " +
-            " or origin_module = 'KIOSCO' ")
+            " and (origin_module = 'KIOSCO' or origin_module = 'AUTO-FORM') ")
     List<Forms> findByUserTypeFormAndCategoryTypeForm(@Param("typeForm") String typeForm,
                                                       @Param("categoryTypeForm") String categoryTypeForm,
                                                       @Param("user") String user);

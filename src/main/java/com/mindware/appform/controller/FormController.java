@@ -31,6 +31,7 @@ public class FormController {
     private String value2;
     private String value3;
     private String value4;
+    private String isTutor;
 
     @Autowired
     private FormsMapper mapper;
@@ -141,12 +142,14 @@ public class FormController {
             if(key.equals("cage")) idClient = Integer.parseInt(value);
             if(key.equals("account")) value2 = value;
             if(key.equals("category_type_form")) value3 = value;
+            if(key.equals("is-tutor")) isTutor = value;
         });
 
-        DataFormDto result = dataFormDtoService.findDataFormDtoFormSavingBoxOrDpfByCageAndAccount(idClient, value2,value3);
+        DataFormDto result = dataFormDtoService.findDataFormDtoFormSavingBoxOrDpfByCageAndAccount(idClient, value2,value3,isTutor);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
 
     @GetMapping(value ="/v1/form/findDataFormForDigitalBank", name ="Datos  de cajas de ahorro")
     ResponseEntity<List<DataFormDto>> findDataFormForDigitalBank(@RequestHeader Map<String,String> headers){
@@ -166,9 +169,10 @@ public class FormController {
             if(key.equals("id_account")) value2 = value;
             if(key.equals("type_form")) value3 = value;
             if(key.equals("category_type_form")) value4 = value;
+            if(key.equals("is-tutor")) isTutor = value;
         });
 
-        FormsDtoReport result = formsDtoReportService.generate(idClient, value2, value3, value4);
+        FormsDtoReport result = formsDtoReportService.generate(idClient, value2, value3, value4,isTutor);
         List<FormsDtoReport> collection = new ArrayList<>();
 
         collection.add(result);

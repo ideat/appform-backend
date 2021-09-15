@@ -89,14 +89,17 @@ public class DataFormDtoService {
         return dataFormDtoList;
     }
 
-    public DataFormDto findDataFormDtoFormSavingBoxOrDpfByCageAndAccount(Integer cage, String account, String category){
+    public DataFormDto findDataFormDtoFormSavingBoxOrDpfByCageAndAccount(Integer cage, String account, String category, String isTutor){
         DataFormDto dataFormDto = new DataFormDto();
         if(category.equals("CAJA-AHORRO")){
-            dataFormDto = dataFormDtoMapper.findDataFormForSavingBank(cage,account);
+            if(isTutor.equals("SI")){
+                dataFormDto = dataFormDtoMapper.findDataFormForSavingBankTutor(cage, account);
+            }else {
+                dataFormDto = dataFormDtoMapper.findDataFormForSavingBank(cage, account);
+            }
         }else{
             dataFormDto = dataFormDtoMapper.findDataFormForDpf(cage,account);
         }
-
 
         Double income = 0.0;
         List<Gblab> gblabList = gblabMapper.findGblabByCage(cage);
@@ -129,7 +132,7 @@ public class DataFormDtoService {
 
 //        if(dataFormDto.getActivity1()==null || dataFormDto.getActivity1().trim().equals("")){
             List<Gblab> aux2 = gblabList.stream()
-                    .filter(g -> g.getGblabmpri() == null || (g.getGblabmpri() != 1 && !g.getGblabdact().isEmpty()))
+                    .filter(g -> g.getGblabmpri() == null || (g.getGblabmpri() != 1 && g.getGblabdact() != null))
                     .collect(Collectors.toList());
             if (aux2.size() > 0) {
                 dataFormDto.setActivity2(aux2.get(0).getGblabdact()!=null?aux2.get(0).getGblabdact():"NO APLICA");

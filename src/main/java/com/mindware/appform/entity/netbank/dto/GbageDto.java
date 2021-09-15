@@ -24,4 +24,14 @@ public class GbageDto {
     private String accountCode;
 
     private String currency;
+
+    private Integer secundaryCage; //Codigo del tutor en caso de menores o codigo cliente manejo conjunto
+
+    private String typeAccount;
+
+    private String civilStatus;
+
+    private String addressHome1;
+
+    private String addressHome2;
 }
