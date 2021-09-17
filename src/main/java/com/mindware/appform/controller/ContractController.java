@@ -1,9 +1,14 @@
 package com.mindware.appform.controller;
 
+import com.mindware.appform.entity.TemplateContract;
+import com.mindware.appform.exceptions.AppException;
+import com.mindware.appform.service.TemplateContractService;
+import com.mindware.appform.util.NameTemplateContract;
 import com.mindware.appform.util.WordReplaceTextContract;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
@@ -13,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value ="/rest",  produces = {"application/json"})
@@ -22,7 +28,13 @@ public class ContractController {
     private String path;
 
     @Autowired
-    WordReplaceTextContract wordReplaceTextContract;
+    private WordReplaceTextContract wordReplaceTextContract;
+
+    @Autowired
+    private NameTemplateContract nameTemplateContract;
+
+    @Autowired
+    private TemplateContractService templateContractService;
 
     private String pathContract;
     private Integer codeClient;
@@ -58,5 +70,39 @@ public class ContractController {
         return IOUtils.toByteArray(is);
     }
 
+    @GetMapping(value="/v1/contract/getTemplateContract", name = "Obtiene la plantilla de contrato")
+    public @ResponseBody byte[] getTemplateContract(@RequestHeader Map<String,String> headers) throws IOException {
+        headers.forEach((key,value)->{
+            if(key.equals("code-client")) codeClient = Integer.valueOf(value) ;
+            if(key.equals("account")) account = value;
+            if(key.equals("type-form")) typeForm = value;
+            if(key.equals("category-type-form")) categoryTypeForm = value;
+            if(key.equals("is-tutor")) isTutor = value;
+            if(key.equals("login")) login = value;
+            if(key.equals("type-account")) typeAccount = value;
+            if(key.equals("plaza")) plaza = Integer.valueOf(value);
+        });
+
+
+        String nameTemplate = nameTemplateContract.generateNameTemplateContract(login,account,typeAccount,plaza,categoryTypeForm);
+        Optional<TemplateContract> templateContract = templateContractService.findByFileName(nameTemplate);
+        String pathTemplate="";
+        if(templateContract.isPresent()){
+            if(templateContract.get().getActive().equals("SI")) {
+                pathTemplate = templateContract.get().getPathContract();
+            }else{
+//                throw new AppException(String.format("Plantilla %s no se encuentra activa, consulte con el administrador", nameTemplate), HttpStatus.BAD_REQUEST);
+            return null;
+            }
+        }else{
+//            throw new AppException(String.format("Plantilla %s no registrada, consulte con el administrador", nameTemplate), HttpStatus.BAD_REQUEST);
+            return null;
+        }
+
+        Path path = Paths.get(pathTemplate);
+        byte[] bFile = Files.readAllBytes(path);
+        InputStream is = new ByteArrayInputStream(bFile);
+        return IOUtils.toByteArray(is);
+    }
 
 }

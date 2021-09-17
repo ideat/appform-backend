@@ -2,11 +2,13 @@ package com.mindware.appform.util;
 
 import com.mindware.appform.dto.DataContractSavingBankDto;
 import com.mindware.appform.entity.ContractData;
+import com.mindware.appform.entity.TemplateContract;
 import com.mindware.appform.entity.VariableContract;
 import com.mindware.appform.entity.netbank.dto.CamcaCatcaDto;
 import com.mindware.appform.entity.netbank.dto.PfmdpGbageDto;
 import com.mindware.appform.exceptions.AppException;
 import com.mindware.appform.service.DataContractDtoService;
+import com.mindware.appform.service.TemplateContractService;
 import com.mindware.appform.service.VariableContractService;
 import com.mindware.appform.service.netabank.CamcaCatcaDtoService;
 import com.xandryex.WordReplacer;
@@ -20,10 +22,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class WordReplaceTextContract {
@@ -62,6 +61,9 @@ public class WordReplaceTextContract {
     @Autowired
     private CamcaCatcaDtoService camcaCatcaDtoService;
 
+    @Autowired
+    private TemplateContractService templateContractService;
+
     public String generateContractSavingBank(String login, String account, String typeAccount, Integer plaza,
                                              String typeForm, String categoryTypeForm, String isTutor) throws Exception {
 
@@ -78,14 +80,25 @@ public class WordReplaceTextContract {
             nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),"");
         }
 
+        Optional<TemplateContract> templateContract = templateContractService.findByFileName(nameContract);
+        if(templateContract.isPresent()){
+            if(templateContract.get().getActive().equals("NO")) {
+                throw new AppException(String.format("Plantilla %s no activa, consulte con el administrador", nameContract), HttpStatus.BAD_REQUEST);
+            }
+        }else{
+
+            throw new AppException(String.format("Plantilla %s no registrada, consulte con el administrador", nameContract), HttpStatus.BAD_REQUEST);
+        }
+
         try {
             templateFile = new File(pathContract + nameContract);
+            replacer = new TextReplacer();
+            wordReplacer = new WordReplacer(templateFile);
         }catch (Exception e){
             throw new AppException("Plantilla de nombre: " + nameContract +
                     ", no encontrada, verifique que la plantilla este cargada", HttpStatus.BAD_REQUEST);
         }
-        replacer = new TextReplacer();
-        wordReplacer = new WordReplacer(templateFile);
+
 
         mapContractData = getMapDataContract(dataContractSavingBankDto);
         Map<String,String> mapDataContractVariableSimple = getDataForMapContractVariable("SIMPLE");
@@ -110,12 +123,12 @@ public class WordReplaceTextContract {
         String nameContract = "";
         if(categoryTypeForm.equals("CAJA-AHORRO")){
             nameContract="CAH";
-            if(typeAccount.equals("INDIVITUAL")) nameContract = nameContract + "-IND";
+            if(typeAccount.equals("INDIVIDUAL")) nameContract = nameContract + "-IND";
             if(typeAccount.equals("CONJUNTA")) nameContract = nameContract + "-CON";
             if(typeAccount.equals("ALTERNA")) nameContract = nameContract + "-ALT";
 
-            if(!product.equals("EFICAZ") && !product.equals("FUTURO") && !product.equals("DINAMICA")){
-                product = "TRAD";
+            if(!product.equals("EFICAZ") && !product.equals("FUTURO") && !product.equals("DINAMICA")  && !product.equals("PROACTIVA")){
+                product = "TRADICIONAL";
             }
 
             nameContract = nameContract+"-"+totalParticipants.toString();
@@ -123,7 +136,6 @@ public class WordReplaceTextContract {
         }else{
             nameContract = "DPF" + "-"+totalParticipants.toString() +".docx";
         }
-
 
         return nameContract;
     }
