@@ -26,7 +26,7 @@ public interface DataFormDtoMapper {
             " inner join gbage on gbagecage = gbdaccage " +
             " inner join camca on gbdaccage = camcacage  " +
             " inner join catca on catcatpca = camcatpca  " +
-            " inner join gbofi on gbofinofi = gbageagen  " +
+            " inner join gbofi on gbofinofi = camcaagen  " +
             " left join gbcon  gbcon1 on (gbcon1.gbconpfij = 2 and gbcon1.gbconcorr = gbagesexo)  " +
             " left join gbcon gbcon2 on (gbcon2.gbconpfij = 4 and gbcon2.gbconcorr = gbagetdid)  " +
             " left join gbcon gbcon3 on (gbcon3.gbconpfij = 3 and gbcon3.gbconcorr = gbageeciv)  " +
@@ -63,7 +63,7 @@ public interface DataFormDtoMapper {
             " inner join pfmdp on gbdaccage = pfmdpcage " +
             " inner join pfhts on pfmdptdep = pfhtstdep  " +
             " inner join pftdp on pfmdptdep = pftdptdep  " +
-            " inner join gbofi on gbofinofi = gbageagen  " +
+            " inner join gbofi on gbofinofi = pfmdpagen  " +
             " left join gbcon  gbcon1 on (gbcon1.gbconpfij = 2 and gbcon1.gbconcorr = gbagesexo)  " +
             " left join gbcon gbcon2 on (gbcon2.gbconpfij = 4 and gbcon2.gbconcorr = gbagetdid)  " +
             " left join gbcon gbcon3 on (gbcon3.gbconpfij = 3 and gbcon3.gbconcorr = gbageeciv)  " +
@@ -138,7 +138,7 @@ public interface DataFormDtoMapper {
             " inner join cafir on cafircage = gbagecage " +
             " inner join camca on camcancta = cafirncta  " +
             " inner join catca on catcatpca = camcatpca  " +
-            " inner join gbofi on gbofinofi = gbageagen  " +
+            " inner join gbofi on gbofinofi = camcaagen  " +
             " left join gbcon  gbcon1 on (gbcon1.gbconpfij = 2 and gbcon1.gbconcorr = gbagesexo)  " +
             " left join gbcon gbcon2 on (gbcon2.gbconpfij = 4 and gbcon2.gbconcorr = gbagetdid)  " +
             " left join gbcon gbcon3 on (gbcon3.gbconpfij = 3 and gbcon3.gbconcorr = gbageeciv)  " +

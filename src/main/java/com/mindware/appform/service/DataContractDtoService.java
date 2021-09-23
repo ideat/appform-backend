@@ -17,9 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DataContractDtoService {
@@ -40,11 +42,21 @@ public class DataContractDtoService {
     GbageDtoMapper gbageDtoMapper;
 
 
-    public DataContractSavingBankDto getDataContractSavingBank(String account, String login){
+    public DataContractSavingBankDto getDataContractSavingBank(String account, String login, String isYunger){
         int i = 1;
-
-        List<CamcaCafirGbageDto> list = camcaCafirGbageDtoMapper.getDataContractSavingBank(account);
+        List<CamcaCafirGbageDto> list = new ArrayList<>();
+        if(isYunger.equals("SI")) {
+            list = new ArrayList(camcaCafirGbageDtoMapper.getDataContractSavingBankTutor(account));
+        } else{
+            list = new ArrayList(camcaCafirGbageDtoMapper.getDataContractSavingBank(account));
+        }
         DataContractSavingBankDto data = new DataContractSavingBankDto();
+
+//        if(isYunger.equals("SI")){
+//            list = list.stream()
+//                    .filter(value -> value.getCamcancta().equals(account))
+//                    .collect(Collectors.toList());
+//        }
 
         for(CamcaCafirGbageDto c : list){
             if(i==1) {

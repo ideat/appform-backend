@@ -19,7 +19,7 @@ public interface GbageDtoMapper {
             " inner join gbage g on g.gbagecage = camcacage " +
             " inner join cacon on caconpref = 3 and caconcorr = camcamane" +
             " where c.gbagemrcb = 0 " +
-            " and camcastat in (1,2,3) " +
+            " and camcastat = 1 " +
             " and cafirstat = 0 " +
             " and c.gbagecage = #{cage}")
     List<GbageDto> findGbageCamcaByCage(@Param("cage") Integer cage);
@@ -51,9 +51,9 @@ public interface GbageDtoMapper {
             " inner join gbage g on g.gbagecage = camcacage " +
             " inner join cacon on caconpref = 3 and caconcorr = camcamane" +
             " where c.gbagemrcb = 0 " +
-            " and camcastat in (1,2,3) " +
+            " and camcastat = 1 " +
             " and cafirstat = 0 " +
-            " and trim(gbagendid) like #{cardNumber}")
+            " and trim(c.gbagendid) like #{cardNumber}")
     List<GbageDto> findGbageCamcaByCardNumber(@Param("cardNumber") String cardNumber);
 
     @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +

@@ -596,7 +596,7 @@
 					<font size="8"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{country}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{zone}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement mode="Opaque" x="133" y="333" width="281" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="c7905878-c723-4e6c-bdd8-cf6712807101">
@@ -609,7 +609,7 @@
 					<font size="8"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{departament}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{homeAddress}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="21" y="320" width="111" height="12" uuid="0c833907-a005-4b8b-8bae-40f135fdc310">
@@ -976,6 +976,29 @@
 				</textElement>
 				<text><![CDATA[Origen de Fondos:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="163" y="190" width="119" height="12" uuid="d2a0d2d6-e26e-4110-9292-da7c3cf79a1a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Profesión:]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="163" y="204" width="241" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="40bc32a9-3c87-4cdb-977f-e69cc6dd5f32">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{profession}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

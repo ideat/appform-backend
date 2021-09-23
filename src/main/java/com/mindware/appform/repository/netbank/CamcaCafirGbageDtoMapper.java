@@ -21,5 +21,14 @@ public interface CamcaCafirGbageDtoMapper {
             " and camcastat in (1,2,3)")
     List<CamcaCafirGbageDto> getDataContractSavingBank(@Param("account") String account);
 
-
+    @Select(" select camcancta, gbagenomb, gbagendid, gbcondesc, gbconabre " +
+            " from camca " +
+            " inner join cafir on cafirncta = camcancta " +
+            " inner join gbage on gbagecage = cafircage " +
+            " inner join gbcon on gbconpfij = 10 and gbconcorr = camcacmon " +
+            " where camcancta = #{account} " +
+            " and cafirstat = 0 " +
+            " and (TODAY -gbagefnac)/365.24>=18.0" +
+            " and camcastat in (1,2,3)")
+    List<CamcaCafirGbageDto> getDataContractSavingBankTutor(@Param("account") String account);
 }

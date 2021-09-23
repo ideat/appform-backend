@@ -34,19 +34,19 @@ public class NameTemplateContract {
     private static File templateFile;
 
     public String generateNameTemplateContract(String login, String account, String typeAccount, Integer plaza,
-                                                String categoryTypeForm) throws IOException {
+                                                String categoryTypeForm, String isYunger) throws IOException {
         String nameContract="";
         DataContractSavingBankDto dataContractSavingBankDto = new DataContractSavingBankDto();
 
         if(categoryTypeForm.equals("CAJA-AHORRO")) {
-            dataContractSavingBankDto = dataContractDtoService.getDataContractSavingBank(account, login);
+            dataContractSavingBankDto = dataContractDtoService.getDataContractSavingBank(account, login, isYunger);
             CamcaCatcaDto camcaCatcaDto = camcaCatcaDtoService.findByAccount(account);
 
             nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),
-                    camcaCatcaDto.getProductName().trim());
+                    camcaCatcaDto.getProductName().trim(), isYunger);
         }else{
             dataContractSavingBankDto = dataContractDtoService.getDataContractDpf(account,login);
-            nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),"");
+            nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),"",isYunger);
         }
 
         Optional<TemplateContract> templateContract = templateContractService.findByFileName(nameContract);
@@ -63,13 +63,21 @@ public class NameTemplateContract {
 
     }
 
-    private String createNameContract(String categoryTypeForm, String typeAccount, Integer totalParticipants, String product){
+    private String createNameContract(String categoryTypeForm, String typeAccount, Integer totalParticipants, String product, String isYunger){
         String nameContract = "";
         if(categoryTypeForm.equals("CAJA-AHORRO")){
             nameContract="CAH";
-            if(typeAccount.equals("INDIVIDUAL")) nameContract = nameContract + "-IND";
-            if(typeAccount.equals("CONJUNTA")) nameContract = nameContract + "-CON";
-            if(typeAccount.equals("ALTERNA")) nameContract = nameContract + "-ALT";
+            if(isYunger.equals("NO")) {
+                if (typeAccount.equals("INDIVIDUAL")) nameContract = nameContract + "-IND";
+                if (typeAccount.equals("CONJUNTA")) nameContract = nameContract + "-CON";
+                if (typeAccount.equals("ALTERNA")) nameContract = nameContract + "-ALT";
+            }else{
+                nameContract = nameContract + "-MEN";
+            }
+            if(product.equals("CAJA DE AHORRO EFICAZ")) product = "EFICAZ";
+            if(product.equals("CAJA DE AHORRO FUTURO")) product = "FUTURO";
+            if(product.equals("CAJA DE AHORRO DINAMICA")) product = "DINAMICA";
+            if(product.equals("CAJA DE AHORRO PROACTIVA")) product = "PROACTIVA";
 
             if(!product.equals("EFICAZ") && !product.equals("FUTURO") && !product.equals("DINAMICA")  && !product.equals("PROACTIVA")){
                 product = "TRADICIONAL";

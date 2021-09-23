@@ -45,6 +45,7 @@ public class ContractController {
     private String login;
     private String typeAccount;
     private Integer plaza;
+    private String isYunger;
 
     @GetMapping(value="/v1/contract/getFileContract", name = "Obtiene el contrato generado")
     public @ResponseBody byte[] getFileContract(@RequestHeader Map<String,String> headers) throws Exception {
@@ -57,11 +58,12 @@ public class ContractController {
             if(key.equals("login")) login = value;
             if(key.equals("type-account")) typeAccount = value;
             if(key.equals("plaza")) plaza = Integer.valueOf(value);
+            if(key.equals("is-yunger")) isYunger = value;
         });
 
 //        wordReplaceTextContract.generateContract(codeClient, account, typeForm, categoryTypeForm, isTutor);
 
-        String pathGenerate= wordReplaceTextContract.generateContractSavingBank(login,account,typeAccount, plaza, typeForm, categoryTypeForm,isTutor);
+        String pathGenerate= wordReplaceTextContract.generateContractSavingBank(login,account,typeAccount, plaza, typeForm, categoryTypeForm,isTutor, isYunger);
 
 //        Path path = Paths.get("c://auto-form//contract//3051756195-CA-MEGAFUSION.pdf");
         Path path = Paths.get(pathGenerate);
@@ -81,10 +83,11 @@ public class ContractController {
             if(key.equals("login")) login = value;
             if(key.equals("type-account")) typeAccount = value;
             if(key.equals("plaza")) plaza = Integer.valueOf(value);
+            if(key.equals("is-yunger")) isYunger = value;
         });
 
 
-        String nameTemplate = nameTemplateContract.generateNameTemplateContract(login,account,typeAccount,plaza,categoryTypeForm);
+        String nameTemplate = nameTemplateContract.generateNameTemplateContract(login,account,typeAccount,plaza,categoryTypeForm, isYunger);
         Optional<TemplateContract> templateContract = templateContractService.findByFileName(nameTemplate);
         String pathTemplate="";
         if(templateContract.isPresent()){
