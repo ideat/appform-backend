@@ -99,6 +99,9 @@ public class DataFormDtoService {
             }
         }else{
             dataFormDto = dataFormDtoMapper.findDataFormForDpf(cage,account);
+            if(dataFormDto==null){
+                dataFormDto = dataFormDtoMapper.findDataFormForDpfPftit(cage,account);
+            }
         }
 
         Double income = 0.0;

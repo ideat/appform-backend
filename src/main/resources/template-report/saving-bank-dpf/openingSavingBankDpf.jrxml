@@ -450,20 +450,20 @@
 				<text><![CDATA[Nombre del Cónyuge:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="290" y="256" width="271" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="0b962a74-c259-40a5-a2ee-6f2b2f25fb5b">
+				<reportElement mode="Opaque" x="278" y="256" width="283" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="0b962a74-c259-40a5-a2ee-6f2b2f25fb5b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
-					<font size="8"/>
+					<font size="7"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{activitySpouse}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="21" y="256" width="269" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="57796238-25d0-4e66-b591-46aab5e63ed0">
+				<reportElement mode="Opaque" x="21" y="256" width="257" height="12" backcolor="rgba(227, 222, 222, 0.8039216)" uuid="57796238-25d0-4e66-b591-46aab5e63ed0">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
@@ -471,7 +471,7 @@
 					<pen lineWidth="0.25"/>
 				</box>
 				<textElement>
-					<font size="8"/>
+					<font size="7"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fullNameSpouse}]]></textFieldExpression>

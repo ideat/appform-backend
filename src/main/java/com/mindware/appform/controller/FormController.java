@@ -270,9 +270,11 @@ public class FormController {
             if(key.equals("id_account_service_operation")) value2 = value;
             if(key.equals("type_form")) value3 = value;
             if(key.equals("category_type_form")) value4 = value;
+            if(key.equals("name-office")) nameOffice = value;
         });
 
         FormDebitCardDtoReport result = formsDebitCardDtoReportService.generate(idClient, value3, value4, value2);
+        result.setOfficeName(nameOffice);
         List<FormDebitCardDtoReport> collection = new ArrayList<>();
 
         collection.add(result);

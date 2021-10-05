@@ -34,6 +34,18 @@ public interface GbageDtoMapper {
             " and gbagecage = #{cage}" )
     List<GbageDto> findGbagePfmdpByCage(@Param("cage") Integer cage);
 
+
+    @Select(" select distinct gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
+            " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency, 0 as secundaryCage, " +
+            " '' as typeAccount " +
+            " from gbage " +
+            " inner join pftit on gbagecage = pftitcage " +
+            " inner join pfmdp on pfmdpndep = pftitndep" +
+            " where gbagemrcb = 0 " +
+            " and pfmdpstat = 1 " +
+            " and gbagecage = #{cage} " )
+    List<GbageDto> findGbagePftitByCage(@Param("cage") Integer cage);
+
     @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, 'VARIOS' as accountName, " +
             " gbcondesc as civilStatus, gbagedir1 as addressHome1, gbagedir2 as addressHome2 " +
             " from gbage " +
@@ -56,6 +68,17 @@ public interface GbageDtoMapper {
             " and trim(c.gbagendid) like #{cardNumber}")
     List<GbageDto> findGbageCamcaByCardNumber(@Param("cardNumber") String cardNumber);
 
+    @Select(" select distinct gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
+            " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency, 0 as secundaryCage," +
+            " '' as typeAccount " +
+            " from gbage " +
+            " inner join pftit on gbagecage = pftitcage " +
+            " inner join pfmdp on pfmdpndep = pftitndep" +
+            " where gbagemrcb = 0 " +
+            " and pfmdpstat = 1 " +
+            " and trim(gbagendid) like #{cardNumber}" )
+    List<GbageDto> findGbagePftitByCardNumber(@Param("cardNumber") String cardNumber);
+
     @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
             " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency, 0 as secundaryCage," +
             " '' as typeAccount " +
@@ -65,6 +88,7 @@ public interface GbageDtoMapper {
             " and pfmdpstat = 1 " +
             " and trim(gbagendid) like #{cardNumber}" )
     List<GbageDto> findGbagePfmdpByCardNumber(@Param("cardNumber") String cardNumber);
+
 
     @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, 'VARIOS' as accountName " +
             " from gbage " +

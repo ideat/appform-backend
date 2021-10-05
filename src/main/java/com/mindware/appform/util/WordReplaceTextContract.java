@@ -76,7 +76,7 @@ public class WordReplaceTextContract {
             nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),
                     camcaCatcaDto.getProductName().trim(),isYunger);
         }else{
-            dataContractSavingBankDto = dataContractDtoService.getDataContractDpf(account,login);
+            dataContractSavingBankDto = dataContractDtoService.getDatacontractDpf2(account,login);
             nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),"",isYunger);
         }
 

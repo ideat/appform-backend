@@ -108,6 +108,83 @@ public class DataContractDtoService {
         return data;
     }
 
+    public DataContractSavingBankDto getDatacontractDpf2(String account, String login){
+        int i = 0;
+        List<PfmdpGbageDto> pfmdpGbageDtoList = pfmdpGbageDtoMapper.getListDataContractDpf(Double.parseDouble(account));
+        DataContractSavingBankDto data = new DataContractSavingBankDto();
+
+        for(PfmdpGbageDto p: pfmdpGbageDtoList){
+
+            if(i==0){
+                data.setFullNameClient1(p.getGbagenomb());
+                data.setIdCardClient1(p.getGbagendid());
+                GbageDto dataGbage1 = gbageDtoMapper.findGbageByCage(p.getPfmdpcage()).get(0);
+                data.setCivilStatus1(dataGbage1.getCivilStatus());
+                String address1 = (dataGbage1.getAddressHome1()!= null?dataGbage1.getAddressHome1():"")  +
+                        (dataGbage1.getAddressHome2()!= null?dataGbage1.getAddressHome2():"");
+                data.setAddressHome1(address1);
+                i++;
+                if(i==1 && p.getPfmdpcag2()!=null && !p.getPfmdpcage().equals(p.getPfmdpcag2())){
+                    GbageDto dataGbage2 = gbageDtoMapper.findGbageByCage(p.getPfmdpcag2()).get(0);
+                    data.setFullNameClient2(dataGbage2.getGbagenomb());
+                    data.setIdCardClient2(dataGbage2.getGbagendid());
+
+                    data.setCivilStatus2(dataGbage2.getCivilStatus());
+                    String address2 = (dataGbage2.getAddressHome1()!= null?dataGbage2.getAddressHome1():"")  +
+                            (dataGbage2.getAddressHome2()!= null?dataGbage2.getAddressHome2():"");
+                    data.setAddressHome2(address2);
+                    i++;
+                }
+
+            }else
+            if(i==1 && !p.getPfmdpcage().equals(p.getPfmdpcag2())){
+                GbageDto dataGbage2 = gbageDtoMapper.findGbageByCage(p.getPfmdpcag2()).get(0);
+                data.setFullNameClient2(dataGbage2.getGbagenomb());
+                data.setIdCardClient2(dataGbage2.getGbagendid());
+
+                data.setCivilStatus2(dataGbage2.getCivilStatus());
+                String address2 = (dataGbage2.getAddressHome1()!= null?dataGbage2.getAddressHome1():"")  +
+                        (dataGbage2.getAddressHome2()!= null?dataGbage2.getAddressHome2():"");
+                data.setAddressHome2(address2);
+                i++;
+            }else
+            if(i==2 && !p.getPfmdpcage().equals(p.getPfmdpcag2())){
+                GbageDto dataGbage3 = gbageDtoMapper.findGbageByCage(p.getPfmdpcag2()).get(0);
+                data.setFullNameClient3(dataGbage3.getGbagenomb());
+                data.setIdCardClient3(dataGbage3.getGbagendid());
+
+                data.setCivilStatus3(dataGbage3.getCivilStatus());
+                String address3 = (dataGbage3.getAddressHome1()!= null?dataGbage3.getAddressHome1():"")  +
+                        (dataGbage3.getAddressHome2()!= null?dataGbage3.getAddressHome2():"");
+                data.setAddressHome3(address3);
+                i++;
+            }else
+            if(i==3 && !p.getPfmdpcage().equals(p.getPfmdpcag2())){
+                GbageDto dataGbage4 = gbageDtoMapper.findGbageByCage(p.getPfmdpcag2()).get(0);
+                data.setFullNameClient4(dataGbage4.getGbagenomb());
+                data.setIdCardClient4(dataGbage4.getGbagendid());
+
+                data.setCivilStatus4(dataGbage4.getCivilStatus());
+                String address4 = (dataGbage4.getAddressHome1()!= null?dataGbage4.getAddressHome1():"")  +
+                        (dataGbage4.getAddressHome2()!= null?dataGbage4.getAddressHome2():"");
+                data.setAddressHome4(address4);
+                i++;
+            }
+
+        }
+        data.setTotalParticipants(i);
+        data.setCurrencyName(pfmdpGbageDtoList.get(0).getGbcondesc());
+        data.setCurrencyAbre(pfmdpGbageDtoList.get(0).getGbconabre());
+        data.setAccount(pfmdpGbageDtoList.get(0).getPfmdpndep());
+
+        AdusrOfi adusrOfi = adusrOfiMapper.findByLogin(login);
+        String plaza[] = adusrOfi.getGbofides4().split("-");
+        data.setPlaza(plaza[0].trim());
+        data.setCurrentDate(Util.formatDate(new Date(),"dd 'de' MMMM 'de' yyyy"));
+
+        return data;
+    }
+
     public DataContractSavingBankDto getDataContractDpf(String account, String login){
         int i = 1;
 
