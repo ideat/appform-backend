@@ -21,10 +21,11 @@ public interface DataFormDtoMapper {
             " gbdaccelu as cellphone, gbagetlfd as home_phone, " +
             " gbageciiu as activity1, '' as activity2, cacondesc as reason_opening_account, gbrelcage as code_spouse," +
             " camcafapt as opening_date, gbciudesc as city, gbdacmail as email, gbagenomb as full_name_client, " +
-            " camcancta as account " +
+            " cafirncta as account " +
             " from gbdac " +
             " inner join gbage on gbagecage = gbdaccage " +
-            " inner join camca on gbdaccage = camcacage  " +
+            " inner join cafir on cafircage = gbagecage " +
+            " inner join camca on camcancta = cafirncta  " +
             " inner join catca on catcatpca = camcatpca  " +
             " inner join gbofi on gbofinofi = camcaagen  " +
             " left join gbcon  gbcon1 on (gbcon1.gbconpfij = 2 and gbcon1.gbconcorr = gbagesexo)  " +
@@ -43,8 +44,9 @@ public interface DataFormDtoMapper {
             " inner join cadac on cadacncta = camcancta  " +
             " inner join cacon on cadacmoti = caconcorr and caconpref = 30  " +
             " where gbagecage = #{cage}  " +
-            " and camcancta = #{account}  " +
-            " and camcastat = 1 ")
+            " and cafirncta = #{account}  " +
+            " and camcastat = 1 " +
+            " and cafirstat = 0 ")
     DataFormDto findDataFormForSavingBank(@Param("cage") Integer cage, @Param("account") String account);
 
     @Select(" select gbdaccage as code_client, gbdacnomb as names, gbdacape1 as last_name, " +
@@ -201,7 +203,8 @@ public interface DataFormDtoMapper {
             " inner join cacon on cadacmoti = caconcorr and caconpref = 30  " +
             " where gbagecage = #{cage}  " +
             " and cafirncta = #{account}  " +
-            " and camcastat = 1 ")
+            " and camcastat = 1 " +
+            " and cafirstat = 0 ")
     DataFormDto findDataFormForSavingBankTutor(@Param("cage") Integer cage, @Param("account") String account);
 
 }

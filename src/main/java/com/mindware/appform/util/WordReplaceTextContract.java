@@ -130,10 +130,10 @@ public class WordReplaceTextContract {
             }else{
                 nameContract = nameContract + "-MEN";
             }
-            if(product.equals("CAJA DE AHORRO EFICAZ")) product = "EFICAZ";
-            if(product.equals("CAJA DE AHORRO FUTURO")) product = "FUTURO";
-            if(product.equals("CAJA DE AHORRO DINAMICA")) product = "DINAMICA";
-            if(product.equals("CAJA DE AHORRO PROACTIVA")) product = "PROACTIVA";
+            if(product.equals("CAJA DE AHORRO EFICAZ") || product.equals("EFICAZ EMPLEADOS")) product = "EFICAZ";
+            if(product.equals("CAJA DE AHORRO FUTURO") || product.equals("FUTURO EMPLEADOS")) product = "FUTURO";
+            if(product.equals("CAJA DE AHORRO DINAMICA") || product.equals("DINAMICA EMPLEADOS")) product = "DINAMICA";
+            if(product.equals("CAJA DE AHORRO PROACTIVA") || product.equals("PROACTIVA EMPLEADOS")) product = "PROACTIVA";
 
             if(!product.equals("EFICAZ") && !product.equals("FUTURO") && !product.equals("DINAMICA")  && !product.equals("PROACTIVA")){
                 product = "TRADICIONAL";
