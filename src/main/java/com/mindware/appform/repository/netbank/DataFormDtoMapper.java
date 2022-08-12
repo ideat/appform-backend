@@ -207,4 +207,18 @@ public interface DataFormDtoMapper {
             " and cafirstat = 0 ")
     DataFormDto findDataFormForSavingBankTutor(@Param("cage") Integer cage, @Param("account") String account);
 
+
+    @Select("select distinct gbagecage as code_client, gbagenomb as full_name_client, gbdirdire as address_home " +
+            " ,gbdacnomb as names, gbdacape1 as last_name " +
+            " ,gbdacape2 as mother_last_name, gbdacape3 as married_last_name " +
+            " , trim(gbagendid) as idcard, gbageciiu as activity1, '' as activity2 " +
+            ", gbdaccelu as cellphone, gbagetlfd as home_phone, gbdacmail as email, catitncta as account" +
+            " from catit" +
+            " left join camca on catitcage = camcacage " +
+            " inner join gbage on catitcage = gbagecage " +
+            " inner join gbdir on gbdircage = gbagecage and gbdiritem = 1 " +
+            " inner join gbdac on gbdaccage = gbagecage " +
+            " where camcacage is null " +
+            " and catitcage = #{cage}")
+    List<DataFormDto> findDataFormSavingBankNoTitular(@Param("cage") Integer cage);
 }

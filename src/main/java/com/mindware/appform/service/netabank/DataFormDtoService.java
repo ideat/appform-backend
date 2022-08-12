@@ -4,17 +4,16 @@ import com.mindware.appform.entity.netbank.GbageLabDto;
 import com.mindware.appform.entity.netbank.Gbcae;
 import com.mindware.appform.entity.netbank.Gblab;
 import com.mindware.appform.entity.netbank.dto.DataFormDto;
+import com.mindware.appform.entity.netbank.dto.GbdanGbageDto;
 import com.mindware.appform.exceptions.AppException;
-import com.mindware.appform.repository.netbank.DataFormDtoMapper;
-import com.mindware.appform.repository.netbank.GbageLabDtoMapper;
-import com.mindware.appform.repository.netbank.GbcaeMapper;
-import com.mindware.appform.repository.netbank.GblabMapper;
+import com.mindware.appform.repository.netbank.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,9 +31,14 @@ public class DataFormDtoService {
     @Autowired
     GbcaeMapper gbcaeMapper;
 
+    @Autowired
+    GbdanGbageDtoMapper gbdanGbageDtoMapper;
+
     public List<DataFormDto> findDataFormForDigitalBank(Integer cage){
         List<DataFormDto> dataFormDtoList = new ArrayList<>();
         dataFormDtoList = dataFormDtoMapper.findDataFormForDigitalBank(cage);
+
+        dataFormDtoList.addAll(dataFormDtoMapper.findDataFormSavingBankNoTitular(cage));
 
         if(dataFormDtoList.size()==0){
             throw new AppException("Cliente no tiene cuentas activas", HttpStatus.BAD_REQUEST);
@@ -104,6 +108,8 @@ public class DataFormDtoService {
             }
         }
 
+
+
         Double income = 0.0;
         List<Gblab> gblabList = gblabMapper.findGblabByCage(cage);
         List<Gbcae> gbcaeList = gbcaeMapper.getAll();
@@ -163,6 +169,14 @@ public class DataFormDtoService {
             dataFormDto.setFullNameSpouse("NO APLICA");
             dataFormDto.setActivitySpouse("NO APLICA");
         }
+
+        Optional<GbdanGbageDto> gbdanGbageDto = gbdanGbageDtoMapper.findGbdanGbageDtoByCage(cage);
+        if(gbdanGbageDto.isPresent()){
+            dataFormDto.setFullNameSpouse(gbdanGbageDto.get().getGbdannomc());
+            dataFormDto.setActivitySpouse(gbdanGbageDto.get().getGbdandact()==null
+                    || gbdanGbageDto.get().getGbdandact().equals("")?"NO APLICA":gbdanGbageDto.get().getGbdandact());
+        }
+
         dataFormDto.setIncomeMountly(income);
 
         return dataFormDto;
