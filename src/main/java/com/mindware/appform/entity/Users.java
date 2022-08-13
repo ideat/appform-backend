@@ -29,4 +29,6 @@ public class Users {
     private String state;
 
     private Date createDate;
+
+    private String adUser;
 }

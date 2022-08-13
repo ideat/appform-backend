@@ -1,5 +1,6 @@
 package com.mindware.appform.service.netabank;
 
+import com.mindware.appform.entity.netbank.Camca;
 import com.mindware.appform.entity.netbank.GbageLabDto;
 import com.mindware.appform.entity.netbank.Gbcae;
 import com.mindware.appform.entity.netbank.Gblab;
@@ -34,11 +35,15 @@ public class DataFormDtoService {
     @Autowired
     GbdanGbageDtoMapper gbdanGbageDtoMapper;
 
+    @Autowired
+    CamcaMapper camcaMapper;
+
     public List<DataFormDto> findDataFormForDigitalBank(Integer cage){
         List<DataFormDto> dataFormDtoList = new ArrayList<>();
         dataFormDtoList = dataFormDtoMapper.findDataFormForDigitalBank(cage);
 
-        dataFormDtoList.addAll(dataFormDtoMapper.findDataFormSavingBankNoTitular(cage));
+
+        dataFormDtoList.addAll(getListDataFormDtoAlternateManagment(cage));
 
         if(dataFormDtoList.size()==0){
             throw new AppException("Cliente no tiene cuentas activas", HttpStatus.BAD_REQUEST);
@@ -107,8 +112,6 @@ public class DataFormDtoService {
                 dataFormDto = dataFormDtoMapper.findDataFormForDpfPftit(cage,account);
             }
         }
-
-
 
         Double income = 0.0;
         List<Gblab> gblabList = gblabMapper.findGblabByCage(cage);
@@ -180,5 +183,17 @@ public class DataFormDtoService {
         dataFormDto.setIncomeMountly(income);
 
         return dataFormDto;
+    }
+
+    private List<DataFormDto> getListDataFormDtoAlternateManagment(Integer cage){
+        List<DataFormDto> list = new ArrayList<>(dataFormDtoMapper.findDataFormSavingBankNoTitular(cage));
+
+        for(DataFormDto dataFormDto:list){
+            Optional<Camca> camca = Optional.ofNullable(camcaMapper.findCamcaByNcta(dataFormDto.getAccount()));
+            if (!camca.isPresent()){
+                list.removeIf(f -> f.getAccount().equals(dataFormDto.getAccount()));
+            }
+        }
+        return list;
     }
 }

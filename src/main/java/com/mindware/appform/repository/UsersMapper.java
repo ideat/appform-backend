@@ -21,7 +21,8 @@ public interface UsersMapper {
             " email, " +
             " num_days_validity, " +
             " state, " +
-            " create_date ) values (" +
+            " create_date, " +
+            " ad_user ) values (" +
             " #{users.id}, " +
             " #{users.login}, " +
             " #{users.fullName}, " +
@@ -32,7 +33,8 @@ public interface UsersMapper {
             " #{users.email}, " +
             " #{users.numDaysValidity}, " +
             " #{users.state}, " +
-            " #{users.createDate})")
+            " #{users.createDate}, " +
+            " #{users.adUser})")
     void add(@Param("users") Users users);
 
     @Update("update users set " +
@@ -41,7 +43,8 @@ public interface UsersMapper {
             " image = #{users.image}, " +
             " email = #{users.email}, " +
             " num_days_validity = #{users.numDaysValidity}, " +
-            " state = #{users.state} " +
+            " state = #{users.state}," +
+            " ad_user = #{users.adUser} " +
             " where id = #{users.id}")
     void update(@Param("users") Users users);
 
@@ -63,6 +66,9 @@ public interface UsersMapper {
 
     @Select("select * from users where login = #{login}")
     Optional<Users> findByLogin(@Param("login") String login);
+
+    @Select("select * from users where ad_user = #{adUser}")
+    Optional<Users> findByAdUser(@Param("adUser") String adUser);
 
     @Select(" select * from users where users.rol_name = #{rolName}")
     List<Users> findByRol(@Param("rolName") String rolName);

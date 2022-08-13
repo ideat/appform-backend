@@ -218,7 +218,6 @@ public interface DataFormDtoMapper {
             " inner join gbage on catitcage = gbagecage " +
             " inner join gbdir on gbdircage = gbagecage and gbdiritem = 1 " +
             " inner join gbdac on gbdaccage = gbagecage " +
-            " where camcacage is null " +
-            " and catitcage = #{cage}")
+            " where catitcage = #{cage}")
     List<DataFormDto> findDataFormSavingBankNoTitular(@Param("cage") Integer cage);
 }

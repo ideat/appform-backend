@@ -31,6 +31,12 @@ public class UsersService {
             throw new AppException("Login ya existe", HttpStatus.BAD_REQUEST);
         }
 
+        Optional<Users> findByAdUser = mapper.findByAdUser(users.getAdUser());
+
+        if(result.isPresent()){
+            throw new AppException("Usuario AD ya existe", HttpStatus.BAD_REQUEST);
+        }
+
         UUID id = UUID.randomUUID();
         users.setId(id.toString());
         users.setPassword(passwordEncoder.encode(CharBuffer.wrap(users.getPassword())));
