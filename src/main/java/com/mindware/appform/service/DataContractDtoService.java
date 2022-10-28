@@ -118,7 +118,9 @@ public class DataContractDtoService {
             if(i==0){
                 data.setFullNameClient1(p.getGbagenomb());
                 data.setIdCardClient1(p.getGbagendid());
+
                 GbageDto dataGbage1 = gbageDtoMapper.findGbageByCage(p.getPfmdpcage()).get(0);
+
                 data.setCivilStatus1(dataGbage1.getCivilStatus());
                 String address1 = (dataGbage1.getAddressHome1()!= null?dataGbage1.getAddressHome1():"")  +
                         (dataGbage1.getAddressHome2()!= null?dataGbage1.getAddressHome2():"");

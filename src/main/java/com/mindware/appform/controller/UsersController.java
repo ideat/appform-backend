@@ -49,4 +49,9 @@ public class UsersController {
         return new ResponseEntity<>(service.findByLogin(login).get(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/v1/user/findByAdUser/{aduser}", name = "Obtiene usuario por su usuario AD")
+    public ResponseEntity<Users> findByAdUser(@PathVariable("aduser") String adUser){
+        return new ResponseEntity<>(service.findByAdUser(adUser).get(), HttpStatus.OK);
+    }
+
 }

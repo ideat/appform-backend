@@ -187,13 +187,15 @@ public class DataFormDtoService {
 
     private List<DataFormDto> getListDataFormDtoAlternateManagment(Integer cage){
         List<DataFormDto> list = new ArrayList<>(dataFormDtoMapper.findDataFormSavingBankNoTitular(cage));
-
+        List<DataFormDto> newList =new ArrayList<>(list);
         for(DataFormDto dataFormDto:list){
             Optional<Camca> camca = Optional.ofNullable(camcaMapper.findCamcaByNcta(dataFormDto.getAccount()));
             if (!camca.isPresent()){
-                list.removeIf(f -> f.getAccount().equals(dataFormDto.getAccount()));
+                newList.removeIf(f -> f.getAccount().equals(dataFormDto.getAccount()));
             }
         }
-        return list;
+        newList.addAll(dataFormDtoMapper.findDataFormDpfNoTitular(cage));
+        newList.addAll(dataFormDtoMapper.findDataFormDpfTitular(cage));
+        return newList;
     }
 }

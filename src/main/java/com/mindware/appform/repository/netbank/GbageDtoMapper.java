@@ -24,6 +24,7 @@ public interface GbageDtoMapper {
             " and c.gbagecage = #{cage}")
     List<GbageDto> findGbageCamcaByCage(@Param("cage") Integer cage);
 
+
     @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
             " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency, 0 as secundaryCage, " +
             " '' as typeAccount " +
@@ -35,7 +36,7 @@ public interface GbageDtoMapper {
     List<GbageDto> findGbagePfmdpByCage(@Param("cage") Integer cage);
 
 
-    @Select(" select distinct gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
+    @Select(" select distinct pftitcage as gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
             " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency, 0 as secundaryCage, " +
             " '' as typeAccount " +
             " from gbage " +

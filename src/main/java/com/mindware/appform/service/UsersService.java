@@ -67,6 +67,12 @@ public class UsersService {
         return result;
     }
 
+    public Optional<Users> findByAdUser(String adUser){
+        Optional<Users> result = mapper.findByAdUser(adUser);
+
+        return result;
+    }
+
     public List<Users> findByRol(String rolName){
          return mapper.findByRol(rolName);
     }

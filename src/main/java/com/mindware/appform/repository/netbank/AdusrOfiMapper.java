@@ -14,4 +14,5 @@ public interface AdusrOfiMapper {
             " left join gbdac on gbdaccage = adusrcage " +
             " where adusrusrn = upper(#{login}) ")
     AdusrOfi findByLogin(@Param("login") String login);
+
 }

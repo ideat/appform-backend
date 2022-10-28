@@ -75,12 +75,12 @@ public class FormController {
     }
 
     @GetMapping(value ="/v1/form/findByIdClient", name ="Formulario por ID Cliente")
-    ResponseEntity<Forms> findById(@RequestHeader Map<String, String> headers){
+    ResponseEntity<List<Forms>> findById(@RequestHeader Map<String, String> headers){
         headers.forEach((key,value) -> {
             if(key.equals("id_client")) idClient = Integer.parseInt(value);
         });
 
-        Forms forms = mapper.findByIdCliente(idClient);
+        List<Forms> forms = mapper.findByIdCliente(idClient);
 
         return new ResponseEntity<>(forms, HttpStatus.OK);
     }

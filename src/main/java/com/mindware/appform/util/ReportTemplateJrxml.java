@@ -23,6 +23,7 @@ public class ReportTemplateJrxml {
     public ReportTemplateJrxml(InputStream path, Collection<?> datasource, Map<String,Object> params) throws JRException {
         this.datasource = datasource;
         this.jrDataSource = new JRBeanCollectionDataSource(datasource);
+
         params.put("logo","template-report/img/logo.png");
         this.params = params;
         this.report = JasperCompileManager.compileReport(path);

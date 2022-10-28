@@ -111,7 +111,7 @@ public interface FormsMapper {
     @Select("select * " +
             "from forms " +
             "where id_client = #{idClient}")
-    Forms findByIdCliente(@Param("idClient") Integer idClient);
+    List<Forms> findByIdCliente(@Param("idClient") Integer idClient);
 
     @Select(" select * " +
             " from forms " +
@@ -156,4 +156,5 @@ public interface FormsMapper {
     @Select("select * from forms " +
             " where id = #{id} " )
     Forms findById(@Param("id") String id);
+
 }

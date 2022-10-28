@@ -16,7 +16,7 @@ public class Camca {
 
     private Double camcasact;
 
-    private LocalDate camcafapt;
+    private Date camcafapt;
 
     private Integer camcastus;
 }

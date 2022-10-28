@@ -214,10 +214,41 @@ public interface DataFormDtoMapper {
             " , trim(gbagendid) as idcard, gbageciiu as activity1, '' as activity2 " +
             ", gbdaccelu as cellphone, gbagetlfd as home_phone, gbdacmail as email, catitncta as account" +
             " from catit" +
-            " left join camca on catitcage = camcacage " +
+            " inner join camca on catitncta = camcancta and catitcage<>camcacage and camcastat = 1 " +
             " inner join gbage on catitcage = gbagecage " +
             " inner join gbdir on gbdircage = gbagecage and gbdiritem = 1 " +
             " inner join gbdac on gbdaccage = gbagecage " +
             " where catitcage = #{cage}")
     List<DataFormDto> findDataFormSavingBankNoTitular(@Param("cage") Integer cage);
+    
+    @Select("select distinct gbagecage as code_client, gbagenomb as full_name_client, gbdacnomb as names, gbdacape1 as last_name " +
+            "   ,gbdacape2 as mother_last_name, gbdacape3 as married_last_name " +
+            "   , gbageciiu as activity1, '' as activity2 " +
+            "  , gbdirdire as address_home, trim(gbagendid) as idcard " +
+            "  , gbdaccelu as cellphone, gbagetlfd as home_phone, gbdacmail as email, pftitndep as account " +
+            " from pftit " +
+            "     INNER join pfmdp ON pfmdpndep = pftitndep  AND pfmdpstat = 1 AND pfmdpmane = 2 and pfmdpmrcb = 0 AND pfmdpcage <> pftitcage " +
+            "     inner join gbage on pftitcage = gbagecage " +
+            "     inner join gbdir on gbdircage = gbagecage and gbdiritem = 1 " +
+            "     inner join gbdac on gbdaccage = gbagecage " +
+            "     where  " +
+            "     pftitcage = #{cage} " +
+            "     and pftitmrcb = 0")
+    List<DataFormDto> findDataFormDpfNoTitular(@Param("cage") Integer cage);
+
+    @Select("select distinct gbagecage as code_client, gbagenomb as full_name_client, gbdacnomb as names, gbdacape1 as last_name " +
+            "     ,gbdacape2 as mother_last_name, gbdacape3 as married_last_name " +
+            "     , gbageciiu as activity1, '' as activity2 " +
+            "     , gbdirdire as address_home, trim(gbagendid) as idcard " +
+            "     , gbdaccelu as cellphone, gbagetlfd as home_phone, gbdacmail as email, pfmdpndep as account " +
+            " from pftit " +
+            "     INNER join pfmdp ON pfmdpcage = pftitcage  AND pfmdpstat = 1 AND pfmdpmrcb = 0 " +
+            "     inner join gbage on pftitcage = gbagecage " +
+            "     inner join gbdir on gbdircage = gbagecage and gbdiritem = 1 " +
+            "     inner join gbdac on gbdaccage = gbagecage " +
+            "     where  " +
+            "    pftitmrcb = 0 " +
+            "    and pftitcage= #{cage}")
+    List<DataFormDto> findDataFormDpfTitular(@Param("cage") Integer cage);
+
 }
