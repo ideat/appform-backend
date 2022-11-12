@@ -14,6 +14,8 @@ public class FormToSelectReportDto {
 
     private String idAccount;
 
+    private String account;
+
     private String cardNumber;
 
     private String nameTypeForm;

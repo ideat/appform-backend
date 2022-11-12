@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mainReport" pageWidth="612" pageHeight="792" columnWidth="592" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="16092820-37a8-43cf-b69e-e3b3d5f03e86">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="path_subreport1" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="path_subreport2" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="path_subreport3" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="logo" class="java.lang.String" isForPrompting="false" evaluationTime="Early"/>
+	<parameter name="check" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="unchecked" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="path1" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="path2" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="path3" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="formsDtoReports" class="java.util.List"/>
+	<field name="formDigitalBankDtoReports" class="java.util.List"/>
+	<field name="formDebitCardDtoReports" class="java.util.List"/>
+	<field name="officeName" class="java.lang.String"/>
+	<field name="login" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<image>
+				<reportElement x="18" y="0" width="122" height="24" uuid="79289c84-ad94-48de-b739-d6b79f72dc5b"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="364" y="12" width="38" height="12" uuid="6f81d969-4698-485c-b531-d8b399c47183">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="402" y="12" width="108" height="12" uuid="179514b6-21e8-43a7-8362-1974af535728">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{officeName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="510" y="12" width="28" height="12" uuid="1f738020-1cef-492c-ab0f-649948678132">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{login}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="364" y="0" width="38" height="12" backcolor="rgba(181, 177, 177, 0.6901961)" uuid="40727780-fcb1-4154-a697-1571fb35bdb8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="402" y="0" width="108" height="12" backcolor="rgba(181, 177, 177, 0.6901961)" uuid="4a2568a7-dc44-4cc6-ac1c-d27bff94b289">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Agencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="510" y="0" width="28" height="12" backcolor="rgba(181, 177, 177, 0.6901961)" uuid="f03ef3bd-1926-434e-a021-92b85fb2c84d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Usuario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="538" y="0" width="30" height="12" backcolor="rgba(181, 177, 177, 0.6901961)" uuid="1ead2e37-84ba-4b16-bf5b-23ec0232afa4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="92" splitType="Stretch">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="30" width="590" height="30" isRemoveLineWhenBlank="true" uuid="ef6fbbcc-d8be-4483-b083-a43820f50a30"/>
+				<subreportParameter name="path2">
+					<subreportParameterExpression><![CDATA[$P{path2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="check">
+					<subreportParameterExpression><![CDATA[$P{check}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="unchecked">
+					<subreportParameterExpression><![CDATA[$P{unchecked}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{formDebitCardDtoReports})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{path_subreport2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="61" width="590" height="30" isRemoveLineWhenBlank="true" uuid="e7249273-f329-41df-97c9-c6c3f1cdf3f6"/>
+				<subreportParameter name="path3">
+					<subreportParameterExpression><![CDATA[$P{path3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="check">
+					<subreportParameterExpression><![CDATA[$P{check}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="unchecked">
+					<subreportParameterExpression><![CDATA[$P{unchecked}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{formDigitalBankDtoReports})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{path_subreport3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement isPrintRepeatedValues="false" x="0" y="-2" width="590" height="30" uuid="609471cb-c3dc-4b55-b2f3-acbdc6da1e53"/>
+				<subreportParameter name="path1">
+					<subreportParameterExpression><![CDATA[$P{path1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{formsDtoReports})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{path_subreport1}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="109">
+			<frame>
+				<reportElement positionType="Float" x="32" y="10" width="526" height="94" uuid="f9ac8db5-1bf1-4c63-a4ea-649ce35c8c7a"/>
+				<staticText>
+					<reportElement x="33" y="74" width="140" height="12" uuid="d6e9985d-6081-42f6-8262-c76abc47ffab">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[FIRMA DEL CLIENTE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="189" y="74" width="160" height="12" uuid="79905c1a-5b31-4466-b4d1-19746a7bbd51">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[FIRMA Y SELLO DEL FUNCIONARIO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="359" y="74" width="160" height="20" uuid="01cbcae0-c998-4653-b7d3-75eeb3af542d">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[FIRMA Y SELLO RESP. OPERATIVO Y/O JEFE OPERATIVO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="5" y="0" width="516" height="15" backcolor="rgba(173, 168, 168, 0.45490196)" uuid="c8e99852-747d-4b07-a76b-bf275e176002">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[FIRMAS]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

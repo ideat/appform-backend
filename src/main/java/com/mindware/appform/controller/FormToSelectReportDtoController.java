@@ -25,4 +25,6 @@ public class FormToSelectReportDtoController {
     ResponseEntity<List<FormToSelectReportDto>> findFormSelectReportByIdclient(@PathVariable("idclient") Integer idClient) throws JsonProcessingException {
         return new ResponseEntity<>(formToSelectReportDtoService.getFormToSelectReportDto(idClient), HttpStatus.OK);
     }
+
+
 }

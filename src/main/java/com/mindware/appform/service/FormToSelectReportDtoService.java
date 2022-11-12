@@ -32,6 +32,7 @@ public class FormToSelectReportDtoService {
             formToSelectReportDto.setId(forms.getId());
             formToSelectReportDto.setIdClient(forms.getIdClient());
             formToSelectReportDto.setIdAccount(forms.getIdAccount());
+            formToSelectReportDto.setAccount(forms.getAccounts());
             formToSelectReportDto.setNameTypeForm(forms.getNameTypeForm());
             formToSelectReportDto.setCategoryTypeForm(forms.getCategoryTypeForm());
             formToSelectReportDtoList.add(formToSelectReportDto);
@@ -45,7 +46,8 @@ public class FormToSelectReportDtoService {
                   FormToSelectReportDto formToSelectReportDto = new FormToSelectReportDto();
                   formToSelectReportDto.setId(accountServiceOperation.getId());
                   formToSelectReportDto.setIdClient(forms.getIdClient());
-                  formToSelectReportDto.setIdAccount(accountServiceOperation.getAccount());
+                  formToSelectReportDto.setIdAccount(accountServiceOperation.getId());
+                  formToSelectReportDto.setAccount(accountServiceOperation.getAccount());
                   formToSelectReportDto.setNameTypeForm(forms.getNameTypeForm());
                   formToSelectReportDto.setCategoryTypeForm(forms.getCategoryTypeForm());
                   formToSelectReportDtoList.add(formToSelectReportDto);
@@ -60,7 +62,8 @@ public class FormToSelectReportDtoService {
                   FormToSelectReportDto formToSelectReportDto = new FormToSelectReportDto();
                   formToSelectReportDto.setId(accountServiceOperation.getId());
                   formToSelectReportDto.setIdClient(forms.getIdClient());
-                  formToSelectReportDto.setIdAccount(accountServiceOperation.getAccountSavingBank());
+                  formToSelectReportDto.setIdAccount(accountServiceOperation.getId());
+                  formToSelectReportDto.setAccount(accountServiceOperation.getAccountSavingBank());
                   formToSelectReportDto.setNameTypeForm(forms.getNameTypeForm());
                   formToSelectReportDto.setCategoryTypeForm(forms.getCategoryTypeForm());
                   formToSelectReportDtoList.add(formToSelectReportDto);

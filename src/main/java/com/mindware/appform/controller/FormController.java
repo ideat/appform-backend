@@ -1,14 +1,13 @@
 package com.mindware.appform.controller;
 
-import com.mindware.appform.dto.FormDebitCardDtoReport;
-import com.mindware.appform.dto.FormDigitalBankDtoReport;
-import com.mindware.appform.dto.FormVerifyIdCardDtoReport;
-import com.mindware.appform.dto.FormsDtoReport;
+import com.mindware.appform.dto.*;
 import com.mindware.appform.entity.Forms;
 import com.mindware.appform.entity.netbank.dto.DataFormDto;
+import com.mindware.appform.entity.netbank.dto.GbageDto;
 import com.mindware.appform.repository.FormsMapper;
 import com.mindware.appform.service.*;
 import com.mindware.appform.service.netabank.DataFormDtoService;
+import com.mindware.appform.service.netabank.GbageDtoService;
 import com.mindware.appform.util.PrinterReportJasper;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.io.IOUtils;
@@ -21,6 +20,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.*;
 
 @RestController
@@ -33,6 +35,7 @@ public class FormController {
     private String value4;
     private String isTutor;
     private String nameOffice;
+    private String listReports;
 
     @Autowired
     private FormsMapper mapper;
@@ -55,6 +58,8 @@ public class FormController {
     @Autowired
     FormsVerifyIdCardDtoReportService formsVerifyIdCardDtoReportService;
 
+    @Autowired
+    private GbageDtoService gbageDtoService;
     @Value("${path_image}")
     private String path;
 
@@ -294,6 +299,133 @@ public class FormController {
 
     }
 
+    @GetMapping(value = "/v1/form/getSelectedReport", name = "Reportes seleccionados")
+    public @ResponseBody byte[] getSelectedReport(@RequestHeader Map<String,String> headers) throws IOException, JRException {
+        headers.forEach((key,value) -> {
+            if(key.equals("code_client")) idClient = Integer.parseInt(value);
+            if(key.equals("login")) value2 = value;
+            if(key.equals("office_name")) value3 = value;
+            if(key.equals("list_reports")) listReports = value;
+
+        });
+        FormsDtoReport formsDtoReport = new FormsDtoReport();
+        FormDebitCardDtoReport formDebitCardDtoReport = new FormDebitCardDtoReport();
+        FormDigitalBankDtoReport formDigitalBankDtoReport = new FormDigitalBankDtoReport();
+
+
+        SelectedReportDto selectedReportDto = new SelectedReportDto();
+        selectedReportDto.setOfficeName(value3);
+        selectedReportDto.setLogin(value2);
+
+        String idAccount = "";
+        String typeForm = "";
+        String categoryTypeForm = "";
+
+        String pathSubReport1="";
+        String pathSubReport2="";
+        String pathSubReport3="";
+
+        String path1="";
+        String path2="";
+        String path3="";
+        String path4="";
+        String path5="";
+
+        String[] formsReport = listReports.split("&");
+        int count=0;
+        for(String formReport:formsReport){
+            String[] form = formReport.split("\\*");
+
+            String pathFormName = form[0].equals("FORMULARIO APERTURA")?"/selected/forms/openingSavingBankDpf.jasper":
+                    form[0].equals("BANCA DIGITAL")?"/selected/digitalBank/digitalBank.jasper":
+                    form[0].equals("SERVICIOS TD")?"/selected/debitCard/debitCardService.jasper":"";
+
+            String path = form[0].equals("FORMULARIO APERTURA")?"/selected/forms/":
+                            form[0].equals("BANCA DIGITAL")?"/selected/digitalBank/":
+                            form[0].equals("SERVICIOS TD")?"/selected/debitCard/":"";
+
+            if(form[0].equals("FORMULARIO APERTURA")){
+                idAccount = form[2];
+                typeForm = form[0];
+                categoryTypeForm = form[1];
+                if(form[1].equals("CAJA-AHORRO")){
+
+                    formsDtoReport = formsDtoReportService.generate(idClient, idAccount, typeForm, categoryTypeForm,getIsTutor(idClient,idAccount));
+                }else{
+                    formsDtoReport = formsDtoReportService.generate(idClient, idAccount, typeForm, categoryTypeForm,"NO");
+                }
+
+                pathSubReport1 = "template-report"+pathFormName;
+                path1 = "template-report" + path;
+
+                List<FormsDtoReport> formsDtoReportCollection = new ArrayList<>();
+                formsDtoReportCollection.add(formsDtoReport);
+                selectedReportDto.setFormsDtoReports(formsDtoReportCollection);
+
+            }else if(form[0].equals("SERVICIOS TD")){
+                idAccount = form[1];
+                typeForm = form[0];
+                formDebitCardDtoReport = formsDebitCardDtoReportService.generate(idClient, typeForm,"VARIOS",idAccount);
+                formDebitCardDtoReport.setOfficeName(value3);
+
+                pathSubReport2 = "template-report"+pathFormName;
+                path2 = "template-report" + path;
+
+                List<FormDebitCardDtoReport> formDebitCardDtoReportList = new ArrayList<>();
+                formDebitCardDtoReportList.add(formDebitCardDtoReport);
+                selectedReportDto.setFormDebitCardDtoReports(formDebitCardDtoReportList);
+
+            }else if(form[0].equals("BANCA DIGITAL")){
+                idAccount = form[1];
+                typeForm = form[0];
+                formDigitalBankDtoReport = formsDigitalBankDtoReportService.generate(idClient,typeForm,"VARIOS",idAccount);
+                formDigitalBankDtoReport.setOfficeName(value3);
+
+                pathSubReport3 = "template-report"+pathFormName;
+                path3 = "template-report" + path;
+
+
+                List<FormDigitalBankDtoReport> formDigitalBankDtoReportList = new ArrayList<>();
+                formDigitalBankDtoReportList.add(formDigitalBankDtoReport);
+                selectedReportDto.setFormDigitalBankDtoReports(formDigitalBankDtoReportList);
+            }
+
+            count++;
+        }
+
+        String check = path +"/check.png";
+        String unchecked = path + "/unchecked.png";
+        String pathLogo =  getClass().getResource("/template-report/img/logo.png").getPath();
+
+        InputStream stream = getClass().getResourceAsStream("/template-report/selected/mainReport.jrxml");
+
+
+        List<SelectedReportDto> selectedReportDtos = new ArrayList<>();
+        selectedReportDtos.add(selectedReportDto);
+
+        Map<String,Object> params = new WeakHashMap<>();
+        params.put("logo",pathLogo);
+        if(!pathSubReport1.equals("")) {
+            params.put("path_subreport1", pathSubReport1);
+            params.put("path1",path1);
+        }
+        if(!pathSubReport2.equals("")) {
+            params.put("path_subreport2", pathSubReport2);
+            params.put("path2",path2);
+        }
+        if(!pathSubReport3.equals("")) {
+            params.put("path_subreport3", pathSubReport3);
+            params.put("path3",path3);
+        }
+        params.put("check",check);
+        params.put("unchecked",unchecked);
+
+        byte[] b = PrinterReportJasper.imprimirComoPdf(stream,selectedReportDtos,params);
+        InputStream is = new ByteArrayInputStream(b);
+
+        return IOUtils.toByteArray(is);
+
+    }
 
     @GetMapping(value ="/v1/form/getFormVerifyIdCardDtoReport", name ="Reporte Verificacion SEGIP")
     public @ResponseBody byte[] getFormVerifyIdCardDtoReport(@RequestHeader Map<String,String> headers) throws IOException, JRException {
@@ -342,6 +474,28 @@ public class FormController {
         Forms result = forms.isPresent()?forms.get():new Forms();
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+    private int getYears(GbageDto gbageDto) {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate birthDate = gbageDto.getGbagefnac().toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+        Period period = Period.between(currentDate, birthDate);
+        return Math.abs(period.getYears());
+    }
+
+    private String getIsTutor(Integer idClient, String account){
+        List<GbageDto> gbageDtoList = gbageDtoService.findGbageCamcaByCage(idClient);
+        GbageDto gbageDto = gbageDtoList.stream()
+                .filter(g -> g.getAccountCode().equals(account))
+                .findFirst().get();
+        Integer year = getYears(gbageDto);
+        if(year<18){
+            return "NO";
+        }else  if(gbageDto.getSecundaryCage().equals(gbageDto.getGbagecage())) {
+            return "NO";
+        }
+        return "SI";
     }
 
 }

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="debitCard" pageWidth="612" pageHeight="792" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ef892762-5cd8-4567-ba84-27743c863ae3">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="Dataset1" uuid="864c9446-0cfa-4209-9600-be7876a58729">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="title_service" class="java.lang.String"/>
+	<parameter name="title_operation" class="java.lang.String"/>
+	<parameter name="path2" class="java.lang.String"/>
+	<parameter name="check" class="java.lang.String"/>
+	<parameter name="unchecked" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="createDate" class="java.lang.String"/>
+	<field name="officeName" class="java.lang.String"/>
+	<field name="userCreate" class="java.lang.String"/>
+	<field name="fullNameClient" class="java.lang.String"/>
+	<field name="homeAddress" class="java.lang.String"/>
+	<field name="idCard" class="java.lang.String"/>
+	<field name="cellphone" class="java.lang.String"/>
+	<field name="homePhone" class="java.lang.String"/>
+	<field name="listService" class="java.util.List"/>
+	<field name="reason" class="java.lang.String"/>
+	<field name="accounts" class="java.lang.String"/>
+	<field name="accountSavingBank" class="java.lang.String"/>
+	<field name="hourCreate" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="137" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="40" y="3" width="258" height="18" uuid="b5abfbe3-53bf-4277-a19a-1bdbeb790410"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TARJETAS DE DEBITO]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="38" y="46" width="516" height="20" uuid="3e0afe0d-b949-402e-9297-03a1c293cfef"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<subreport>
+					<reportElement x="16" y="2" width="340" height="18" uuid="a10ab6d5-dcdd-4d9a-8e83-5256e57c6ff8"/>
+					<subreportParameter name="title">
+						<subreportParameterExpression><![CDATA[$P{title_service}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="check">
+						<subreportParameterExpression><![CDATA[$P{check}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="unchecked">
+						<subreportParameterExpression><![CDATA[$P{unchecked}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="path5">
+						<subreportParameterExpression><![CDATA[$P{path2}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{listService})]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{path2}  + "services.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="38" y="68" width="520" height="42" uuid="5faefbc7-9eda-4c72-b31b-da1564d7cfc9"/>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="0" y="13" width="516" height="25" uuid="2e542a15-cac5-4d53-8091-99b12070c928">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.25"/>
+					</box>
+					<textElement>
+						<font size="6" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{reason}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="2" width="319" height="10" uuid="409248a0-de3d-431e-a587-378f59849d4d">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Por favor describa brevemente los motivos por los cuales desea habilitar los servicios elegidos]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement mode="Opaque" x="38" y="28" width="119" height="11" backcolor="rgba(143, 141, 141, 0.40392157)" uuid="68edc32b-f573-4a4e-b8b1-ac6a9c3d5e04">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO DE TARJETA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="157" y="27" width="231" height="12" uuid="52b9f0e6-4d34-490e-b4f5-975232f7cdb4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="9.5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{accounts}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement positionType="Float" x="39" y="112" width="526" height="20" uuid="902d5946-9ebf-4538-92e7-f25d553353cf"/>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement x="397" y="2" width="118" height="12" uuid="f64fc052-29c5-422f-ab13-993e30594ff9">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="8"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{accountSavingBank}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="-1" y="2" width="404" height="12" backcolor="rgba(168, 158, 158, 0.4509804)" uuid="cbb9e602-8cfd-43d3-8d2f-e5c2390ea86d">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Autorizo a que los cargos resultantes de la solicitud  de los servicios elegidos se debiten mi cuenta de Caja de Ahorro Nª]]></text>
+				</staticText>
+			</frame>
+			<line>
+				<reportElement x="157" y="38" width="222" height="1" uuid="beab0750-52ad-4821-af25-2eaa1317e423">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="157" y="28" width="222" height="1" uuid="2d4b0a66-ab9d-4f8b-9891-5f43737797e8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</summary>
+</jasperReport>

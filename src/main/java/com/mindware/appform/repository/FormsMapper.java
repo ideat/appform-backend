@@ -102,7 +102,7 @@ public interface FormsMapper {
             " name_client_vinculation = #{forms.nameClientVinculation}, " +
             " document_client_vinculation = #{forms.documentClientVinculation}," +
             " user_digital_bank = #{forms.userDigitalBank}, " +
-            " id_user = #{forms.idUser}, " +
+//            " id_user = #{forms.idUser}, " +
             " account_service_operation = #{forms.accountServiceOperation}, " +
             " source_founds = #{forms.sourceFounds}" +
             " where id = #{forms.id}" )
@@ -127,6 +127,16 @@ public interface FormsMapper {
             " and name_type_form = #{typeForm} " +
             " and category_type_form = #{categoryTypeForm}")
     Optional<Forms> findByIdAccountAndTypeFormAndCategoryTypeForm(@Param("idAccount") String idAccount,
+                                                                  @Param("typeForm") String typeForm,
+                                                                  @Param("categoryTypeForm") String categoryTypeForm);
+
+    @Select("select * from forms " +
+            " where id_account = #{idAccount} " +
+            " and name_type_form = #{typeForm} " +
+            " and category_type_form = #{categoryTypeForm} " +
+            " and id_client = #{idClient}")
+    Optional<Forms> findByIClientIdAccountAndTypeFormAndCategoryTypeForm(@Param("idClient") String idClient,
+                                                                  @Param("idAccount") String idAccount,
                                                                   @Param("typeForm") String typeForm,
                                                                   @Param("categoryTypeForm") String categoryTypeForm);
 

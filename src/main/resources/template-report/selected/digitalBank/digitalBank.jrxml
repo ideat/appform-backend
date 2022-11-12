@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="digitalBank" pageWidth="612" pageHeight="792" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ef892762-5cd8-4567-ba84-27743c863ae3">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="Dataset1" uuid="864c9446-0cfa-4209-9600-be7876a58729">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="title_service" class="java.lang.String"/>
+	<parameter name="title_operation" class="java.lang.String"/>
+	<parameter name="path3" class="java.lang.String"/>
+	<parameter name="check" class="java.lang.String"/>
+	<parameter name="unchecked" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="createDate" class="java.lang.String"/>
+	<field name="officeName" class="java.lang.String"/>
+	<field name="userCreate" class="java.lang.String"/>
+	<field name="fullNameClient" class="java.lang.String"/>
+	<field name="homeAddress" class="java.lang.String"/>
+	<field name="idCard" class="java.lang.String"/>
+	<field name="cellphone" class="java.lang.String"/>
+	<field name="homePhone" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="userDigitalBank" class="java.lang.String"/>
+	<field name="listService" class="java.util.List"/>
+	<field name="listOperation" class="java.util.List"/>
+	<field name="reason" class="java.lang.String"/>
+	<field name="accounts" class="java.lang.String"/>
+	<field name="maxDailyLimitBs" class="java.lang.Double"/>
+	<field name="maxExtendLimitBs" class="java.lang.Double"/>
+	<field name="maxDailyLimitSus" class="java.lang.Double"/>
+	<field name="maxExtendLimitSus" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="28" y="3" width="220" height="16" uuid="1b735c6d-943c-43b9-a5f8-432dffe8ab4b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BANCA DIGITAL]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+		<band height="190">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement mode="Opaque" x="29" y="1" width="508" height="12" backcolor="rgba(143, 141, 141, 0.40392157)" uuid="08aa4173-378f-4b36-a801-11208c9fe610">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[DATOS DEL CLIENTE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="14" width="470" height="12" uuid="f7539306-289f-4e04-b2fc-c997306ec2ea">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{userDigitalBank}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="14" width="39" height="12" uuid="e539f5dd-445b-44a8-8b8c-e8fc803a25c0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="29" y="28" width="507" height="36" uuid="19ab42d0-7890-43f5-9c98-d725b6d481fc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<subreport>
+					<reportElement x="296" y="3" width="190" height="30" uuid="fc14b45e-15c1-4e3b-9487-a627e0e0f3a6"/>
+					<subreportParameter name="title">
+						<subreportParameterExpression><![CDATA[$P{title_operation}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="checkOpe">
+						<subreportParameterExpression><![CDATA[$P{check}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="uncheckedOpe">
+						<subreportParameterExpression><![CDATA[$P{unchecked}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{listOperation})]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{path3}  + "operation.jasper"]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement x="1" y="3" width="190" height="30" uuid="5c060d78-9d45-490b-bea2-0245a7f7a041"/>
+					<subreportParameter name="title">
+						<subreportParameterExpression><![CDATA[$P{title_service}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="check">
+						<subreportParameterExpression><![CDATA[$P{check}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="unchecked">
+						<subreportParameterExpression><![CDATA[$P{unchecked}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{listService})]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{path3}  + "services.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="13" y="65" width="525" height="105" uuid="f1523b82-6c9b-4d4a-ab86-d01a95ad5c34">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<rectangle>
+					<reportElement x="17" y="29" width="507" height="34" uuid="e2d22073-4ab1-4df9-b212-2d4cf08e0ff3">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</rectangle>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="18" y="76" width="506" height="25" uuid="58dcf1a0-c5f8-4965-89f8-173e59a36d81">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.25"/>
+					</box>
+					<textElement>
+						<font size="6" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{reason}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="18" y="65" width="319" height="10" uuid="65f182b8-45fd-4ed3-b791-29eb368c45f2">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Por favor describa brevemente los motivos por los cuales desea habilitar los servicios elegidos]]></text>
+				</staticText>
+				<textField pattern="#,##0.00;#,##0.00-" isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="180" y="1" width="63" height="10" backcolor="rgba(176, 176, 176, 0.5294118)" uuid="897f8bd5-c880-4551-864b-e36ea3899a99"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{maxDailyLimitSus}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="18" y="1" width="140" height="10" backcolor="rgba(176, 176, 176, 0.5294118)" uuid="83ab3ae6-a1d3-43a5-bb13-d944c1096e71">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="6"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[LIMITE MAXIMO DIARIO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="158" y="1" width="22" height="10" backcolor="rgba(176, 176, 176, 0.5294118)" uuid="c74eca04-5fe9-46db-99e5-bd0bce0b1573"/>
+					<textElement textAlignment="Center">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[$us]]></text>
+				</staticText>
+				<textField pattern="#,##0.00#;#,##0.00-" isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="180" y="12" width="63" height="10" backcolor="rgba(176, 176, 176, 0.5294118)" uuid="80885109-7465-4880-a831-bdd39a7dd41a"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{maxExtendLimitSus}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="18" y="12" width="140" height="10" backcolor="rgba(176, 176, 176, 0.5294118)" uuid="f93e811a-c283-4f69-91b7-763d73809881">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="6"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[LIMITE MAXIMO CON AMPLIACION]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="158" y="12" width="22" height="10" backcolor="rgba(176, 176, 176, 0.5294118)" uuid="bb09430d-bcdd-4139-a202-af8e2f90bdb7"/>
+					<textElement textAlignment="Center">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[$us]]></text>
+				</staticText>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="18" y="42" width="506" height="19" uuid="e72ecbdb-9adb-45c4-bff7-a330a9f73d81">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="6"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{accounts}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="18" y="31" width="505" height="10" backcolor="rgba(168, 158, 158, 0.4509804)" uuid="45e72d05-f708-4abc-9fd2-3cdb06989d08">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="6" isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[CUENTAS ESPECIFICAS]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="29" y="171" width="510" height="16" uuid="02340bf7-426a-4644-b110-17455ce9241c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<staticText>
+					<reportElement x="3" y="1" width="506" height="12" uuid="47478e47-9da6-4ac1-b3dd-166d1f900787">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA["SOLO SE VALIDARA EL NUMERO DE CUENTA DEL BENEFICIARIO, POR LO QUE ES RESPONSABILIDAD DEL ORDENANTE VERIFICAR LA INFORMACION REGISTRADA"]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</summary>
+</jasperReport>
