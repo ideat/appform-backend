@@ -92,18 +92,18 @@ public class DataContractDtoService {
         String plaza[] = adusrOfi.getGbofides4().split("-");
         data.setPlaza(plaza[0].trim());
         data.setCurrentDate(Util.formatDate(new Date(),"dd 'de' MMMM 'de' yyyy"));
-//        Optional<Signatory> signatory = signatoryMapper.findByPlaza(Integer.valueOf(adusrOfi.getAdusrplaz()));
-//        if(signatory.isPresent()){
-//            data.setLegalRepresentative(signatory.get().getFullName());
-//            data.setIdCardLegalRepresentative(signatory.get().getIdCard());
-//            data.setPosition(signatory.get().getPosition());
-//            data.setDatePowerNotary(Util.formatDate(signatory.get().getDatePowerNotary(),"dd 'de' MMMM 'de' yyyy"));
-//            data.setNumberNotary(signatory.get().getNumberNotary().toString());
-//            data.setNotaryName(signatory.get().getNotaryName());
-//
-//        }else{
-//            throw new AppException("Representante legal no registrado", HttpStatus.BAD_REQUEST);
-//        }
+        Optional<Signatory> signatory = signatoryMapper.findByPlaza(Integer.valueOf(adusrOfi.getAdusrplaz()));
+        if(signatory.isPresent()){
+            data.setLegalRepresentative(signatory.get().getFullName());
+            data.setIdCardLegalRepresentative(signatory.get().getIdCard());
+            data.setPosition(signatory.get().getPosition());
+            data.setDatePowerNotary(Util.formatDate(signatory.get().getDatePowerNotary(),"dd 'de' MMMM 'de' yyyy"));
+            data.setNumberNotary(signatory.get().getNumberNotary().toString());
+            data.setNotaryName(signatory.get().getNotaryName());
+
+        }else{
+            throw new AppException("Representante legal no registrado", HttpStatus.BAD_REQUEST);
+        }
 
         return data;
     }
