@@ -39,13 +39,13 @@ public class NameTemplateContract {
         DataContractSavingBankDto dataContractSavingBankDto = new DataContractSavingBankDto();
 
         if(categoryTypeForm.equals("CAJA-AHORRO")) {
-            dataContractSavingBankDto = dataContractDtoService.getDataContractSavingBank(account, login, isYunger);
+            dataContractSavingBankDto = dataContractDtoService.getDataContractSavingBank(account, login, isYunger, plaza.toString());
             CamcaCatcaDto camcaCatcaDto = camcaCatcaDtoService.findByAccount(account);
 
             nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),
                     camcaCatcaDto.getProductName().trim(), isYunger);
         }else{
-            dataContractSavingBankDto = dataContractDtoService.getDatacontractDpf2(account,login);
+            dataContractSavingBankDto = dataContractDtoService.getDatacontractDpf2(account,login, plaza);
             nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),"",isYunger);
         }
 
@@ -74,12 +74,12 @@ public class NameTemplateContract {
             }else{
                 nameContract = nameContract + "-MEN";
             }
-            if(product.equals("CAJA DE AHORRO EFICAZ")) product = "EFICAZ";
+            if(product.equals("CAJA DE AHORRO EFICIENTE")) product = "EFICIENTE";
             if(product.equals("CAJA DE AHORRO FUTURO")) product = "FUTURO";
             if(product.equals("CAJA DE AHORRO DINAMICA")) product = "DINAMICA";
             if(product.equals("CAJA DE AHORRO PROACTIVA")) product = "PROACTIVA";
 
-            if(!product.equals("EFICAZ") && !product.equals("FUTURO") && !product.equals("DINAMICA")  && !product.equals("PROACTIVA")){
+            if(!product.equals("EFICIENTE") && !product.equals("FUTURO") && !product.equals("DINAMICA")  && !product.equals("PROACTIVA")){
                 product = "TRADICIONAL";
             }
 

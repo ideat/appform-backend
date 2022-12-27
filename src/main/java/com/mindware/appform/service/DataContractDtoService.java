@@ -2,16 +2,14 @@ package com.mindware.appform.service;
 
 import com.mindware.appform.dto.DataContractSavingBankDto;
 import com.mindware.appform.entity.Signatory;
+import com.mindware.appform.entity.netbank.Gbofi;
 import com.mindware.appform.entity.netbank.dto.AdusrOfi;
 import com.mindware.appform.entity.netbank.dto.CamcaCafirGbageDto;
 import com.mindware.appform.entity.netbank.dto.GbageDto;
 import com.mindware.appform.entity.netbank.dto.PfmdpGbageDto;
 import com.mindware.appform.exceptions.AppException;
 import com.mindware.appform.repository.SignatoryMapper;
-import com.mindware.appform.repository.netbank.AdusrOfiMapper;
-import com.mindware.appform.repository.netbank.CamcaCafirGbageDtoMapper;
-import com.mindware.appform.repository.netbank.GbageDtoMapper;
-import com.mindware.appform.repository.netbank.PfmdpGbageDtoMapper;
+import com.mindware.appform.repository.netbank.*;
 import com.mindware.appform.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,8 +39,11 @@ public class DataContractDtoService {
     @Autowired
     GbageDtoMapper gbageDtoMapper;
 
+    @Autowired
+    GbofiMapper gbofiMapper;
 
-    public DataContractSavingBankDto getDataContractSavingBank(String account, String login, String isYunger){
+
+    public DataContractSavingBankDto getDataContractSavingBank(String account, String login, String isYunger, String plaza){
         int i = 1;
         List<CamcaCafirGbageDto> list = new ArrayList<>();
         if(isYunger.equals("SI")) {
@@ -88,11 +89,14 @@ public class DataContractDtoService {
         data.setCurrencyAbre(list.get(0).getGbconabre());
         data.setAccount(list.get(0).getCamcancta());
 
-        AdusrOfi adusrOfi = adusrOfiMapper.findByLogin(login);
-        String plaza[] = adusrOfi.getGbofides4().split("-");
-        data.setPlaza(plaza[0].trim());
+//        AdusrOfi adusrOfi = adusrOfiMapper.findByLogin(login);
+//        String plaza[] = adusrOfi.getGbofides4().split("-");
+        Optional<Gbofi> gbofi = gbofiMapper.findByNofi(Integer.valueOf(plaza));
+        if(gbofi.isPresent()) {
+            data.setPlaza(gbofi.get().getGbofidesc());
+        }
         data.setCurrentDate(Util.formatDate(new Date(),"dd 'de' MMMM 'de' yyyy"));
-        Optional<Signatory> signatory = signatoryMapper.findByPlaza(Integer.valueOf(adusrOfi.getAdusrplaz()));
+        Optional<Signatory> signatory = signatoryMapper.findByPlaza(Integer.valueOf(plaza));
         if(signatory.isPresent()){
             data.setLegalRepresentative(signatory.get().getFullName());
             data.setIdCardLegalRepresentative(signatory.get().getIdCard());
@@ -100,15 +104,17 @@ public class DataContractDtoService {
             data.setDatePowerNotary(Util.formatDate(signatory.get().getDatePowerNotary(),"dd 'de' MMMM 'de' yyyy"));
             data.setNumberNotary(signatory.get().getNumberNotary().toString());
             data.setNotaryName(signatory.get().getNotaryName());
+            data.setPowerNotary(signatory.get().getPowerNotary());
+
 
         }else{
-            throw new AppException("Representante legal no registrado", HttpStatus.BAD_REQUEST);
+//            throw new AppException("Representante legal no registrado", HttpStatus.BAD_REQUEST);
         }
 
         return data;
     }
 
-    public DataContractSavingBankDto getDatacontractDpf2(String account, String login){
+    public DataContractSavingBankDto getDatacontractDpf2(String account, String login, Integer plaza){
         int i = 0;
         List<PfmdpGbageDto> pfmdpGbageDtoList = pfmdpGbageDtoMapper.getListDataContractDpf(Double.parseDouble(account));
         DataContractSavingBankDto data = new DataContractSavingBankDto();
@@ -179,9 +185,26 @@ public class DataContractDtoService {
         data.setCurrencyAbre(pfmdpGbageDtoList.get(0).getGbconabre());
         data.setAccount(pfmdpGbageDtoList.get(0).getPfmdpndep());
 
-        AdusrOfi adusrOfi = adusrOfiMapper.findByLogin(login);
-        String plaza[] = adusrOfi.getGbofides4().split("-");
-        data.setPlaza(plaza[0].trim());
+//        AdusrOfi adusrOfi = adusrOfiMapper.findByLogin(login);
+//        String plaza[] = adusrOfi.getGbofides4().split("-");
+        Optional<Gbofi> gbofi = gbofiMapper.findByNofi(Integer.valueOf(plaza));
+        if(gbofi.isPresent()) {
+            data.setPlaza(gbofi.get().getGbofidesc());
+        }
+        Optional<Signatory> signatory = signatoryMapper.findByPlaza(Integer.valueOf(plaza));
+        if(signatory.isPresent()){
+            data.setLegalRepresentative(signatory.get().getFullName());
+            data.setIdCardLegalRepresentative(signatory.get().getIdCard());
+            data.setPosition(signatory.get().getPosition());
+            data.setDatePowerNotary(Util.formatDate(signatory.get().getDatePowerNotary(),"dd 'de' MMMM 'de' yyyy"));
+            data.setNumberNotary(signatory.get().getNumberNotary().toString());
+            data.setNotaryName(signatory.get().getNotaryName());
+            data.setPowerNotary(signatory.get().getPowerNotary());
+
+        }else{
+//            throw new AppException("Representante legal no registrado", HttpStatus.BAD_REQUEST);
+        }
+
         data.setCurrentDate(Util.formatDate(new Date(),"dd 'de' MMMM 'de' yyyy"));
 
         return data;

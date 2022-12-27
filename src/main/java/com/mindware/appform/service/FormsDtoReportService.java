@@ -31,7 +31,7 @@ public class FormsDtoReportService {
         DataFormDto dataFormDto = new DataFormDto();
 
         if(categoryTypeForm.equals("CAJA-AHORRO")|| categoryTypeForm.equals("DPF")){
-            formsResult = formsService.findByIdAccountAndTypeFormAndCategoryTypeForm(idAccount,typeForm,categoryTypeForm);
+            formsResult = formsService.findByIClientIdAccountAndTypeFormAndCategoryTypeForm(codeClient.toString(), idAccount,typeForm,categoryTypeForm);
             dataFormDto = dataFormDtoService.findDataFormDtoFormSavingBoxOrDpfByCageAndAccount(codeClient, idAccount,categoryTypeForm, isTutor);
 
         }else{

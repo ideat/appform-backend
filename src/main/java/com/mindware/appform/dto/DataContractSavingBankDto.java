@@ -67,6 +67,8 @@ public class DataContractSavingBankDto {
 
     public String datePowerNotary;
 
+    public String powerNotary;
+
     public String numberNotary;
 
     public String notaryName;

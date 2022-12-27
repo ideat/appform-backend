@@ -44,13 +44,14 @@ public interface SignatoryMapper {
             " notary_name = #{signatory.notaryName}," +
             " plaza = #{signatory.plaza}, " +
             " trade_registration = #{signatory.tradeRegistration}, " +
-            " active = #{signatory.active} ")
+            " active = #{signatory.active} " +
+            " where id = #{signatory.id}")
     void update(@Param("signatory") Signatory signatory);
 
     @Select("select * from signatory order by plaza, full_name")
     List<Signatory> findAll();
 
-    @Select("select * from signatory where plaza = #{plaza} and active = 'SI'")
+     @Select("select * from signatory where plaza = #{plaza} and active = 'SI'")
     Optional<Signatory> findByPlaza(@Param("plaza") Integer plaza);
 
 

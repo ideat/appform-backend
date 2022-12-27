@@ -104,6 +104,22 @@ public class FormController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping(value ="/v1/form/findByIdClientIdAccountAndTypeFormAndCategoryTypeForm", name ="Formulario por ID Cliente")
+    ResponseEntity<Forms> findByIdClientIdAccountAndTypeFormAndCategoryTypeForm(@RequestHeader Map<String, String> headers){
+        headers.forEach((key,value) -> {
+            if(key.equals("id_client")) value1 = value;
+            if(key.equals("id_account")) value2 = value;
+            if(key.equals("name_type_form")) value3 = value;
+            if(key.equals("category_type_form")) value4 = value;
+
+        });
+
+        Optional<Forms> forms = mapper.findByIClientIdAccountAndTypeFormAndCategoryTypeForm(value1,value2,value3,value4);
+        Forms result = forms.isPresent()?forms.get():new Forms();
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     @GetMapping(value ="/v1/form/findByIdClientAndTypeFormAndCategoryTypeForm", name ="Formulario por ID Cliente")
     ResponseEntity<Forms> findByIdClientAndTypeFormAndCategoryTypeForm(@RequestHeader Map<String, String> headers){
         headers.forEach((key,value) -> {
@@ -405,6 +421,7 @@ public class FormController {
 
         Map<String,Object> params = new WeakHashMap<>();
         params.put("logo",pathLogo);
+        params.put("login",value2);
         if(!pathSubReport1.equals("")) {
             params.put("path_subreport1", pathSubReport1);
             params.put("path1",path1);

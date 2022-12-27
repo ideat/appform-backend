@@ -20,6 +20,7 @@
 	<parameter name="path1" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="path2" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="path3" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="login" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -32,7 +33,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="31" splitType="Stretch">
+		<band height="27" splitType="Stretch">
 			<image>
 				<reportElement x="18" y="0" width="122" height="24" uuid="79289c84-ad94-48de-b739-d6b79f72dc5b"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
@@ -47,6 +48,7 @@
 				<textElement textAlignment="Center">
 					<font size="6"/>
 				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="402" y="12" width="108" height="12" uuid="179514b6-21e8-43a7-8362-1974af535728">
@@ -70,7 +72,7 @@
 				<textElement textAlignment="Center">
 					<font size="6"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{login}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{login}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="364" y="0" width="38" height="12" backcolor="rgba(181, 177, 177, 0.6901961)" uuid="40727780-fcb1-4154-a697-1571fb35bdb8">
@@ -120,6 +122,18 @@
 				</textElement>
 				<text><![CDATA[Hora]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="538" y="12" width="30" height="12" uuid="6399a94e-0b73-494d-99fb-429978c5dc95">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("HH:mm").format(new Date())]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<detail>
@@ -160,6 +174,9 @@
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{formsDtoReports})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{path_subreport1}]]></subreportExpression>
 			</subreport>
+			<break>
+				<reportElement x="0" y="27" width="100" height="1" uuid="7d642bd2-b0b9-4eba-84f3-078e47b0eb5b"/>
+			</break>
 		</band>
 	</detail>
 	<pageFooter>
