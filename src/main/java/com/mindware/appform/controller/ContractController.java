@@ -63,7 +63,7 @@ public class ContractController {
 
 //        wordReplaceTextContract.generateContract(codeClient, account, typeForm, categoryTypeForm, isTutor);
 
-        String pathGenerate= wordReplaceTextContract.generateContractSavingBank(login,account,typeAccount, plaza, typeForm, categoryTypeForm,isTutor, isYunger);
+        String pathGenerate= wordReplaceTextContract.generateContractSavingBank(codeClient,login,account,typeAccount, plaza, typeForm, categoryTypeForm,isTutor, isYunger);
 
 //        Path path = Paths.get("c://auto-form//contract//3051756195-CA-MEGAFUSION.pdf");
         Path path = Paths.get(pathGenerate);

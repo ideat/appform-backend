@@ -85,6 +85,8 @@ public class FormsDtoReportService {
             if (formsResult.get().getLinkingAccount().equals("PADRES O TUTORES LEGALES")) {
                 result.setLabel1("Nombre del Menor");
                 result.setLabel2("Número de Documento");
+                result.setNameClientVinculation(formsResult.get().getNameClientVinculation());
+                result.setDocumentClientVinculation(formsResult.get().getDocumentClientVinculation());
             } else if (formsResult.get().getLinkingAccount().equals("APODERADOS")) {
                 result.setLabel1("Nombre o Razon Social");
                 result.setLabel2("Número de Documento/Nit");

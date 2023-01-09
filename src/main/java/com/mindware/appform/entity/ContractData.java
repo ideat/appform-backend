@@ -39,5 +39,7 @@ public class ContractData {
 
     public String rate;
 
+    private String nameClientVinculation;
 
+    private String documentClientVinculation;
 }

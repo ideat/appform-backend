@@ -2,12 +2,14 @@ package com.mindware.appform.util;
 
 import com.mindware.appform.dto.DataContractSavingBankDto;
 import com.mindware.appform.entity.ContractData;
+import com.mindware.appform.entity.Forms;
 import com.mindware.appform.entity.TemplateContract;
 import com.mindware.appform.entity.VariableContract;
 import com.mindware.appform.entity.netbank.dto.CamcaCatcaDto;
 import com.mindware.appform.entity.netbank.dto.PfmdpGbageDto;
 import com.mindware.appform.exceptions.AppException;
 import com.mindware.appform.service.DataContractDtoService;
+import com.mindware.appform.service.FormsService;
 import com.mindware.appform.service.TemplateContractService;
 import com.mindware.appform.service.VariableContractService;
 import com.mindware.appform.service.netabank.CamcaCatcaDtoService;
@@ -19,6 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -64,7 +67,10 @@ public class WordReplaceTextContract {
     @Autowired
     private TemplateContractService templateContractService;
 
-    public String generateContractSavingBank(String login, String account, String typeAccount, Integer plaza,
+    @Autowired
+    private FormsService formsService;
+
+    public String generateContractSavingBank(Integer codeClient, String login, String account, String typeAccount, Integer plaza,
                                              String typeForm, String categoryTypeForm, String isTutor, String isYunger) throws Exception {
 
         String nameContract="";
@@ -81,6 +87,8 @@ public class WordReplaceTextContract {
         }
 
         Optional<TemplateContract> templateContract = templateContractService.findByFileName(nameContract);
+        Optional<Forms> forms = formsService.findByIClientIdAccountAndTypeFormAndCategoryTypeForm(codeClient.toString(),account,"FORMULARIO APERTURA",categoryTypeForm);
+
         if(templateContract.isPresent()){
             if(templateContract.get().getActive().equals("NO")) {
                 throw new AppException(String.format("Plantilla %s no activa, consulte con el administrador", nameContract), HttpStatus.BAD_REQUEST);
@@ -88,6 +96,11 @@ public class WordReplaceTextContract {
         }else{
 
             throw new AppException(String.format("Plantilla %s no registrada, consulte con el administrador", nameContract), HttpStatus.BAD_REQUEST);
+        }
+
+        if(forms.isPresent()){
+           dataContractSavingBankDto.setNameClientVinculation(forms.get().getNameClientVinculation());
+           dataContractSavingBankDto.setDocumentClientVinculation(forms.get().getDocumentClientVinculation());
         }
 
         try {

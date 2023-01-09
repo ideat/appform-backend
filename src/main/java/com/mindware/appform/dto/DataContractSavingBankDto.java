@@ -81,4 +81,8 @@ public class DataContractSavingBankDto {
 
     public String currentDate;
 
+    public String nameClientVinculation;
+
+    public String documentClientVinculation;
+
 }

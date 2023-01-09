@@ -33,6 +33,8 @@ public class GenerateContractData {
         contractData.setCurrencyName("");
         contractData.setRate("");
         contractData.setAddressClientHome(formsDtoReport.getHomeAddress().trim());
+        contractData.setNameClientVinculation(formsDtoReport.getNameClientVinculation());
+        contractData.setDocumentClientVinculation(formsDtoReport.getDocumentClientVinculation());
 
         return contractData;
     }
