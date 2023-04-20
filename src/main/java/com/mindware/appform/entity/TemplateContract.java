@@ -14,4 +14,6 @@ public class TemplateContract {
     private String detail;
 
     private String active;
+
+    private String typeSavingBox;
 }

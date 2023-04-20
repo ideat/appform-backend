@@ -79,5 +79,5 @@ public class DataFormDto {
 
     private String account;
 
-
+    private Integer typeSavingBox;
 }

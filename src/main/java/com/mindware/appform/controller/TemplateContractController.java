@@ -1,6 +1,7 @@
 package com.mindware.appform.controller;
 
 import com.mindware.appform.entity.TemplateContract;
+import com.mindware.appform.exceptions.AppException;
 import com.mindware.appform.service.TemplateContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +31,19 @@ public class TemplateContractController {
 
     @PostMapping(value = "/v1/template-contract/create", name = "Crear Template")
     ResponseEntity<TemplateContract> create(@RequestBody TemplateContract templateContract){
+        String[] typeSavingBoxList = templateContract.getTypeSavingBox().split(",");
+
+        String code="";
+        for(String typeSB: typeSavingBoxList){
+           code = "%"+typeSB.split("-")[0]+"-%";
+           Optional<TemplateContract> temp = service.findByTypeSavingBox(code);
+            if(temp.isPresent()){
+                 throw new AppException("Tipo caja ahorro ya esta asignada a otra plantilla", HttpStatus.CONFLICT);
+
+            }
+
+        }
+
         Path path = Paths.get(pathTemplate +templateContract.getFileName());
         templateContract.setPathContract(path.toString());
         if(templateContract.getId()==null){

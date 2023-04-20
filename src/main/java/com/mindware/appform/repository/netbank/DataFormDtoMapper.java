@@ -21,7 +21,7 @@ public interface DataFormDtoMapper {
             " gbdaccelu as cellphone, gbagetlfd as home_phone, " +
             " gbageciiu as activity1, '' as activity2, cacondesc as reason_opening_account, gbrelcage as code_spouse," +
             " camcafapt as opening_date, gbciudesc as city, gbdacmail as email, gbagenomb as full_name_client, " +
-            " cafirncta as account " +
+            " cafirncta as account, camcatpca as type_saving_box " +
             " from gbdac " +
             " inner join gbage on gbagecage = gbdaccage " +
             " inner join cafir on cafircage = gbagecage " +
@@ -60,7 +60,7 @@ public interface DataFormDtoMapper {
             " gbdaccelu as cellphone, gbagetlfd as home_phone, " +
             " gbageciiu as activity1, '' as activity2, pfcondesc as reason_opening_account, gbrelcage as code_spouse," +
             " pfmdpfreg as opening_date, gbciudesc as city, gbdacmail as email, gbagenomb as full_name_client, " +
-            " pfmdpndep as account " +
+            " pfmdpndep as account, 0 as type_saving_box " +
             " from gbdac " +
             " inner join gbage on gbagecage = gbdaccage " +
             " inner join pfmdp on gbdaccage = pfmdpcage " +
@@ -100,7 +100,7 @@ public interface DataFormDtoMapper {
             " gbdaccelu as cellphone, gbagetlfd as home_phone, " +
             " gbageciiu as activity1, '' as activity2, pfcondesc as reason_opening_account, gbrelcage as code_spouse," +
             " pfmdpfreg as opening_date, gbciudesc as city, gbdacmail as email, gbagenomb as full_name_client, " +
-            " pfmdpndep as account " +
+            " pfmdpndep as account, 0 as type_saving_box " +
             " from gbdac " +
             " inner join gbage on gbagecage = gbdaccage " +
             " inner join pftit on pftitcage = gbdaccage " +
@@ -142,7 +142,7 @@ public interface DataFormDtoMapper {
             " gbdaccelu as cellphone, gbagetlfd as home_phone, " +
             " gbageciiu as activity1, '' as activity2, cacondesc as reason_opening_account, gbrelcage as code_spouse," +
             " camcafapt as opening_date, gbciudesc as city, gbdacmail as email, gbagenomb as full_name_client, " +
-            " camcancta as account " +
+            " camcancta as account, camcatpca as type_saving_box " +
             " from gbdac " +
             " inner join gbage on gbagecage = gbdaccage " +
             " inner join camca on gbdaccage = camcacage  " +
@@ -179,7 +179,7 @@ public interface DataFormDtoMapper {
             " gbdaccelu as cellphone, gbagetlfd as home_phone, " +
             " gbageciiu as activity1, '' as activity2, cacondesc as reason_opening_account, gbrelcage as code_spouse," +
             " camcafapt as opening_date, gbciudesc as city, gbdacmail as email, gbagenomb as full_name_client, " +
-            " cafirncta as account " +
+            " cafirncta as account, camcatpca as type_saving_box " +
             " from gbdac " +
             " inner join gbage on gbagecage = gbdaccage " +
             " inner join cafir on cafircage = gbagecage " +

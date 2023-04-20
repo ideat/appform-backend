@@ -53,4 +53,8 @@ public class TemplateContractService {
     public Optional<TemplateContract> findByFileName(String fileName){
         return mapper.findByFileName(fileName);
     }
+
+    public Optional<TemplateContract> findByTypeSavingBox(String typeSavingBox){
+        return mapper.findByTypeSavingBox(typeSavingBox);
+    }
 }

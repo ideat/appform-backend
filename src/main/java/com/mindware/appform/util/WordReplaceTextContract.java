@@ -5,6 +5,7 @@ import com.mindware.appform.entity.ContractData;
 import com.mindware.appform.entity.Forms;
 import com.mindware.appform.entity.TemplateContract;
 import com.mindware.appform.entity.VariableContract;
+import com.mindware.appform.entity.netbank.Catca;
 import com.mindware.appform.entity.netbank.dto.CamcaCatcaDto;
 import com.mindware.appform.entity.netbank.dto.PfmdpGbageDto;
 import com.mindware.appform.exceptions.AppException;
@@ -13,6 +14,7 @@ import com.mindware.appform.service.FormsService;
 import com.mindware.appform.service.TemplateContractService;
 import com.mindware.appform.service.VariableContractService;
 import com.mindware.appform.service.netabank.CamcaCatcaDtoService;
+import com.mindware.appform.service.netabank.CatcaService;
 import com.xandryex.WordReplacer;
 import com.xandryex.utils.TextReplacer;
 import lombok.SneakyThrows;
@@ -70,8 +72,11 @@ public class WordReplaceTextContract {
     @Autowired
     private FormsService formsService;
 
+    @Autowired
+    private CatcaService catcaService;
+
     public String generateContractSavingBank(Integer codeClient, String login, String account, String typeAccount, Integer plaza,
-                                             String typeForm, String categoryTypeForm, String isTutor, String isYunger) throws Exception {
+                                             String typeForm, String categoryTypeForm, String isTutor, String isYunger, Integer typeSavingBox) throws Exception {
 
         String nameContract="";
         DataContractSavingBankDto dataContractSavingBankDto = new DataContractSavingBankDto();
@@ -80,10 +85,11 @@ public class WordReplaceTextContract {
             CamcaCatcaDto camcaCatcaDto = camcaCatcaDtoService.findByAccount(account);
 
             nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),
-                    camcaCatcaDto.getProductName().trim(),isYunger);
+                    camcaCatcaDto.getProductName().trim(),isYunger,typeSavingBox);
         }else{
             dataContractSavingBankDto = dataContractDtoService.getDatacontractDpf2(account,login,plaza);
-            nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),"",isYunger);
+            nameContract = createNameContract(categoryTypeForm, typeAccount, dataContractSavingBankDto.getTotalParticipants(),
+                    "",isYunger, typeSavingBox);
         }
 
         Optional<TemplateContract> templateContract = templateContractService.findByFileName(nameContract);
@@ -132,28 +138,49 @@ public class WordReplaceTextContract {
         return  pathPdf + namePdf;
     }
 
-    private String createNameContract(String categoryTypeForm, String typeAccount, Integer totalParticipants, String product, String isYunger){
+    private String createNameContract(String categoryTypeForm, String typeAccount,
+                                      Integer totalParticipants, String product,
+                                      String isYunger, Integer typeSavingBox){
         String nameContract = "";
         if(categoryTypeForm.equals("CAJA-AHORRO")){
-            nameContract="CAH";
+//            nameContract="CAH-" + typeSavingBox.toString();
+            //TODO: implement select product accordin code product sending for client
+
             if(isYunger.equals("NO")) {
-                if (typeAccount.equals("INDIVIDUAL")) nameContract = nameContract + "-IND";
-                if (typeAccount.equals("CONJUNTA")) nameContract = nameContract + "-CON";
-                if (typeAccount.equals("ALTERNA")) nameContract = nameContract + "-ALT";
+//                if (typeAccount.equals("INDIVIDUAL")) nameContract = nameContract + "-IND";
+//                if (typeAccount.equals("CONJUNTA")) nameContract = nameContract + "-CON";
+//                if (typeAccount.equals("ALTERNA")) nameContract = nameContract + "-ALT";
+
+                nameContract = nameContract + "-" + typeAccount;
+
             }else{
-                nameContract = nameContract + "-MEN";
+                nameContract = nameContract + "-MENORES";
             }
-            if(product.equals("CAJA DE AHORRO EFICIENTE") || product.equals("EFICIENTE EMPLEADOS")) product = "EFICIENTE";
-            if(product.equals("CAJA DE AHORRO FUTURO") || product.equals("FUTURO EMPLEADOS")) product = "FUTURO";
-            if(product.equals("CAJA DE AHORRO DINAMICA") || product.equals("DINAMICA EMPLEADOS")) product = "DINAMICA";
-            if(product.equals("CAJA DE AHORRO PROACTIVA") || product.equals("PROACTIVA EMPLEADOS")) product = "PROACTIVA";
+//            if(product.equals("CAJA DE AHORRO EFICIENTE") || product.equals("EFICIENTE EMPLEADOS")) product = "EFICIENTE";
+//            if(product.equals("CAJA DE AHORRO FUTURO") || product.equals("FUTURO EMPLEADOS")) product = "FUTURO";
+//            if(product.equals("CAJA DE AHORRO DINAMICA") || product.equals("DINAMICA EMPLEADOS")) product = "DINAMICA";
+//            if(product.equals("CAJA DE AHORRO PROACTIVA") || product.equals("PROACTIVA EMPLEADOS")) product = "PROACTIVA";
+//
+//            if(!product.equals("EFICIENTE") && !product.equals("FUTURO") && !product.equals("DINAMICA")  && !product.equals("PROACTIVA")){
+//                product = "TRADICIONAL";
+//            }
 
-            if(!product.equals("EFICIENTE") && !product.equals("FUTURO") && !product.equals("DINAMICA")  && !product.equals("PROACTIVA")){
-                product = "TRADICIONAL";
+            List<TemplateContract> templateContractList = templateContractService.findAll();
+            boolean finded = false;
+            for(TemplateContract templateContract:templateContractList){
+                List<String> list = Arrays.asList(templateContract.getTypeSavingBox().split(","));
+                for(String s:list){
+                    Integer code = Integer.valueOf(s.split("-")[0]);
+                    if(code.equals(typeSavingBox)) {
+                        nameContract = templateContract.getFileName();
+                        finded = true;
+                    }
+                }
+                if(finded) break;
             }
 
-            nameContract = nameContract+"-"+totalParticipants.toString();
-            nameContract = nameContract +"-"+product  +".docx";
+//            nameContract = nameContract+"-"+totalParticipants.toString()+".docx";
+
         }else{
             nameContract = "DPF" + "-"+totalParticipants.toString() +".docx";
         }

@@ -47,6 +47,8 @@ public class ContractController {
     private Integer plaza;
     private String isYunger;
 
+    private Integer typeSavingBox;
+
     @GetMapping(value="/v1/contract/getFileContract", name = "Obtiene el contrato generado")
     public @ResponseBody byte[] getFileContract(@RequestHeader Map<String,String> headers) throws Exception {
         headers.forEach((key,value)->{
@@ -59,11 +61,13 @@ public class ContractController {
             if(key.equals("type-account")) typeAccount = value;
             if(key.equals("plaza")) plaza = Integer.valueOf(value);
             if(key.equals("is-yunger")) isYunger = value;
+            if(key.equals("type-saving-box")) typeSavingBox = Integer.valueOf(value);
         });
 
 //        wordReplaceTextContract.generateContract(codeClient, account, typeForm, categoryTypeForm, isTutor);
 
-        String pathGenerate= wordReplaceTextContract.generateContractSavingBank(codeClient,login,account,typeAccount, plaza, typeForm, categoryTypeForm,isTutor, isYunger);
+        String pathGenerate= wordReplaceTextContract.generateContractSavingBank(codeClient,login,account,typeAccount,
+                plaza, typeForm, categoryTypeForm,isTutor, isYunger,typeSavingBox);
 
 //        Path path = Paths.get("c://auto-form//contract//3051756195-CA-MEGAFUSION.pdf");
         Path path = Paths.get(pathGenerate);

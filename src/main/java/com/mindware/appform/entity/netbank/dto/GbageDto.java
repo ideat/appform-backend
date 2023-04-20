@@ -34,4 +34,6 @@ public class GbageDto {
     private String addressHome1;
 
     private String addressHome2;
+
+    private Integer typeSavingBox;
 }

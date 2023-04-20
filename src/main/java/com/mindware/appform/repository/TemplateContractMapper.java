@@ -14,20 +14,23 @@ public interface TemplateContractMapper {
             " file_name, " +
             " path_contract, " +
             " detail, " +
-            " active ) " +
+            " active, " +
+            " type_saving_box ) " +
             " values ( " +
             " #{templateContract.id}, " +
             " #{templateContract.fileName}, " +
             " #{templateContract.pathContract}, " +
             " #{templateContract.detail}, " +
-            " #{templateContract.active} )")
+            " #{templateContract.active}, " +
+            " #{templateContract.typeSavingBox} )")
     void add(@Param("templateContract") TemplateContract templateContract);
 
     @Update(" update template_contract set " +
             " file_name = #{templateContract.fileName}, " +
             " path_contract = #{templateContract.pathContract}, " +
             " detail = #{templateContract.detail}, " +
-            " active = #{templateContract.active} " +
+            " active = #{templateContract.active}, " +
+            " type_saving_box = #{templateContract.typeSavingBox} " +
             " where id = #{templateContract.id }")
     void update(@Param("templateContract") TemplateContract templateContract);
 
@@ -43,4 +46,10 @@ public interface TemplateContractMapper {
             " from template_contract " +
             " where file_name = #{fileName} ")
     Optional<TemplateContract> findByFileName(@Param("fileName") String fileName);
+
+    @Select(" select * " +
+            " from template_contract " +
+            " where type_saving_box like #{typeSavingBox} ")
+    Optional<TemplateContract> findByTypeSavingBox(@Param("typeSavingBox") String typeSavingBox);
+
 }

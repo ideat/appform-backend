@@ -12,12 +12,13 @@ public interface GbageDtoMapper {
 
     @Select(" select camcacage as gbagecage, c.gbagenomb, c.gbagendid, g.gbagefnac, c.gbagefreg, camcafapt as openingDate, " +
             " 'CAJA-AHORRO' as accountName,cafirncta as accountCode,camcacmon as currency, cafircage as secundaryCage, " +
-            " cacondesc as typeAccount" +
+            " cacondesc as typeAccount, camcatpca as typeSavingBox" +
             " from gbage c " +
             " inner join cafir on c.gbagecage = cafircage " +
             " inner join camca on camcancta = cafirncta " +
             " inner join gbage g on g.gbagecage = camcacage " +
-            " inner join cacon on caconpref = 3 and caconcorr = camcamane" +
+            " inner join cacon on caconpref = 3 and caconcorr = camcamane " +
+            " inner join catca on catcatpca = camcatpca" +
             " where c.gbagemrcb = 0 " +
             " and camcastat = 1 " +
             " and cafirstat = 0 " +
@@ -27,7 +28,7 @@ public interface GbageDtoMapper {
 
     @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
             " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency, 0 as secundaryCage, " +
-            " '' as typeAccount " +
+            " '' as typeAccount, 0 as typeSavingBox " +
             " from gbage " +
             " inner join pfmdp on gbagecage = pfmdpcage " +
             " where gbagemrcb = 0 " +
@@ -38,7 +39,7 @@ public interface GbageDtoMapper {
 
     @Select(" select distinct pftitcage as gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
             " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency, 0 as secundaryCage, " +
-            " '' as typeAccount " +
+            " '' as typeAccount, 0 as typeSavingBox " +
             " from gbage " +
             " inner join pftit on gbagecage = pftitcage " +
             " inner join pfmdp on pfmdpndep = pftitndep" +
@@ -57,12 +58,13 @@ public interface GbageDtoMapper {
 
     @Select(" select camcacage as gbagecage, c.gbagenomb, c.gbagendid, g.gbagefnac, c.gbagefreg, camcafapt as openingDate, " +
             " 'CAJA-AHORRO' as accountName,cafirncta as accountCode,camcacmon as currency, cafircage as secundaryCage ," +
-            " cacondesc as typeAccount" +
+            " cacondesc as typeAccount, camcatpca as typeSavingBox" +
             " from gbage c " +
             " inner join cafir on c.gbagecage = cafircage " +
             " inner join camca on camcancta = cafirncta " +
             " inner join gbage g on g.gbagecage = camcacage " +
             " inner join cacon on caconpref = 3 and caconcorr = camcamane" +
+            " inner join catca on catcatpca = camcatpca" +
             " where c.gbagemrcb = 0 " +
             " and camcastat = 1 " +
             " and cafirstat = 0 " +
@@ -71,7 +73,7 @@ public interface GbageDtoMapper {
 
     @Select(" select distinct gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
             " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency, 0 as secundaryCage," +
-            " '' as typeAccount " +
+            " '' as typeAccount,  0 as typeSavingBox " +
             " from gbage " +
             " inner join pftit on gbagecage = pftitcage " +
             " inner join pfmdp on pfmdpndep = pftitndep" +
@@ -82,7 +84,7 @@ public interface GbageDtoMapper {
 
     @Select(" select gbagecage, gbagenomb, gbagendid, gbagefnac, gbagefreg, pfmdpfreg as openingDate, " +
             " 'DPF' as accountName, pfmdpndep as accountCode,pfmdpcmon as currency, 0 as secundaryCage," +
-            " '' as typeAccount " +
+            " '' as typeAccount,  '0' as typeSavingBox " +
             " from gbage " +
             " inner join pfmdp on gbagecage = pfmdpcage " +
             " where gbagemrcb = 0 " +
