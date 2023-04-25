@@ -50,6 +50,10 @@ public class TemplateContractService {
         return mapper.findAll();
     }
 
+    public List<TemplateContract> findByCategory(String category){
+        return mapper.findByCategory(category);
+    }
+
     public Optional<TemplateContract> findByFileName(String fileName){
         return mapper.findByFileName(fileName);
     }

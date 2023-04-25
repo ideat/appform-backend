@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class WordReplaceTextContract {
@@ -146,16 +147,15 @@ public class WordReplaceTextContract {
 //            nameContract="CAH-" + typeSavingBox.toString();
             //TODO: implement select product accordin code product sending for client
 
-            if(isYunger.equals("NO")) {
+            nameContract = nameContract + "-" + typeAccount;
+//            if(isYunger.equals("NO")) {
 //                if (typeAccount.equals("INDIVIDUAL")) nameContract = nameContract + "-IND";
 //                if (typeAccount.equals("CONJUNTA")) nameContract = nameContract + "-CON";
 //                if (typeAccount.equals("ALTERNA")) nameContract = nameContract + "-ALT";
 
-                nameContract = nameContract + "-" + typeAccount;
-
-            }else{
-                nameContract = nameContract + "-MENORES";
-            }
+//            }else{
+//                nameContract = nameContract + "-MEN";
+//            }
 //            if(product.equals("CAJA DE AHORRO EFICIENTE") || product.equals("EFICIENTE EMPLEADOS")) product = "EFICIENTE";
 //            if(product.equals("CAJA DE AHORRO FUTURO") || product.equals("FUTURO EMPLEADOS")) product = "FUTURO";
 //            if(product.equals("CAJA DE AHORRO DINAMICA") || product.equals("DINAMICA EMPLEADOS")) product = "DINAMICA";
@@ -165,13 +165,19 @@ public class WordReplaceTextContract {
 //                product = "TRADICIONAL";
 //            }
 
-            List<TemplateContract> templateContractList = templateContractService.findAll();
+            List<TemplateContract> templateContractList = templateContractService.findByCategory("CAJA-AHORRO");
+//            templateContractList = templateContractList.stream()
+//                    .filter(e -> e.getTypeSavingBox().equals(typeSavingBox))
+//                    .collect(Collectors.toList());
             boolean finded = false;
             for(TemplateContract templateContract:templateContractList){
                 List<String> list = Arrays.asList(templateContract.getTypeSavingBox().split(","));
                 for(String s:list){
                     Integer code = Integer.valueOf(s.split("-")[0]);
-                    if(code.equals(typeSavingBox)) {
+                    if(code.equals(typeSavingBox)
+                            && totalParticipants.equals(templateContract.getTotalParticipants())
+                            && isYunger.equals(templateContract.getIsYunger().trim())
+                            && typeAccount.equals(templateContract.getTypeAccount().trim())) {
                         nameContract = templateContract.getFileName();
                         finded = true;
                     }

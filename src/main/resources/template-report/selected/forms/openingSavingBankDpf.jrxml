@@ -931,7 +931,7 @@
 		<band height="92" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement mode="Opaque" x="14" y="0" width="550" height="19" backcolor="#D6D6D6" uuid="59b97ebc-40c5-4161-82da-39ad7624a5c5">
+				<reportElement mode="Opaque" x="14" y="12" width="550" height="19" backcolor="#D6D6D6" uuid="59b97ebc-40c5-4161-82da-39ad7624a5c5">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -943,7 +943,7 @@
 				<text><![CDATA[* Beneficiario Final,  se refiere a la(s) persona(s) natural(es) que finalmente poseen o controlan a un cliente y/o la persona natural en cuyo nombre se realiza una transacción. Incluye también a las personas que ejercen el control efectivo final sobre una persona jurídica u otra estructura jurídica.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="14" y="20" width="550" height="34" backcolor="#D6D6D6" uuid="9cab6217-844c-47c8-ace3-3f754ee259b2">
+				<reportElement mode="Opaque" x="14" y="32" width="550" height="34" backcolor="#D6D6D6" uuid="9cab6217-844c-47c8-ace3-3f754ee259b2">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -959,7 +959,7 @@
 				<text><![CDATA[La información que se desprende de este documento constituye una Declaración Jurada de quien firma, que tiene carácter de confesión, verdad y certeza jurídica, como establece el artículo 1322 del Código Civil y el Parágrafo IV del Articulo 157del Codigo Procesal Civil. En este contexto, toda la información contenida en este documento, proporcionada por quien a La Promotora EFV, sobre identidad, domicilio, ocupación, actividad, nivel y origen de ingresos, u otros, es auténtica y fidedigna, por lo que acepta la aplicación de penalidades establecidas en el artículo 169 del Código Penal como falso testimonio en el caso de inexactitud o falsedad de dicha información.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="14" y="54" width="550" height="19" backcolor="#D6D6D6" uuid="444c1a4c-8898-42a6-a60e-7b4d6ce5d99b"/>
+				<reportElement mode="Opaque" x="14" y="66" width="550" height="19" backcolor="#D6D6D6" uuid="444c1a4c-8898-42a6-a60e-7b4d6ce5d99b"/>
 				<box>
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -971,6 +971,18 @@
 					<font size="6"/>
 				</textElement>
 				<text><![CDATA[Autorizo(amos) a la Promotora EFV., solicitar el informe confidencial a obtenerse del Servicio General de Identificacion Personal (SEGIP), por intermedio de INFOCRED y/o adquirir otra entidad que contrate LA PROMOTORA EFV. Pudiendo ser directamente del SEGIP si fuera el caso, por el periodo de vigencia de la(s) cuentas de Ahorro y/o depostio (s) a Plazo Fijo.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="14" y="2" width="550" height="10" backcolor="#D6D6D6" uuid="9d428d41-2625-41c2-a627-eb415cb6b224">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Se recibió el reglamento de Caja de Ahorro / Depósitos a Plazo Fijo.]]></text>
 			</staticText>
 		</band>
 	</summary>

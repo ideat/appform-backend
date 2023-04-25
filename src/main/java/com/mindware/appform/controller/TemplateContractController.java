@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -29,20 +30,22 @@ public class TemplateContractController {
     @Autowired
     private TemplateContractService service;
 
+    private String category;
+
     @PostMapping(value = "/v1/template-contract/create", name = "Crear Template")
     ResponseEntity<TemplateContract> create(@RequestBody TemplateContract templateContract){
-        String[] typeSavingBoxList = templateContract.getTypeSavingBox().split(",");
+//        String[] typeSavingBoxList = templateContract.getTypeSavingBox().split(",");
 
-        String code="";
-        for(String typeSB: typeSavingBoxList){
-           code = "%"+typeSB.split("-")[0]+"-%";
-           Optional<TemplateContract> temp = service.findByTypeSavingBox(code);
-            if(temp.isPresent()){
-                 throw new AppException("Tipo caja ahorro ya esta asignada a otra plantilla", HttpStatus.CONFLICT);
-
-            }
-
-        }
+//        String code="";
+//        for(String typeSB: typeSavingBoxList){
+//           code = "%"+typeSB.split("-")[0]+"-%";
+//           Optional<TemplateContract> temp = service.findByTypeSavingBox(code);
+//            if(temp.isPresent()){
+//                 throw new AppException("Tipo caja ahorro ya esta asignada a otra plantilla", HttpStatus.CONFLICT);
+//
+//            }
+//
+//        }
 
         Path path = Paths.get(pathTemplate +templateContract.getFileName());
         templateContract.setPathContract(path.toString());
@@ -61,6 +64,17 @@ public class TemplateContractController {
     @GetMapping(value = "/v1/template-contract/findAll", name = "Obtiene todas las plantillas")
     ResponseEntity<List<TemplateContract>> findAll() {
         List<TemplateContract> templateContractList = service.findAll();
+        return new ResponseEntity<>(templateContractList,HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/v1/template-contract/findByCateroy", name = "Obtiene plantillas de la categoria")
+    ResponseEntity<List<TemplateContract>> findByCategory(@RequestHeader Map<String,String> headers) {
+        headers.forEach((key,value) -> {
+            if(key.equals("category")) category = value;
+
+        });
+
+        List<TemplateContract> templateContractList = service.findByCategory(category);
         return new ResponseEntity<>(templateContractList,HttpStatus.OK);
     }
 
